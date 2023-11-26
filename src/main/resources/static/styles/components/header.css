@@ -1,0 +1,65 @@
+header {
+    background-color: var(--white);
+    border-bottom: .1rem solid var(--indigo-100);
+    padding: 2rem 4rem 0;
+}
+.header-content {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1.85rem;
+}
+.logo-title {
+    font-weight: bold;
+}
+.logo-title-first-word {
+    background-color: var(--indigo-700);
+    border-radius: var(--radius);
+    color: var(--white);
+    padding: .55rem 1rem;
+}
+.logo-title-second-word {
+    color: var(--indigo-700);
+    padding: 0 .35rem;
+}
+.user-menu-icon {
+    border-radius: var(--full-radius);
+    cursor: pointer;
+    height: 2.25rem;
+    overflow: hidden;
+    width: 2.25rem;
+}
+.user-menu-icon svg {
+    background-color: var(--indigo-100);
+    color: var(--indigo-700);
+    height: 100%;
+    width: 100%;
+}
+.user-menu-items {
+    background-color: var(--indigo-50);
+    border-radius: var(--radius);
+    margin-top: 0.5rem;
+    position: absolute;
+    transform: translateY(0.5rem) translateX(-7.75rem);
+    transition: all 0.1s cubic-bezier(0.16, 1, 0.5, 1);
+    visibility: hidden;
+    width: 10rem;
+    z-index: 2;
+}
+.user-menu-items a {
+    align-items: center;
+    color: var(--black);
+    display: flex;
+    font-size: var(--font-size-small);
+    padding: 0.8rem 1rem;
+}
+.user-menu-items a:hover {
+    background-color: var(--indigo-700);
+    border-radius: var(--radius);
+    color: var(--white);
+}
+.show {
+    opacity: 1;
+    transform: translateY(0rem) translateX(-7.75rem);
+    visibility: visible;
+}

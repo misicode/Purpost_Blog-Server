@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EggNews</title>
+    <link rel="stylesheet" th:href="@{/styles/settings/global.css}" />
+    <link rel="stylesheet" th:href="@{/styles/components/header.css}" />
+    <link rel="stylesheet" th:href="@{/styles/components/footer.css}" />
+    <link rel="stylesheet" th:href="@{/styles/pages/form-news-page.css}" />
+</head>
+<body>
+    <header th:replace="~{layouts/layout-client :: header}"></header>
+    <div class="page-title">
+        <h2 th:text="${subtitle}"></h2>
+    </div>
+    <div class="page-breadcrumbs">
+        <a href="/my-news">Noticias</a> / <span th:text="${sectionTitle}">Nuevo</span>
+    </div>
+    <section>
+        <form th:action="@{/my-news/form}" th:object="${news}" method="post">
+            <input type="hidden" th:field="*{idNews}" />
+            <div class="card create-news-card">
+                <div>
+                    <label for="title">
+                        Título
+                    </label>
+                    <div class="input-item-box">
+                        <input th:field="*{title}" type="text" name="title" id="title" class="input-item" />
+                    </div>
+                </div>
+                <div>
+                    <label for="content">
+                        Contenido
+                    </label>
+                    <div class="input-item-box">
+                        <textarea th:field="*{body}" id="content" name="content" rows="10" class="input-item"></textarea>
+                    </div>
+                    <p class="input-item-annotation">
+                        Ingrese como máximo 1000 caracteres
+                    </p>
+                </div>
+            </div>
+            <div class="create-news-btns align-right">
+                <a href="/my-news">
+                    <button type="button" class="cancel-btn">
+                        Cancelar
+                    </button>
+                </a>
+                <button type="submit" th:text="${btnName}" class="success-btn">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </section>
+    <footer th:replace="~{layouts/layout-client :: footer}"></footer>
+
+    <script th:src="@{/scripts/dropdown-menu.js}"></script>
+</body>
+</html>

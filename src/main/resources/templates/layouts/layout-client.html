@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EggNews</title>
+</head>
+<body>
+    <header th:fragment="header">
+        <div class="header-content">
+            <a href="/" class="logo-title">
+                <span class="logo-title-first-word">Egg</span>
+                <span class="logo-title-second-word">News</span>
+            </a>
+            <div class="user-menu">
+                <div class="user-menu-icon" id="user-dropdown-menu-btn">
+                    <svg
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                    >
+                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                </div>
+                <div class="user-menu-items" id="user-dropdown-menu">
+                    <a href="/my-news">Mis noticias</a>
+                    <a href="#">Mi perfil</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <footer th:fragment="footer">
+        <p>
+            © <span th:text="${T(java.time.LocalDate).now().year}"></span> Learning and Programming | Coded by <a href="https://github.com/misicode/Globant-EggNews" target="_blank" rel="noreferrer">MISICODE</a>
+        </p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EggNews</title>
+    <link rel="stylesheet" th:href="@{/styles/settings/global.css}" />
+    <link rel="stylesheet" th:href="@{/styles/components/header.css}" />
+    <link rel="stylesheet" th:href="@{/styles/components/footer.css}" />
+    <link rel="stylesheet" th:href="@{/styles/pages/news-page.css}" />
+</head>
+<body>
+    <header th:replace="~{layouts/layout-client :: header}"></header>
+    <section>
+        <div class="card card-news-info">
+            <h3 th:text="${news.title}"></h3>
+            <p th:text="${news.getCreatedAtWithTime()}"></p>
+            <p th:utext="${news.getFormatBody()}"></p>
+        </div>
+    </section>
+    <footer th:replace="~{layouts/layout-client :: footer}"></footer>
+
+    <script th:src="@{/scripts/dropdown-menu.js}"></script>
+</body>
+</html>

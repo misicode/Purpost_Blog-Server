@@ -1,0 +1,20 @@
+.form-login-card {
+    margin: 0 auto;
+    max-width: 24rem;
+}
+.form-login-card h2 {
+    color: var(--indigo-700);
+    font-size: 1.85rem;
+    font-weight: 900;
+    padding-bottom: .5rem;
+    text-align: center;
+}
+.form-login-card p {
+    border-top: .1rem solid var(--indigo-100);
+    font-size: var(--font-size-small);
+    padding-top: 1.5rem;
+    text-align: center;
+}
+.form-login-card p a:hover {
+    color: var(--indigo-700);
+}

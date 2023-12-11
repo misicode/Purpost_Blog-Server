@@ -12,7 +12,7 @@
     <header th:replace="~{layouts/layout-client :: header}"></header>
     <section class="section-all-news">
         <div class="card card-news" th:each="news : ${allNews}">
-            <a th:href="@{/{id}(id=${news.idNews})}">
+            <a th:href="@{/news/{id}(id=${news.idNews})}">
                 <h3 th:text="${news.title}"></h3>
                 <p th:utext="${news.getFormatBody()}"></p>
                 <p th:text="${news.createdAt}"></p>

@@ -1,33 +1,3 @@
-.create-news-card {
-    display: grid;
-    grid-row-gap: 2rem;
-}
-.card label {
-    font-weight: 500;
-    letter-spacing: .025rem;
-}
-.input-item-box {
-    border: .1rem solid var(--slate-200);
-    border-radius: var(--min-radius);
-    margin-top: .5rem;
-}
-.input-item-box:focus-within {
-    outline: 0;
-    border-color: var(--indigo-700);
-}
-.input-item {
-    border-width: 0;
-    border-radius: var(--min-radius);
-    color: var(--slate-700);
-    display: block;
-    font-family: var(--font);
-    font-size: var(--font-size-very-small);
-    padding: .45rem .65rem;
-    width: 100%;
-}
-.input-item:focus {
-    outline: 0;
-}
 .input-item-annotation {
     font-size: var(--font-size-annotation);
     margin-top: .35rem;

@@ -22,7 +22,7 @@ public class NewsController {
         return "home-page";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/news/{id}")
     public String newsById(@PathVariable Long id, ModelMap model) {
         model.addAttribute("news", newsService.getNewsById(id));
         return "news-page";

@@ -4,13 +4,16 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Entity
 @Table(name = "news")
 public class News implements Serializable {
+    @Serial
     private static final long serialVersionUID = -2952735933715107252L;
 
     @Id
@@ -34,6 +37,10 @@ public class News implements Serializable {
 
     @Column(name = "is_active", columnDefinition = "boolean default true", nullable = false)
     private Boolean isActive = true;
+
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name = "id_user", nullable = false)
+    private User user;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

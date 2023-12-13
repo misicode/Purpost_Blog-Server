@@ -43,12 +43,6 @@ public class NewsController {
         return "form-news-page";
     }
 
-    @PostMapping("/my-news/form")
-    public String formNews(News news) {
-        newsService.saveNews(news);
-        return "redirect:../my-news";
-    }
-
     @GetMapping("/my-news/edit/{id}")
     public String showEditNews(@PathVariable Long id, ModelMap model) {
         model.addAttribute("subtitle", "Editar Noticia");
@@ -56,6 +50,12 @@ public class NewsController {
         model.addAttribute("btnName", "Actualizar");
         model.addAttribute("news", newsService.getNewsById(id));
         return "form-news-page";
+    }
+
+    @PostMapping("/my-news/form")
+    public String formNews(News news) {
+        newsService.saveNews(news);
+        return "redirect:../my-news";
     }
 
     @GetMapping("/my-news/delete/{id}")

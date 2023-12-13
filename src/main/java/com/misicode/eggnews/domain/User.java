@@ -47,4 +47,12 @@ public class User implements Serializable {
     @ManyToOne(targetEntity = Role.class)
     @JoinColumn(name = "id_role", nullable = false)
     private Role role;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }

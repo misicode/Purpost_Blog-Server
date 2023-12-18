@@ -12,16 +12,16 @@ public class Role {
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "enum('USER', 'ADMIN') default 'USER'")
-    private ERole role;
+    private ERole name;
 
     public Role() {
     }
 
-    public Role(ERole role) {
-        this.role = role;
+    public Role(ERole name) {
+        this.name = name;
     }
 
-    public ERole getRole() {
-        return role;
+    public ERole getName() {
+        return name;
     }
 }

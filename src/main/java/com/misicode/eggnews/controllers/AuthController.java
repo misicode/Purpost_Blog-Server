@@ -1,6 +1,8 @@
 package com.misicode.eggnews.controllers;
 
 import com.misicode.eggnews.domain.User;
+import com.misicode.eggnews.domain.UserDetailsImpl;
+import com.misicode.eggnews.services.IAuthService;
 import com.misicode.eggnews.services.IUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,15 +13,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
+    private IAuthService authService;
     private IUserService userService;
 
-    public AuthController(IUserService userService) {
+    public AuthController(IAuthService authService, IUserService userService) {
+        this.authService = authService;
         this.userService = userService;
     }
 
     @GetMapping("/signin")
     public String showSignIn() {
         return "signin-page";
+    }
+
+    @PostMapping("/signin/form")
+    public String signIn(UserDetailsImpl userDetails) {
+        authService.login(userDetails);
+        return "redirect:../home-page";
     }
 
     @GetMapping("/signup")

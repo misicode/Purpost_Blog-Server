@@ -4,5 +4,5 @@ import com.misicode.eggnews.domain.ERole;
 import com.misicode.eggnews.domain.Role;
 
 public interface IRoleService {
-    Role getRoleByName(ERole role);
+    Role getRoleByName(ERole name);
 }

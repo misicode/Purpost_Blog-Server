@@ -29,7 +29,7 @@ public class JwtUtils {
                 .compact();
     }
 
-    public boolean validateJwtToken(String token) {
+    public boolean isValidJwtToken(String token) {
         try {
             getAllClaims(token);
             return true;

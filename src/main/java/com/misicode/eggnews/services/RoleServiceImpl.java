@@ -16,7 +16,7 @@ public class RoleServiceImpl implements IRoleService {
 
     @Override
     @Transactional(readOnly = true)
-    public Role getRoleByName(ERole role) {
-        return roleRepository.findByRole(role).orElse(null);
+    public Role getRoleByName(ERole name) {
+        return roleRepository.findByName(name).orElse(null);
     }
 }

@@ -10,7 +10,7 @@
     <link rel="stylesheet" th:href="@{/styles/components/sign-form-card.css}" />
 </head>
 <body>
-<header th:replace="~{layouts/layout-client :: header}"></header>
+<header th:replace="~{fragments/fragment-layout :: header}"></header>
 <section>
     <form th:action="@{/auth/signup/form}" th:object="${user}" method="post">
         <div class="card form-card form-login-card">
@@ -57,7 +57,7 @@
         </div>
     </form>
 </section>
-<footer th:replace="~{layouts/layout-client :: footer}"></footer>
+<footer th:replace="~{fragments/fragment-layout :: footer}"></footer>
 
 <script th:src="@{/scripts/dropdown-menu.js}"></script>
 </body>

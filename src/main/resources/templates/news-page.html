@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/styles/pages/news-page.css}" />
 </head>
 <body>
-    <header th:replace="~{layouts/layout-client :: header}"></header>
+    <header th:replace="~{fragments/fragment-layout :: header}"></header>
     <section>
         <div class="card card-news-info">
             <h3 th:text="${news.title}"></h3>
@@ -17,7 +17,7 @@
             <p th:utext="${news.getFormatBody()}"></p>
         </div>
     </section>
-    <footer th:replace="~{layouts/layout-client :: footer}"></footer>
+    <footer th:replace="~{fragments/fragment-layout :: footer}"></footer>
 
     <script th:src="@{/scripts/dropdown-menu.js}"></script>
 </body>

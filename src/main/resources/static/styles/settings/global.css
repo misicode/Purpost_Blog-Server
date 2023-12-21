@@ -94,3 +94,10 @@ textarea {
 .success-btn:hover {
     background-color: var(--indigo-500);
 }
+.cancel-btn {
+    background-color: var(--slate-200);
+    margin-right: .25rem;
+}
+.cancel-btn:hover {
+    background-color: var(--slate-300);
+}

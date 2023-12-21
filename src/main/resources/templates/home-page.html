@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/styles/pages/home-page.css}" />
 </head>
 <body>
-    <header th:replace="~{layouts/layout-client :: header}"></header>
+    <header th:replace="~{fragments/fragment-layout :: header}"></header>
     <section class="section-all-news">
         <div class="card card-news" th:each="news : ${allNews}">
             <a th:href="@{/news/{id}(id=${news.idNews})}">
@@ -22,7 +22,7 @@
             </a>
         </div>
     </section>
-    <footer th:replace="~{layouts/layout-client :: footer}"></footer>
+    <footer th:replace="~{fragments/fragment-layout :: footer}"></footer>
 
     <script th:src="@{/scripts/dropdown-menu.js}"></script>
 </body>

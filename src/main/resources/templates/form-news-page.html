@@ -10,7 +10,7 @@
     <link rel="stylesheet" th:href="@{/styles/pages/form-news-page.css}" />
 </head>
 <body>
-    <header th:replace="~{layouts/layout-client :: header}"></header>
+    <header th:replace="~{fragments/fragment-layout :: header}"></header>
     <div class="page-title">
         <h2 th:text="${subtitle}"></h2>
     </div>
@@ -53,7 +53,7 @@
             </div>
         </form>
     </section>
-    <footer th:replace="~{layouts/layout-client :: footer}"></footer>
+    <footer th:replace="~{fragments/fragment-layout :: footer}"></footer>
 
     <script th:src="@{/scripts/dropdown-menu.js}"></script>
 </body>

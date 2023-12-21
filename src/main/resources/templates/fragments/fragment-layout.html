@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>EggNews</title>
@@ -11,7 +11,15 @@
                 <span class="logo-title-first-word">Egg</span>
                 <span class="logo-title-second-word">News</span>
             </a>
-            <div class="user-menu">
+            <div sec:authorize="!isAuthenticated()">
+                <a href="/auth/signin">
+                    <button class="cancel-btn">Iniciar sesión</button>
+                </a>
+                <a href="/auth/signup">
+                    <button class="success-btn">Registrarse</button>
+                </a>
+            </div>
+            <div class="user-menu" sec:authorize="isAuthenticated()">
                 <div class="user-menu-icon" id="user-dropdown-menu-btn">
                     <svg
                             fill="currentColor"
@@ -21,8 +29,9 @@
                     </svg>
                 </div>
                 <div class="user-menu-items" id="user-dropdown-menu">
-                    <a href="/my-news">Mis noticias</a>
                     <a href="#">Mi perfil</a>
+                    <a href="/my-news">Mis noticias</a>
+                    <a href="#">Cerrar sesión</a>
                 </div>
             </div>
         </div>

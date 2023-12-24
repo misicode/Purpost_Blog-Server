@@ -1,6 +1,6 @@
 package com.misicode.eggnews.domain;
 
 public enum ERole {
-    ADMIN,
-    USER
+    ROLE_ADMIN,
+    ROLE_USER
 }

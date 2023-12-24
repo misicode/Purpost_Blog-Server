@@ -52,17 +52,23 @@ public class SecurityConfig {
         return http
                 .csrf(csrfConfig -> csrfConfig.disable())
                 .authorizeHttpRequests(authRequest -> authRequest
-                        .requestMatchers("/styles/**", "/scripts/**").permitAll()
-                        .requestMatchers("/").permitAll()
-                        .requestMatchers("/news/**").permitAll()
-                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/styles/**", "/scripts/**", "/", "/news/**", "/auth/**").permitAll()
+                        .requestMatchers("/my-news/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )
-                .sessionManagement(sessionManager -> {
-                    sessionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-                })
+                .sessionManagement(sessionManager -> sessionManager
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                        .invalidSessionUrl("/auth/signin?timeout")
+                        .sessionFixation().migrateSession()
+                        .maximumSessions(1)
+                        .expiredUrl("/auth/signin?expired")
+                        .maxSessionsPreventsLogin(false)
+                )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/auth/signin")
+                        .defaultSuccessUrl("/my-news")
+                        .failureUrl("/auth/signin/error")
+                        .usernameParameter("email")
                 )
                 .authenticationProvider(authenticationProvider())
                 //.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)

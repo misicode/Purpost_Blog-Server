@@ -9,12 +9,22 @@
     padding-bottom: .5rem;
     text-align: center;
 }
-.form-login-card p {
+.error {
+    color: var(--rose-500);
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    margin-top: 1rem;
+    text-align: center;
+}
+.form-login-card button {
+    width: 100%;
+}
+.form-login-card > p:last-child {
     border-top: .1rem solid var(--indigo-100);
     font-size: var(--font-size-small);
     padding-top: 1.5rem;
     text-align: center;
 }
-.form-login-card p a:hover {
+.form-login-card > p:last-child a:hover {
     color: var(--indigo-700);
 }

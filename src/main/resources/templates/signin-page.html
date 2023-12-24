@@ -12,7 +12,7 @@
 <body>
     <header th:replace="~{fragments/fragment-layout :: header}"></header>
     <section>
-        <form th:action="@{/auth/signin/form}" th:object="${signinRequest}" method="post">
+        <form th:action="@{/auth/signin}" method="post">
             <div class="card form-card form-login-card">
                 <h2>BIENVENIDO</h2>
                 <div>
@@ -20,7 +20,7 @@
                         Correo
                     </label>
                     <div class="input-item-box">
-                        <input th:field="*{email}" type="email" name="email" id="email" class="input-item" required />
+                        <input type="email" name="email" id="email" class="input-item" required />
                     </div>
                 </div>
                 <div>
@@ -28,12 +28,15 @@
                         Contraseña
                     </label>
                     <div class="input-item-box">
-                        <input th:field="*{password}" type="password" name="password" id="password" class="input-item" required />
+                        <input type="password" name="password" id="password" class="input-item" required />
                     </div>
                 </div>
-                <button type="submit" class="success-btn">
-                    Ingresar
-                </button>
+                <div>
+                    <button type="submit" class="success-btn">
+                        Ingresar
+                    </button>
+                    <p th:if="${isSignInError}" class="error">Correo o contraseña incorrectos</p>
+                </div>
                 <p>
                     ¿No tienes una cuenta?
                     <a href="/auth/signup">Regístrate</a>

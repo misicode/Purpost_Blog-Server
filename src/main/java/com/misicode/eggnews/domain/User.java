@@ -40,7 +40,7 @@ public class User implements Serializable {
     @Column(name = "is_active", columnDefinition = "boolean default true", nullable = false)
     private Boolean isActive = true;
 
-    @OneToMany(fetch = FetchType.EAGER, targetEntity = News.class, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = News.class, mappedBy = "user")
     private List<News> news;
 
     @ManyToOne(targetEntity = Role.class)

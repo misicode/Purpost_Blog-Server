@@ -42,7 +42,7 @@ public class NewsServiceImpl implements INewsService {
 
     @Override
     @Transactional
-    public void deleteBook(Long id) {
+    public void deleteNews(Long id) {
         newsRepository.softDelete(id);
     }
 }

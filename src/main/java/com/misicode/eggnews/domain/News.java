@@ -92,6 +92,10 @@ public class News implements Serializable {
         isActive = active;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public String getCreatedAt() {
         return createdAt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }

@@ -3,6 +3,7 @@ package com.misicode.eggnews.controllers;
 import com.misicode.eggnews.domain.News;
 import com.misicode.eggnews.domain.User;
 import com.misicode.eggnews.domain.UserDetailsImpl;
+import com.misicode.eggnews.services.IAuthService;
 import com.misicode.eggnews.services.INewsService;
 import com.misicode.eggnews.services.IUserService;
 import org.springframework.security.core.Authentication;
@@ -15,12 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class NewsController {
+    private IAuthService authService;
     private INewsService newsService;
-    private IUserService userService;
 
-    public NewsController(INewsService newsService, IUserService userService) {
+    public NewsController(IAuthService authService, INewsService newsService) {
+        this.authService = authService;
         this.newsService = newsService;
-        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -37,11 +38,7 @@ public class NewsController {
 
     @GetMapping("/my-news")
     public String newsByAuthor(ModelMap model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        User user = userService.getUserByEmail(userDetails.getUsername());
-
-        model.addAttribute("allNews", newsService.getNewsByUser(user));
+        model.addAttribute("allNews", newsService.getNewsByUser(authService.getUserAuthenticated()));
         return "my-news-page";
     }
 
@@ -65,13 +62,14 @@ public class NewsController {
 
     @PostMapping("/my-news/form")
     public String formNews(News news) {
+        news.setUser(authService.getUserAuthenticated());
         newsService.saveNews(news);
         return "redirect:../my-news";
     }
 
     @GetMapping("/my-news/delete/{id}")
-    public String deleteNews(@PathVariable Long id) {
-        newsService.deleteBook(id);
+    public String deleteNewsById(@PathVariable Long id) {
+        newsService.deleteNews(id);
         return "redirect:/my-news";
     }
 }

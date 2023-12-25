@@ -14,5 +14,5 @@ public interface INewsService {
 
     void saveNews(News news);
 
-    void deleteBook(Long id);
+    void deleteNews(Long id);
 }

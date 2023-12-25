@@ -1,6 +1,7 @@
 package com.misicode.eggnews.services;
 
 import com.misicode.eggnews.domain.News;
+import com.misicode.eggnews.domain.User;
 import com.misicode.eggnews.repositories.NewsRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,12 @@ public class NewsServiceImpl implements INewsService {
     @Transactional(readOnly = true)
     public List<News> getNews() {
         return newsRepository.findByIsActiveTrueOrderByCreatedAtDesc();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<News> getNewsByUser(User user) {
+        return newsRepository.findActiveNewsByUser(user);
     }
 
     @Override

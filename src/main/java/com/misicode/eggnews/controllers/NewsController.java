@@ -1,7 +1,12 @@
 package com.misicode.eggnews.controllers;
 
 import com.misicode.eggnews.domain.News;
+import com.misicode.eggnews.domain.User;
+import com.misicode.eggnews.domain.UserDetailsImpl;
 import com.misicode.eggnews.services.INewsService;
+import com.misicode.eggnews.services.IUserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class NewsController {
     private INewsService newsService;
+    private IUserService userService;
 
-    public NewsController(INewsService newsService) {
+    public NewsController(INewsService newsService, IUserService userService) {
         this.newsService = newsService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -30,7 +37,11 @@ public class NewsController {
 
     @GetMapping("/my-news")
     public String newsByAuthor(ModelMap model) {
-        model.addAttribute("allNews", newsService.getNews());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User user = userService.getUserByEmail(userDetails.getUsername());
+
+        model.addAttribute("allNews", newsService.getNewsByUser(user));
         return "my-news-page";
     }
 

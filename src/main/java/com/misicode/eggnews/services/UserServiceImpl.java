@@ -20,6 +20,11 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
+    }
+
+    @Override
     @Transactional
     public Boolean saveUser(User user) {
         if(userRepository.existsByEmail(user.getEmail())) {

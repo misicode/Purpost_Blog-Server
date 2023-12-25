@@ -70,6 +70,11 @@ public class SecurityConfig {
                         .failureUrl("/auth/signin/error")
                         .usernameParameter("email")
                 )
+                .logout(logout -> logout
+                        .logoutUrl("/auth/signout")
+                        .deleteCookies("JSESSIONID")
+                        .invalidateHttpSession(true)
+                )
                 .authenticationProvider(authenticationProvider())
                 //.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();

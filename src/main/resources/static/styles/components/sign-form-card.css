@@ -1,8 +1,4 @@
-.form-login-card {
-    margin: 0 auto;
-    max-width: 24rem;
-}
-.form-login-card h2 {
+.form-mid-card h2 {
     color: var(--indigo-700);
     font-size: 1.85rem;
     font-weight: 900;
@@ -16,15 +12,15 @@
     margin-top: 1rem;
     text-align: center;
 }
-.form-login-card button {
+.form-mid-card button {
     width: 100%;
 }
-.form-login-card > p:last-child {
+.form-mid-card > p:last-child {
     border-top: .1rem solid var(--indigo-100);
     font-size: var(--font-size-small);
     padding-top: 1.5rem;
     text-align: center;
 }
-.form-login-card > p:last-child a:hover {
+.form-mid-card > p:last-child a:hover {
     color: var(--indigo-700);
 }

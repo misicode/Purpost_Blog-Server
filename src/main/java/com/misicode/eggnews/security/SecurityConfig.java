@@ -53,6 +53,7 @@ public class SecurityConfig {
                 .csrf(csrfConfig -> csrfConfig.disable())
                 .authorizeHttpRequests(authRequest -> authRequest
                         .requestMatchers("/styles/**", "/scripts/**", "/", "/news/**", "/auth/**").permitAll()
+                        .requestMatchers("/my-profile/**").hasRole("USER")
                         .requestMatchers("/my-news/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )

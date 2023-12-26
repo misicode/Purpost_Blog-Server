@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EggNews</title>
+    <link rel="stylesheet" th:href="@{/styles/settings/global.css}" />
+    <link rel="stylesheet" th:href="@{/styles/components/header.css}" />
+    <link rel="stylesheet" th:href="@{/styles/components/footer.css}" />
+    <link rel="stylesheet" th:href="@{/styles/components/form-card.css}" />
+</head>
+<body>
+    <header th:replace="~{fragments/fragment-layout :: header}"></header>
+    <div class="page-title">
+        <h2>Mi Perfil</h2>
+    </div>
+    <div class="page-breadcrumbs">
+        <a href="/my-profile">Perfil</a>
+    </div>
+    <section>
+        <div class="form-mid-card">
+            <div class="card form-card">
+                <div>
+                    <label for="names">
+                        Nombres
+                    </label>
+                    <div class="input-item-box">
+                        <input th:value="*{user.getNames()}" type="text" name="names" id="names" class="input-item" required disabled />
+                    </div>
+                </div>
+                <div>
+                    <label for="surnames">
+                        Apellidos
+                    </label>
+                    <div class="input-item-box">
+                        <input th:value="*{user.getSurnames()}" type="text" name="surnames" id="surnames" class="input-item" required disabled />
+                    </div>
+                </div>
+                <div>
+                    <label for="email">
+                        Correo
+                    </label>
+                    <div class="input-item-box">
+                        <input th:value="*{user.getEmail()}" type="email" name="email" id="email" class="input-item" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="align-right">
+                <button class="success-btn">
+                    Editar
+                </button>
+            </div>
+        </div>
+    </section>
+    <footer th:replace="~{fragments/fragment-layout :: footer}"></footer>
+
+    <script th:src="@{/scripts/dropdown-menu.js}"></script>
+</body>
+</html>

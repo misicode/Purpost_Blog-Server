@@ -1,13 +1,8 @@
 package com.misicode.eggnews.controllers;
 
 import com.misicode.eggnews.domain.News;
-import com.misicode.eggnews.domain.User;
-import com.misicode.eggnews.domain.UserDetailsImpl;
 import com.misicode.eggnews.services.IAuthService;
 import com.misicode.eggnews.services.INewsService;
-import com.misicode.eggnews.services.IUserService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;

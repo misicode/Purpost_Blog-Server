@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
+import java.util.StringTokenizer;
 
 @Entity
 @Table(name = "user")
@@ -81,6 +82,14 @@ public class User implements Serializable {
 
     public void setSurnames(String surnames) {
         this.surnames = surnames;
+    }
+
+    public String getSomeName() {
+        return (new StringTokenizer(names)).nextToken() + " " + surnames;
+    }
+
+    public String getFullName() {
+        return names + " " + surnames;
     }
 
     public List<News> getNews() {

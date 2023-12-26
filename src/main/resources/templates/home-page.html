@@ -15,7 +15,10 @@
             <a th:href="@{/news/{id}(id=${news.idNews})}">
                 <h3 th:text="${news.title}"></h3>
                 <p th:utext="${news.getFormatBody()}"></p>
-                <p th:text="${news.createdAt}"></p>
+                <div class="card-news-extra">
+                    <p th:text="${news.getUser().getSomeName()}"></p>
+                    <p th:text="${news.createdAt}"></p>
+                </div>
                 <div class="card-news-corner">
                     <div class="card-news-corner-arrow">→</div>
                 </div>

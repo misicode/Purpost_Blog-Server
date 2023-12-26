@@ -36,7 +36,7 @@
 .card-news:hover h3 {
     color: var(--indigo-700);
 }
-.card-news p:first-of-type {
+.card-news > a > p {
     color: var(--slate-600);
     display: -webkit-box;
     font-size: var(--font-size-medium);
@@ -45,10 +45,13 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 6;
 }
-.card-news p:last-of-type {
+.card-news-extra > p {
     color: var(--slate-600);
     font-size: var(--font-size-very-small);
     text-align: right;
+}
+.card-news-extra > p:first-of-type {
+    font-weight: bold;
 }
 .card-news-corner {
     align-items: center;

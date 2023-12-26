@@ -13,7 +13,10 @@
     <section>
         <div class="card card-news-info">
             <h3 th:text="${news.title}"></h3>
-            <p th:text="${news.getCreatedAtWithTime()}"></p>
+            <div>
+                <p th:text="${news.getUser().getFullName()}"></p>
+                <p th:text="${news.getCreatedAtWithTime()}"></p>
+            </div>
             <p th:utext="${news.getFormatBody()}"></p>
         </div>
     </section>

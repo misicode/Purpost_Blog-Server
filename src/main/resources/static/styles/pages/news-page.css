@@ -8,8 +8,11 @@
     padding-bottom: 2rem;
     text-align: center;
 }
-.card-news-info p:first-of-type {
-    font-size: var(--font-size-very-small);
+.card-news-info > div {
+    display: flex;
+    justify-content: space-between;
     margin: 1rem 0 1.5rem;
-    text-align: right;
+}
+.card-news-info > div > p {
+    font-size: var(--font-size-very-small);
 }

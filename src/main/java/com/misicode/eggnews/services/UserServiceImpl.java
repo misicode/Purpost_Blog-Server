@@ -26,7 +26,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @Transactional
-    public Boolean saveUser(User user) {
+    public Boolean registerUser(User user) {
         if(userRepository.existsByEmail(user.getEmail())) {
             System.out.println("ERROR: Usuario ya registrado");
             return false;
@@ -38,5 +38,11 @@ public class UserServiceImpl implements IUserService {
         userRepository.save(user);
 
         return true;
+    }
+
+    @Override
+    @Transactional
+    public void saveUser(User user) {
+        userRepository.save(user);
     }
 }

@@ -15,7 +15,7 @@
         <h2 th:text="${subtitle}"></h2>
     </div>
     <div class="page-breadcrumbs">
-        <a href="/my-news">Noticias</a> / <span th:text="${sectionTitle}">Nuevo</span>
+        <a href="/my-news">Noticias</a> / <span th:text="${sectionTitle}"></span>
     </div>
     <section>
         <form th:action="@{/my-news/form}" th:object="${news}" method="post">
@@ -41,7 +41,7 @@
                     </p>
                 </div>
             </div>
-            <div class="create-news-btns align-right">
+            <div class="mt-1 align-right">
                 <a href="/my-news">
                     <button type="button" class="cancel-btn">
                         Cancelar

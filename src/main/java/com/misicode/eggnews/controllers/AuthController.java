@@ -43,6 +43,6 @@ public class AuthController {
 
     @PostMapping("/signup/form")
     public String signUp(User user) {
-        return userService.saveUser(user) ? "redirect:../signin" : "redirect:./error";
+        return userService.registerUser(user) ? "redirect:../signin" : "redirect:./error";
     }
 }

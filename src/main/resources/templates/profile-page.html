@@ -14,42 +14,54 @@
         <h2>Mi Perfil</h2>
     </div>
     <div class="page-breadcrumbs">
-        <a href="/my-profile">Perfil</a>
+        <a href="/my-profile">Perfil</a><span th:if="${isEditable}"> / Editar</span>
     </div>
     <section>
-        <div class="form-mid-card">
-            <div class="card form-card">
-                <div>
-                    <label for="names">
-                        Nombres
-                    </label>
-                    <div class="input-item-box">
-                        <input th:value="*{user.getNames()}" type="text" name="names" id="names" class="input-item" required disabled />
+        <form th:action="@{/my-profile/form}" th:object="${user}" method="post">
+            <div class="form-mid-card">
+                <div class="card form-card">
+                    <div>
+                        <label for="names">
+                            Nombres
+                        </label>
+                        <div class="input-item-box">
+                            <input th:field="*{names}" th:value="*{names}" type="text" name="names" id="names" class="input-item" required th:attr="disabled=!${isEditable}" />
+                        </div>
+                    </div>
+                    <div>
+                        <label for="surnames">
+                            Apellidos
+                        </label>
+                        <div class="input-item-box">
+                            <input th:field="*{surnames}" th:value="*{surnames}" type="text" name="surnames" id="surnames" class="input-item" required th:attr="disabled=!${isEditable}" />
+                        </div>
+                    </div>
+                    <div>
+                        <label for="email">
+                            Correo
+                        </label>
+                        <div class="input-item-box">
+                            <input th:value="*{email}" type="email" name="email" id="email" class="input-item" disabled />
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <label for="surnames">
-                        Apellidos
-                    </label>
-                    <div class="input-item-box">
-                        <input th:value="*{user.getSurnames()}" type="text" name="surnames" id="surnames" class="input-item" required disabled />
-                    </div>
-                </div>
-                <div>
-                    <label for="email">
-                        Correo
-                    </label>
-                    <div class="input-item-box">
-                        <input th:value="*{user.getEmail()}" type="email" name="email" id="email" class="input-item" disabled />
-                    </div>
+                <div class="mt-1 align-right">
+                    <a th:if="!${isEditable}" href="/my-profile/edit">
+                        <button type="button" class="success-btn">
+                            Editar
+                        </button>
+                    </a>
+                    <a th:if="${isEditable}" href="/my-profile">
+                        <button type="button" class="cancel-btn">
+                            Cancelar
+                        </button>
+                    </a>
+                    <button th:if="${isEditable}" type="submit" class="success-btn">
+                        Guardar
+                    </button>
                 </div>
             </div>
-            <div class="align-right">
-                <button class="success-btn">
-                    Editar
-                </button>
-            </div>
-        </div>
+        </form>
     </section>
     <footer th:replace="~{fragments/fragment-layout :: footer}"></footer>
 

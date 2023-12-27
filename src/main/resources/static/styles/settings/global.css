@@ -60,6 +60,9 @@ textarea {
     height: 100%;
     resize: none;
 }
+.mt-1 {
+    margin-top: 1.5rem;
+}
 .card {
     background-color: var(--white);
     border: .1rem solid var(--indigo-100);

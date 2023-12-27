@@ -53,6 +53,10 @@ button {
 button:hover {
     transition: all 300ms ease-out;
 }
+label {
+    font-weight: 500;
+    letter-spacing: .025rem;
+}
 section {
     padding: 3rem 4rem;
 }

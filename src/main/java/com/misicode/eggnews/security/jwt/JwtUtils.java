@@ -14,10 +14,10 @@ import java.util.function.Function;
 
 //@Component
 public class JwtUtils {
-    @Value("${jwt.secret.key}")
+    @Value("${jwt.secret_key}")
     private String secretKey;
 
-    @Value("${jwt.expiration.time}")
+    @Value("${jwt.expiration_time}")
     private String expirationTime;
 
     public String generateJwtToken(String email){

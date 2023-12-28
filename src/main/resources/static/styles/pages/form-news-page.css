@@ -19,29 +19,10 @@
     flex-direction: column;
     font-size: var(--font-size-small);
     justify-content: center;
+    position: relative;
 }
-.input-file svg {
-    color: var(--slate-300);
-    height: 2.5rem;
-    width: 2.5rem;
-}
-.input-file-text {
-    display: flex;
-    margin: .5rem 0 .25rem;
-}
-.input-file-text label {
-    color: var(--indigo-700);
-    font-weight: bold;
-}
-.input-file-text label:hover {
-    color: var(--indigo-500);
-    cursor: pointer;
-}
-.input-file-text > p {
-    margin-left: .1rem;
-}
-.input-file > p {
-    font-size: var(--font-size-very-small);
+.input-file:hover, .highlight {
+    border-color: var(--indigo-700);
 }
 .sr-only {
     position: absolute;
@@ -53,4 +34,20 @@
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
+}
+.input-file img {
+    display: block;
+    max-height: 90%;
+    max-width: 90%;
+    position: absolute;
+}
+.input-file svg {
+    color: var(--slate-300);
+    height: 3rem;
+    margin-bottom: .5rem;
+    width: 3rem;
+}
+.input-file span:last-of-type {
+    font-size: var(--font-size-very-small);
+    margin-top: .25rem;
 }

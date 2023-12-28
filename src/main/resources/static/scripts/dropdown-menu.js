@@ -3,12 +3,12 @@ const dropdownMenu = document.getElementById("user-dropdown-menu");
 
 const toggleDropdown = () => dropdownMenu.classList.toggle("show");
 
-dropdownBtn.addEventListener("click", function (e) {
+dropdownBtn.addEventListener("click", e => {
     e.stopPropagation();
     toggleDropdown();
 });
 
-document.documentElement.addEventListener("click", function () {
+document.documentElement.addEventListener("click", () => {
     if(dropdownMenu.classList.contains("show")) {
         toggleDropdown();
     }

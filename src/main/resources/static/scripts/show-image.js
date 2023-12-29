@@ -5,6 +5,7 @@ const img = document.getElementById("file-img");
 const displayImg = (files) => {
     const [file] = files;
     if(file) img.src = URL.createObjectURL(file);
+    fileUpload.files = files;
 
     dropArea.querySelector("svg").style.display = "none";
     dropArea.querySelectorAll("span").forEach(spanElement => spanElement.style.display = "none");

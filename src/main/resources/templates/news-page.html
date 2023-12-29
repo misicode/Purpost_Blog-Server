@@ -14,6 +14,9 @@
         <div class="card card-news-info">
             <h3 th:text="${news.title}"></h3>
             <div>
+                <img th:src="${news.image.getUrl()}" th:alt="${news.image.getName()}" />
+            </div>
+            <div>
                 <p th:text="${news.getUser().getFullName()}"></p>
                 <p th:text="${news.getCreatedAtWithTime()}"></p>
             </div>

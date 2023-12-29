@@ -18,7 +18,7 @@
         <a href="/my-news">Noticias</a> / <span th:text="${sectionTitle}"></span>
     </div>
     <section>
-        <form th:action="@{/my-news/form}" th:object="${news}" method="post">
+        <form th:action="@{/my-news/form}" th:object="${news}" method="post" enctype="multipart/form-data">
             <input type="hidden" th:field="*{idNews}" />
             <div class="card grid-form-card">
                 <div class="form-card">
@@ -27,7 +27,7 @@
                             Título
                         </label>
                         <div class="input-item-box">
-                            <input th:field="*{title}" type="text" name="title" id="title" class="input-item" />
+                            <input th:field="*{title}" type="text" name="title" id="title" class="input-item" required />
                         </div>
                     </div>
                     <div>
@@ -35,7 +35,7 @@
                             Contenido
                         </label>
                         <div class="input-item-box">
-                            <textarea th:field="*{body}" id="content" name="content" rows="10" class="input-item"></textarea>
+                            <textarea th:field="*{body}" id="content" name="content" rows="10" class="input-item" required></textarea>
                         </div>
                         <p class="input-item-annotation">
                             Ingrese como máximo 1000 caracteres
@@ -47,7 +47,7 @@
                         Imagen
                     </label>
                     <label id="file-drop-area" for="file-upload" class="input-item-box input-file">
-                        <input class="sr-only" id="file-upload" name="file-upload" type="file" accept="image/jpeg, image/png">
+                        <input class="sr-only" id="file-upload" name="file-upload" type="file" accept="image/jpeg, image/png" required>
                         <img id="file-img" src="" alt="" />
                         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />

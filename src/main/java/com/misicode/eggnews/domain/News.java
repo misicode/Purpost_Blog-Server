@@ -41,6 +41,10 @@ public class News implements Serializable {
     @JoinColumn(name = "id_user", nullable = false)
     private User user;
 
+    @OneToOne(targetEntity = Image.class)
+    @JoinColumn(name = "id_image", nullable = false)
+    private Image image;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -98,6 +102,14 @@ public class News implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public String getCreatedAt() {

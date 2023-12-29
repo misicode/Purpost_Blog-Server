@@ -2,20 +2,25 @@ package com.misicode.eggnews.controllers;
 
 import com.misicode.eggnews.domain.News;
 import com.misicode.eggnews.services.IAuthService;
+import com.misicode.eggnews.services.IImageService;
 import com.misicode.eggnews.services.INewsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class NewsController {
     private IAuthService authService;
+    private IImageService imageService;
     private INewsService newsService;
 
-    public NewsController(IAuthService authService, INewsService newsService) {
+    public NewsController(IAuthService authService, IImageService imageService, INewsService newsService) {
         this.authService = authService;
+        this.imageService = imageService;
         this.newsService = newsService;
     }
 
@@ -56,8 +61,9 @@ public class NewsController {
     }
 
     @PostMapping("/my-news/form")
-    public String formNews(News news) {
+    public String formNews(News news, @RequestParam("file-upload") MultipartFile file) {
         news.setUser(authService.getUserAuthenticated());
+        news.setImage(imageService.saveImage(file));
         newsService.saveNews(news);
         return "redirect:../my-news";
     }

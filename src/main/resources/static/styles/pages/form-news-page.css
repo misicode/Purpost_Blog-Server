@@ -23,6 +23,7 @@
 }
 .input-file:hover, .highlight {
     border-color: var(--indigo-700);
+    cursor: pointer;
 }
 .sr-only {
     position: absolute;

@@ -4,7 +4,7 @@
 }
 .card-news {
     overflow: hidden;
-    padding-right: 3rem;
+    padding-right: 4rem;
     position: relative;
     z-index: 0;
     &:before {
@@ -30,13 +30,23 @@
     cursor: pointer;
     transition: all 300ms ease-out;
 }
-.card-news h3 {
+.card-news > a > div:first-of-type {
+    display: grid;
+    grid-column-gap: 2rem;
+    grid-template-columns: 1fr 2fr;
+}
+.card-news img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+.card-news-info h3 {
     margin-bottom: .75rem;
 }
-.card-news:hover h3 {
+.card-news-info:hover h3 {
     color: var(--indigo-700);
 }
-.card-news > a > p {
+.card-news-info > p {
     color: var(--slate-600);
     display: -webkit-box;
     font-size: var(--font-size-medium);

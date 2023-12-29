@@ -13,11 +13,16 @@
     <section class="section-all-news">
         <div class="card card-news" th:each="news : ${allNews}">
             <a th:href="@{/news/{id}(id=${news.idNews})}">
-                <h3 th:text="${news.title}"></h3>
-                <p th:utext="${news.getFormatBody()}"></p>
-                <div class="card-news-extra">
-                    <p th:text="${news.getUser().getSomeName()}"></p>
-                    <p th:text="${news.createdAt}"></p>
+                <div>
+                    <img th:src="${news.image.getUrl()}"  th:alt="${news.image.getName()}"/>
+                    <div class="card-news-info">
+                        <h3 th:text="${news.title}"></h3>
+                        <p th:utext="${news.getFormatBody()}"></p>
+                        <div class="card-news-extra">
+                            <p th:text="${news.getUser().getSomeName()}"></p>
+                            <p th:text="${news.createdAt}"></p>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-news-corner">
                     <div class="card-news-corner-arrow">→</div>

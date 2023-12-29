@@ -14,7 +14,9 @@
         <div class="card card-news" th:each="news : ${allNews}">
             <a th:href="@{/news/{id}(id=${news.idNews})}">
                 <div>
-                    <img th:src="${news.image.getUrl()}"  th:alt="${news.image.getName()}"/>
+                    <div>
+                        <img th:src="${news.image.getUrl()}"  th:alt="${news.image.getName()}"/>
+                    </div>
                     <div class="card-news-info">
                         <h3 th:text="${news.title}"></h3>
                         <p th:utext="${news.getFormatBody()}"></p>

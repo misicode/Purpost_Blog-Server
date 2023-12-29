@@ -35,9 +35,14 @@
     grid-column-gap: 2rem;
     grid-template-columns: 1fr 2fr;
 }
+.card-news > a > div:first-of-type > div {
+    position: relative;
+}
 .card-news img {
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    position: absolute;
     width: 100%;
 }
 .card-news-info h3 {

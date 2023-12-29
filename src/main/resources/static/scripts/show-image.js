@@ -2,6 +2,11 @@ const fileUpload = document.getElementById("file-upload");
 const dropArea = document.getElementById("file-drop-area");
 const img = document.getElementById("file-img");
 
+document.addEventListener("DOMContentLoaded", function() {
+    const imgUrl = img.getAttribute("data-url");
+    if(imgUrl !== "") img.src = imgUrl;
+});
+
 const displayImg = (files) => {
     const [file] = files;
     if(file) img.src = URL.createObjectURL(file);

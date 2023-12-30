@@ -9,9 +9,7 @@ Aplicación desarrollada con Spring Boot para la gestión de noticias y el regis
 
 
 ## 💻 Configuración
-- **Sobre el esquema de base de datos**: Deberá ejecutar el script [`eggnews.sql`](https://github.com/misicode/BC-EggNews/blob/main/eggnews.sql) en MySQL para crear la base de datos.
-
-- **Sobre las variables de entorno**: En el archivo `application.properties` se deberá modificar los siguientes campos con las credenciales de acceso a la base de datos y al servicio de Cloudinary.
+**Sobre las variables de entorno**: En el archivo `application.properties` se deberá modificar los siguientes campos con las credenciales de acceso a la base de datos y al servicio de Cloudinary.
 
 ```properties
 # Database configuration

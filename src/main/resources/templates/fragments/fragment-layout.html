@@ -41,5 +41,6 @@
             © <span th:text="${T(java.time.LocalDate).now().year}"></span> Learning and Programming | Coded by <a href="https://github.com/misicode/Globant-EggNews" target="_blank" rel="noreferrer">MISICODE</a>
         </p>
     </footer>
+    <script th:fragment="menu-script" sec:authorize="isAuthenticated()" th:src="@{/scripts/dropdown-menu.js}"></script>
 </body>
 </html>

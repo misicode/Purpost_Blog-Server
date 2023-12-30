@@ -38,7 +38,7 @@
                             <textarea th:field="*{body}" id="content" name="content" rows="10" class="input-item" required></textarea>
                         </div>
                         <p class="input-item-annotation">
-                            Ingrese como máximo 1000 caracteres
+                            Ingrese como máximo 2500 caracteres
                         </p>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
     </section>
     <footer th:replace="~{fragments/fragment-layout :: footer}"></footer>
 
-    <script th:src="@{/scripts/dropdown-menu.js}"></script>
+    <script th:replace="~{fragments/fragment-layout :: menu-script}"></script>
     <script th:src="@{/scripts/show-image.js}"></script>
 </body>
 </html>

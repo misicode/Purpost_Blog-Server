@@ -19,7 +19,7 @@
     </div>
     <section>
         <form th:action="@{/my-news/form}" th:object="${news}" method="post" enctype="multipart/form-data">
-            <input th:if="!${isNew}" type="hidden" th:value="${news.idNews}" />
+            <input th:if="${!isNew}" type="hidden" th:field="*{idNews}" />
             <div class="card grid-form-card">
                 <div class="form-card">
                     <div>

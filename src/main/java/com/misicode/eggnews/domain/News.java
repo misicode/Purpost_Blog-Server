@@ -103,7 +103,15 @@ public class News {
         return createdAt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public String getCreatedAtWithTime() {
         return createdAt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a"));
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

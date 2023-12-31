@@ -64,10 +64,22 @@ public class NewsController {
 
     @PostMapping("/my-news/form")
     public String formNews(News news, @RequestParam("file-upload") MultipartFile file) {
-        news.setUser(authService.getUserAuthenticated());
-        if(!file.isEmpty()) news.setImage(imageService.saveImage(file));
+        if(news.getIdNews() != null) {
+            News mNews = newsService.getNewsById(news.getIdNews());
 
-        newsService.saveNews(news);
+            mNews.setTitle(news.getTitle());
+            mNews.setBody(news.getBody());
+
+            if(!file.isEmpty()) mNews.setImage(imageService.saveImage(file));
+
+            newsService.saveNews(mNews);
+        } else {
+            news.setUser(authService.getUserAuthenticated());
+            news.setImage(imageService.saveImage(file));
+
+            newsService.saveNews(news);
+        }
+
         return "redirect:../my-news";
     }
 

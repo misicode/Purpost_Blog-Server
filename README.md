@@ -13,9 +13,7 @@ Aplicación desarrollada con Spring Boot para la gestión de noticias y el regis
 
 ```properties
 # Database configuration
-spring.datasource.url=${db_url}
-spring.datasource.username=${db_username}
-spring.datasource.password=${db_password}
+spring.data.mongodb.uri=${mongodb_uri}
 # Cloudinary configuration
 cloudinary.cloud_name=${cloudinary_cloud_name}
 cloudinary.api_key=${cloudinary_api_key}
@@ -32,7 +30,7 @@ cloudinary.api_secret=${cloudinary_api_secret}
 | [![Spring Boot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)](https://spring.io/projects/spring-boot/)                            | Framework para el desarrollo de aplicaciones | 3.2.1
 | [![Spring Security](https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=Spring-Security&logoColor=white)](https://spring.io/projects/spring-security/) | Framework para la seguridad de acceso | 6.2.1
 | [![Thymeleaf](https://img.shields.io/badge/Thymeleaf-%23005C0F.svg?style=for-the-badge&logo=Thymeleaf&logoColor=white)](https://www.thymeleaf.org)                         | Motor de plantillas HTML | 3.1.2.RELEASE
-| [![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)](https://dev.mysql.com/doc/)                                           | Gestor para el manejo de bases de datos relacional | 8.0.34 Community
+| [![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/es/what-is-mongodb)                     | Base de datos NoSQL | 4.2.1
 
 
 ## 📝 Agradecimientos

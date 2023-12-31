@@ -4,6 +4,7 @@ import com.misicode.eggnews.domain.News;
 import com.misicode.eggnews.domain.User;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Update;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +16,7 @@ public interface NewsRepository extends MongoRepository<News, String> {
 
     List<News> findByUserAndIsActiveTrueOrderByCreatedAtDesc(User user);
 
-    @Query("{'_id' : id}")
+    @Query("{'_id' : ?0}")
+    @Update("{'$set' : {'isActive': false}}")
     void softDelete(@Param("id") String id);
 }

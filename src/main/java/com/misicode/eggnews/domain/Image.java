@@ -1,22 +1,20 @@
 package com.misicode.eggnews.domain;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "image")
+@Document(collection = "images")
 public class Image {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_image")
-    private Integer idImage;
+    private String idImage;
 
-    @Column(length = 150, nullable = false)
+    @NotNull
     private String name;
 
-    @Column(length = 200, nullable = false)
+    @NotNull
     private String url;
 
-    @OneToOne(targetEntity = News.class, mappedBy = "image")
     private News news;
 
     public String getName() {

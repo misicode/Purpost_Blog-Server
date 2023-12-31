@@ -31,7 +31,7 @@ public class NewsController {
     }
 
     @GetMapping("/news/{id}")
-    public String newsById(@PathVariable Long id, ModelMap model) {
+    public String newsById(@PathVariable String id, ModelMap model) {
         model.addAttribute("news", newsService.getNewsById(id));
         return "news-page";
     }
@@ -46,15 +46,17 @@ public class NewsController {
     public String showCreateNews(ModelMap model) {
         model.addAttribute("subtitle", "Crear Noticia");
         model.addAttribute("sectionTitle", "Nuevo");
+        model.addAttribute("isNew", true);
         model.addAttribute("btnName", "Guardar");
         model.addAttribute("news", new News());
         return "form-news-page";
     }
 
     @GetMapping("/my-news/edit/{id}")
-    public String showEditNews(@PathVariable Long id, ModelMap model) {
+    public String showEditNews(@PathVariable String id, ModelMap model) {
         model.addAttribute("subtitle", "Editar Noticia");
         model.addAttribute("sectionTitle", "Editar");
+        model.addAttribute("isNew", false);
         model.addAttribute("btnName", "Actualizar");
         model.addAttribute("news", newsService.getNewsById(id));
         return "form-news-page";
@@ -63,13 +65,14 @@ public class NewsController {
     @PostMapping("/my-news/form")
     public String formNews(News news, @RequestParam("file-upload") MultipartFile file) {
         news.setUser(authService.getUserAuthenticated());
-        news.setImage(imageService.saveImage(file));
+        if(!file.isEmpty()) news.setImage(imageService.saveImage(file));
+
         newsService.saveNews(news);
         return "redirect:../my-news";
     }
 
     @GetMapping("/my-news/delete/{id}")
-    public String deleteNewsById(@PathVariable Long id) {
+    public String deleteNewsById(@PathVariable String id) {
         newsService.deleteNews(id);
         return "redirect:/my-news";
     }

@@ -1,54 +1,52 @@
 package com.misicode.eggnews.domain;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.StringTokenizer;
 
-@Entity
-@Table(name = "user")
-public class User implements Serializable {
-    @Serial
-    private static final long serialVersionUID = -2952735933715107253L;
-
+@Document(collection = "users")
+public class User {
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
-    @Column(name = "id_user")
-    private Long idUser;
+    private String idUser;
 
-    @Column(length = 150, nullable = false)
+    @NotNull
     private String email;
 
-    @Column(length = 300, nullable = false)
+    @NotNull
     private String password;
 
-    @Column(length = 100, nullable = false)
+    @NotNull
     private String names;
 
-    @Column(length = 100, nullable = false)
+    @NotNull
     private String surnames;
 
-    @Column(name = "is_active", columnDefinition = "boolean default true", nullable = false)
+    @NotNull
     private Boolean isActive = true;
 
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = News.class, mappedBy = "user")
+    @DBRef
     private List<News> news;
 
-    @ManyToOne(targetEntity = Role.class)
-    @JoinColumn(name = "id_role", nullable = false)
+    @NotNull
+    @DBRef
     private Role role;
 
-    public Long getIdUser() {
+    @CreatedDate
+    @NotNull
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    @NotNull
+    private LocalDateTime updatedAt;
+
+    public String getIdUser() {
         return idUser;
     }
 

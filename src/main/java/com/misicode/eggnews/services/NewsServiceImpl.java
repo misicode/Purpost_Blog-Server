@@ -17,32 +17,27 @@ public class NewsServiceImpl implements INewsService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<News> getNews() {
         return newsRepository.findByIsActiveTrueOrderByCreatedAtDesc();
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<News> getNewsByUser(User user) {
-        return newsRepository.findActiveNewsByUser(user);
+        return newsRepository.findByUserAndIsActiveTrueOrderByCreatedAtDesc(user);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public News getNewsById(Long id) {
+    public News getNewsById(String id) {
         return newsRepository.findById(id).orElse(null);
     }
 
     @Override
-    @Transactional
     public void saveNews(News news) {
         newsRepository.save(news);
     }
 
     @Override
-    @Transactional
-    public void deleteNews(Long id) {
+    public void deleteNews(String id) {
         newsRepository.softDelete(id);
     }
 }

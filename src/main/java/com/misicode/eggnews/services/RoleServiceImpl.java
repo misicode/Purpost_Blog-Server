@@ -4,7 +4,8 @@ import com.misicode.eggnews.domain.ERole;
 import com.misicode.eggnews.domain.Role;
 import com.misicode.eggnews.repositories.RoleRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class RoleServiceImpl implements IRoleService {
@@ -15,8 +16,13 @@ public class RoleServiceImpl implements IRoleService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Role getRoleByName(ERole name) {
-        return roleRepository.findByName(name).orElse(null);
+        Role role = roleRepository.findByName(name).orElse(null);
+
+        if(role == null) {
+            role = roleRepository.save(new Role(name));
+        }
+
+        return role;
     }
 }

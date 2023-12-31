@@ -1,4 +1,4 @@
-package com.misicode.eggnews.config;
+package com.misicode.eggnews.config.cloudinary;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;

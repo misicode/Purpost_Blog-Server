@@ -10,9 +10,9 @@ public interface INewsService {
 
     List<News> getNewsByUser(User user);
 
-    News getNewsById(Long id);
+    News getNewsById(String id);
 
     void saveNews(News news);
 
-    void deleteNews(Long id);
+    void deleteNews(String id);
 }

@@ -1,17 +1,15 @@
 package com.misicode.eggnews.domain;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "role")
+@Document(collection = "roles")
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_role")
-    private Integer idRole;
+    private String idRole;
 
-    @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "enum('USER', 'ADMIN') default 'USER'")
+    @NotNull
     private ERole name;
 
     public Role() {

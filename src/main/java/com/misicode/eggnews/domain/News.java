@@ -1,56 +1,43 @@
 package com.misicode.eggnews.domain;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Entity
-@Table(name = "news")
-public class News implements Serializable {
-    @Serial
-    private static final long serialVersionUID = -2952735933715107252L;
-
+@Document(collection = "news")
+public class News {
     @Id
-    @SequenceGenerator(
-            name = "news_sequence",
-            sequenceName = "news_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "news_sequence"
-    )
-    @Column(name = "id_news")
-    private Long idNews;
+    private String idNews;
 
-    @Column(length = 150, nullable = false)
+    @NotNull
     private String title;
 
-    @Column(length = 2500, nullable = false)
+    @NotNull
     private String body;
 
-    @Column(name = "is_active", columnDefinition = "boolean default true", nullable = false)
+    @NotNull
     private Boolean isActive = true;
 
-    @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "id_user", nullable = false)
+    @DBRef
+    @NotNull
     private User user;
 
-    @OneToOne(targetEntity = Image.class)
-    @JoinColumn(name = "id_image", nullable = false)
+    @DBRef
+    @NotNull
     private Image image;
 
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @CreatedDate
+    @NotNull
     private LocalDateTime createdAt;
 
-    @UpdateTimestamp
-    @Column(name = "updated_at", nullable = false)
+    @LastModifiedDate
+    @NotNull
     private LocalDateTime updatedAt;
 
     public News() {}
@@ -60,11 +47,11 @@ public class News implements Serializable {
         this.body = body;
     }
 
-    public Long getIdNews() {
+    public String getIdNews() {
         return idNews;
     }
 
-    public void setIdNews(Long idNews) {
+    public void setIdNews(String idNews) {
         this.idNews = idNews;
     }
 

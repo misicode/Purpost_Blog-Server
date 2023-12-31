@@ -4,7 +4,9 @@ const img = document.getElementById("file-img");
 
 document.addEventListener("DOMContentLoaded", function() {
     const imgUrl = img.getAttribute("data-url");
-    if(imgUrl !== "") img.src = imgUrl;
+    if(imgUrl !== "") {
+        img.src = imgUrl;
+    }
 });
 
 const displayImg = (files) => {

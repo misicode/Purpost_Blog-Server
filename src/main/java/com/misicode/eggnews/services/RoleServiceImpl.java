@@ -5,8 +5,6 @@ import com.misicode.eggnews.domain.Role;
 import com.misicode.eggnews.repositories.RoleRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class RoleServiceImpl implements IRoleService {
     private RoleRepository roleRepository;

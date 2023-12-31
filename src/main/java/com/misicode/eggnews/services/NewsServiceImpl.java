@@ -4,7 +4,6 @@ import com.misicode.eggnews.domain.News;
 import com.misicode.eggnews.domain.User;
 import com.misicode.eggnews.repositories.NewsRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

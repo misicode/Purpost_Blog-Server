@@ -5,7 +5,6 @@ import com.misicode.eggnews.domain.User;
 import com.misicode.eggnews.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements IUserService {

@@ -99,8 +99,8 @@ public class News {
         this.image = image;
     }
 
-    public String getCreatedAt() {
-        return createdAt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
     public String getCreatedAtWithTime() {

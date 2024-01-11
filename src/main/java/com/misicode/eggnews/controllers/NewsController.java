@@ -1,18 +1,14 @@
 package com.misicode.eggnews.controllers;
 
-import com.misicode.eggnews.domain.News;
 import com.misicode.eggnews.services.IAuthService;
 import com.misicode.eggnews.services.IImageService;
 import com.misicode.eggnews.services.INewsService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-@Controller
+@RestController
+@RequestMapping("/api/news")
 public class NewsController {
     private IAuthService authService;
     private IImageService imageService;
@@ -24,19 +20,17 @@ public class NewsController {
         this.newsService = newsService;
     }
 
-    @GetMapping("/")
-    public String home(ModelMap model) {
-        model.addAttribute("allNews", newsService.getNews());
-        return "home-page";
+    @GetMapping()
+    public ResponseEntity<?> getNews() {
+        return ResponseEntity.ok(newsService.getNews());
     }
 
-    @GetMapping("/news/{id}")
-    public String newsById(@PathVariable String id, ModelMap model) {
-        model.addAttribute("news", newsService.getNewsById(id));
-        return "news-page";
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getNewsById(@PathVariable String id) {
+        return ResponseEntity.ok(newsService.getNewsById(id));
     }
 
-    @GetMapping("/my-news")
+    /*@GetMapping("/my-news")
     public String newsByAuthor(ModelMap model) {
         model.addAttribute("allNews", newsService.getNewsByUser(authService.getUserAuthenticated()));
         return "my-news-page";
@@ -87,5 +81,5 @@ public class NewsController {
     public String deleteNewsById(@PathVariable String id) {
         newsService.deleteNews(id);
         return "redirect:/my-news";
-    }
+    }*/
 }

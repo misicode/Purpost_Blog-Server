@@ -1,6 +1,6 @@
 package com.misicode.eggnews.services;
 
-import com.misicode.eggnews.domain.ERole;
+import com.misicode.eggnews.domain.RoleEnum;
 import com.misicode.eggnews.domain.User;
 import com.misicode.eggnews.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,7 +31,7 @@ public class UserServiceImpl implements IUserService {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(roleService.getRoleByName(ERole.ROLE_USER));
+        user.setRole(roleService.getRoleByName(RoleEnum.ROLE_USER));
 
         userRepository.save(user);
 

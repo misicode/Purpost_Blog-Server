@@ -31,9 +31,6 @@ public class User {
     @NotNull
     private Boolean isActive = true;
 
-    @DBRef
-    private List<News> news;
-
     @NotNull
     @DBRef
     private Role role;
@@ -88,14 +85,6 @@ public class User {
 
     public String getFullName() {
         return names + " " + surnames;
-    }
-
-    public List<News> getNews() {
-        return news;
-    }
-
-    public void setNews(List<News> news) {
-        this.news = news;
     }
 
     public Role getRole() {

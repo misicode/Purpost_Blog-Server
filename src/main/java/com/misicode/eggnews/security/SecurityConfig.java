@@ -13,6 +13,13 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.reactive.CorsWebFilter;
+import org.springframework.web.filter.CorsFilter;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -43,6 +50,18 @@ public class SecurityConfig {
     }
 
     @Bean
+    public CorsFilter corsFilter() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return new CorsFilter(source);
+    }
+
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -50,9 +69,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+                .addFilterBefore(corsFilter(), CorsFilter.class)
                 .csrf(csrfConfig -> csrfConfig.disable())
                 .authorizeHttpRequests(authRequest -> authRequest
-                        .requestMatchers("/styles/**", "/scripts/**", "/", "/news/**", "/auth/**").permitAll()
+                        .requestMatchers("/styles/**", "/scripts/**", "/api/news/**", "/auth/**").permitAll()
                         .requestMatchers("/my-profile/**").hasRole("USER")
                         .requestMatchers("/my-news/**").hasRole("USER")
                         .anyRequest().authenticated()

@@ -10,16 +10,16 @@ public class Role {
     private String idRole;
 
     @NotNull
-    private ERole name;
+    private RoleEnum name;
 
     public Role() {
     }
 
-    public Role(ERole name) {
+    public Role(RoleEnum name) {
         this.name = name;
     }
 
-    public ERole getName() {
+    public RoleEnum getName() {
         return name;
     }
 }

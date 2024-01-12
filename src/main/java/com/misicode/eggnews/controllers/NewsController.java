@@ -1,11 +1,14 @@
 package com.misicode.eggnews.controllers;
 
+import com.misicode.eggnews.dto.NewsDto;
 import com.misicode.eggnews.services.IAuthService;
 import com.misicode.eggnews.services.IImageService;
 import com.misicode.eggnews.services.INewsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/news")
@@ -21,12 +24,12 @@ public class NewsController {
     }
 
     @GetMapping()
-    public ResponseEntity<?> getNews() {
+    public ResponseEntity<List<NewsDto>> getNews() {
         return ResponseEntity.ok(newsService.getNews());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getNewsById(@PathVariable String id) {
+    public ResponseEntity<NewsDto> getNewsById(@PathVariable String id) {
         return ResponseEntity.ok(newsService.getNewsById(id));
     }
 

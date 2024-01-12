@@ -15,8 +15,6 @@ public class Image {
     @NotNull
     private String url;
 
-    private News news;
-
     public String getName() {
         return name;
     }

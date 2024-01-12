@@ -79,14 +79,6 @@ public class User {
         this.surnames = surnames;
     }
 
-    public String getSomeName() {
-        return (new StringTokenizer(names)).nextToken() + " " + surnames;
-    }
-
-    public String getFullName() {
-        return names + " " + surnames;
-    }
-
     public Role getRole() {
         return role;
     }

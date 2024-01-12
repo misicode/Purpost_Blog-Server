@@ -2,6 +2,8 @@ package com.misicode.eggnews.services;
 
 import com.misicode.eggnews.domain.News;
 import com.misicode.eggnews.domain.User;
+import com.misicode.eggnews.dto.NewsDto;
+import com.misicode.eggnews.mapper.NewsMapper;
 import com.misicode.eggnews.repositories.NewsRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +18,10 @@ public class NewsServiceImpl implements INewsService {
     }
 
     @Override
-    public List<News> getNews() {
-        return newsRepository.findByIsActiveTrueOrderByCreatedAtDesc();
+    public List<NewsDto> getNews() {
+        List<News> newsList = newsRepository.findByIsActiveTrueOrderByCreatedAtDesc();
+
+        return NewsMapper.mapToListNewsDto(newsList);
     }
 
     @Override
@@ -26,8 +30,10 @@ public class NewsServiceImpl implements INewsService {
     }
 
     @Override
-    public News getNewsById(String id) {
-        return newsRepository.findById(id).orElse(null);
+    public NewsDto getNewsById(String id) {
+        News news = newsRepository.findById(id).orElse(null);
+
+        return news != null ? NewsMapper.mapToNewsDto(news) : null;
     }
 
     @Override

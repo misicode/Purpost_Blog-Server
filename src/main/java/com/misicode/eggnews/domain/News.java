@@ -67,10 +67,6 @@ public class News {
         return body;
     }
 
-    public String getFormatBody() {
-        return body.replace("\n", "<br>");
-    }
-
     public void setBody(String body) {
         this.body = body;
     }
@@ -101,9 +97,5 @@ public class News {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
-    }
-
-    public String getCreatedAtWithTime() {
-        return createdAt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a"));
     }
 }

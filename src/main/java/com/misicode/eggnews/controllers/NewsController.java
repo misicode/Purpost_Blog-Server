@@ -4,6 +4,7 @@ import com.misicode.eggnews.dto.NewsDto;
 import com.misicode.eggnews.services.IAuthService;
 import com.misicode.eggnews.services.IImageService;
 import com.misicode.eggnews.services.INewsService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,7 +31,13 @@ public class NewsController {
 
     @GetMapping("/{id}")
     public ResponseEntity<NewsDto> getNewsById(@PathVariable String id) {
-        return ResponseEntity.ok(newsService.getNewsById(id));
+        NewsDto news = newsService.getNewsById(id);
+
+        if(news == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } else {
+            return ResponseEntity.ok(news);
+        }
     }
 
     /*@GetMapping("/my-news")

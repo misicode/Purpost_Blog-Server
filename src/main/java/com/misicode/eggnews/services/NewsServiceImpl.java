@@ -8,6 +8,7 @@ import com.misicode.eggnews.repositories.NewsRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NewsServiceImpl implements INewsService {
@@ -31,9 +32,7 @@ public class NewsServiceImpl implements INewsService {
 
     @Override
     public NewsDto getNewsById(String id) {
-        News news = newsRepository.findById(id).orElse(null);
-
-        return news != null ? NewsMapper.mapToNewsDto(news) : null;
+        return newsRepository.findById(id).map(news -> NewsMapper.mapToNewsDto(news)).orElse(null);
     }
 
     @Override

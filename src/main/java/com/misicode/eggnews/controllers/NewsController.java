@@ -31,13 +31,7 @@ public class NewsController {
 
     @GetMapping("/{id}")
     public ResponseEntity<NewsDto> getNewsById(@PathVariable String id) {
-        NewsDto news = newsService.getNewsById(id);
-
-        if(news == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        } else {
-            return ResponseEntity.ok(news);
-        }
+        return ResponseEntity.ok(newsService.getNewsById(id));
     }
 
     /*@GetMapping("/my-news")

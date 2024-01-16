@@ -1,5 +1,6 @@
 package com.misicode.eggnews.security;
 
+import com.misicode.eggnews.security.jwt.JwtAuthenticationFilter;
 import com.misicode.eggnews.services.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -30,9 +32,9 @@ public class SecurityConfig {
         this.userDetailsService = userDetailsService;
     }
 
-    /*public JwtAuthenticationFilter jwtAuthenticationFilter() {
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();
-    }*/
+    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
@@ -72,32 +74,16 @@ public class SecurityConfig {
                 .addFilterBefore(corsFilter(), CorsFilter.class)
                 .csrf(csrfConfig -> csrfConfig.disable())
                 .authorizeHttpRequests(authRequest -> authRequest
-                        .requestMatchers("/styles/**", "/scripts/**", "/api/news/**", "/auth/**").permitAll()
+                        .requestMatchers("/styles/**", "/scripts/**", "/api/news/**", "/api/auth/**").permitAll()
                         .requestMatchers("/my-profile/**").hasRole("USER")
                         .requestMatchers("/my-news/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManager -> sessionManager
-                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                        .invalidSessionUrl("/auth/signin?timeout")
-                        .sessionFixation().migrateSession()
-                        .maximumSessions(1)
-                        .expiredUrl("/auth/signin?expired")
-                        .maxSessionsPreventsLogin(false)
-                )
-                .formLogin(formLogin -> formLogin
-                        .loginPage("/auth/signin")
-                        .defaultSuccessUrl("/my-news")
-                        .failureUrl("/auth/signin/error")
-                        .usernameParameter("email")
-                )
-                .logout(logout -> logout
-                        .logoutUrl("/auth/signout")
-                        .deleteCookies("JSESSIONID")
-                        .invalidateHttpSession(true)
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authenticationProvider(authenticationProvider())
-                //.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 }

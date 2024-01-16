@@ -1,48 +1,37 @@
 package com.misicode.eggnews.controllers;
 
-import com.misicode.eggnews.domain.User;
+import com.misicode.eggnews.payload.SigninRequest;
+import com.misicode.eggnews.payload.SigninResponse;
+import com.misicode.eggnews.services.IAuthService;
 import com.misicode.eggnews.services.IUserService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/auth")
+@RestController
+@RequestMapping("/api/auth")
 public class AuthController {
+    private IAuthService authService;
     private IUserService userService;
 
-    public AuthController(IUserService userService) {
+    public AuthController(IAuthService authService, IUserService userService) {
+        this.authService = authService;
         this.userService = userService;
     }
 
-    @GetMapping("/signin")
-    public String showSignIn() {
-        return "signin-page";
+    @PostMapping("/signin")
+    public ResponseEntity<SigninResponse> showSignIn(@RequestBody @Valid SigninRequest request) {
+        return ResponseEntity.ok(authService.login(request));
     }
 
-    @GetMapping("/signin/error")
-    public String showSignInError(ModelMap model) {
-        model.addAttribute("isSignInError", true);
-        return "signin-page";
-    }
-
-    @GetMapping("/signup")
+    /*@GetMapping("/signup")
     public String showSignUp(ModelMap model) {
         model.addAttribute("user", new User());
-        return "signup-page";
-    }
-
-    @GetMapping("/signup/error")
-    public String showSignUpError(ModelMap model) {
-        model.addAttribute("user", new User());
-        model.addAttribute("isSignUpError", true);
         return "signup-page";
     }
 
     @PostMapping("/signup/form")
     public String signUp(User user) {
         return userService.registerUser(user) ? "redirect:../signin" : "redirect:./error";
-    }
+    }*/
 }

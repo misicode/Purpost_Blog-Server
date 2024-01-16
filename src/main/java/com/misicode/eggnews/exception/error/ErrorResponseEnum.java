@@ -1,15 +1,15 @@
-package com.misicode.eggnews.exception;
+package com.misicode.eggnews.exception.error;
 
 import org.springframework.http.HttpStatus;
 
-public enum ErrorEnum implements ErrorResponse {
-    NEWS_NOT_FOUND( "NEWS_NOT_FOUND", HttpStatus.NOT_FOUND , "No se encontró la noticia con ID {id}");
+public enum ErrorResponseEnum implements IErrorResponse {
+    NEWS_NOT_FOUND( "NEWS_NOT_FOUND", HttpStatus.NOT_FOUND , "La noticia con ID {id} no fue encontrada");
 
     String key;
     HttpStatus httpStatus;
     String message;
 
-    ErrorEnum(String key, HttpStatus httpStatus, String message) {
+    ErrorResponseEnum(String key, HttpStatus httpStatus, String message) {
         this.message = message;
         this.key = key;
         this.httpStatus = httpStatus;

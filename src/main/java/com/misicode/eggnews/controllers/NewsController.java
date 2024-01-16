@@ -4,7 +4,6 @@ import com.misicode.eggnews.dto.NewsDto;
 import com.misicode.eggnews.services.IAuthService;
 import com.misicode.eggnews.services.IImageService;
 import com.misicode.eggnews.services.INewsService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

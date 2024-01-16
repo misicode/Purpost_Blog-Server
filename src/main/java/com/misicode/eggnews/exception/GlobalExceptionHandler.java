@@ -45,9 +45,9 @@ public class GlobalExceptionHandler extends DefaultErrorAttributes {
         Map<String, Object> attributes = getErrorAttributes(request, ErrorAttributeOptions.defaults());
         attributes.put(HttpConstants.STATUS, status.value());
         attributes.put(HttpConstants.ERROR, status);
+        attributes.put(HttpConstants.ERROR_KEY, key);
         attributes.put(HttpConstants.MESSAGE, message);
         attributes.put(HttpConstants.ERRORS, validationErrors);
-        attributes.put(HttpConstants.ERROR_KEY, key);
         attributes.put(HttpConstants.PATH, ((ServletWebRequest) request).getRequest().getRequestURI());
         return new ResponseEntity<>(attributes, status);
     }

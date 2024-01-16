@@ -1,8 +1,8 @@
-package com.misicode.eggnews.exception;
+package com.misicode.eggnews.exception.error;
 
 import org.springframework.http.HttpStatus;
 
-public interface ErrorResponse {
+public interface IErrorResponse {
     String getKey();
     String getMessage();
     HttpStatus getHttpStatus();

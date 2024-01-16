@@ -9,9 +9,9 @@ import java.util.List;
 public interface INewsService {
     List<NewsDto> getNews();
 
-    List<News> getNewsByUser(User user);
-
     NewsDto getNewsById(String id);
+
+    List<News> getNewsByUser(User user);
 
     void saveNews(News news);
 

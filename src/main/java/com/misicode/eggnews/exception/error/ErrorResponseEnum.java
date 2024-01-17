@@ -1,9 +1,12 @@
 package com.misicode.eggnews.exception.error;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 
 public enum ErrorResponseEnum implements IErrorResponse {
-    NEWS_NOT_FOUND( "NEWS_NOT_FOUND", HttpStatus.NOT_FOUND , "La noticia con ID {id} no fue encontrada");
+    AUTH_FAILED("AUTH_FAILED", HttpStatus.UNAUTHORIZED, "Acceso no autorizado: {message}"),
+    NEWS_NOT_FOUND( "NEWS_NOT_FOUND", HttpStatus.NOT_FOUND , "La noticia con ID {id} no fue encontrada"),
+    USER_NOT_FOUND("USER_NOT_FOUND", HttpStatus.NOT_FOUND, "El usuario con correo {email} no fue encontrado");
 
     String key;
     HttpStatus httpStatus;

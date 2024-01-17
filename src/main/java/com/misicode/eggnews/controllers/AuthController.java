@@ -5,6 +5,7 @@ import com.misicode.eggnews.payload.SigninResponse;
 import com.misicode.eggnews.services.IAuthService;
 import com.misicode.eggnews.services.IUserService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,9 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<SigninResponse> showSignIn(@RequestBody @Valid SigninRequest request) {
-        return ResponseEntity.ok(authService.login(request));
+    public ResponseEntity<SigninResponse> signIn(@RequestBody @Valid SigninRequest request) {
+        SigninResponse response = authService.login(request);
+        return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, response.getToken()).body(null);
     }
 
     /*@GetMapping("/signup")

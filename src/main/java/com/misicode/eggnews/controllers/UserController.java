@@ -1,14 +1,19 @@
 package com.misicode.eggnews.controllers;
 
 import com.misicode.eggnews.domain.User;
+import com.misicode.eggnews.dto.UserDto;
 import com.misicode.eggnews.services.IAuthService;
 import com.misicode.eggnews.services.IUserService;
-import org.springframework.stereotype.Controller;
+import org.apache.coyote.Response;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@RequestMapping("/api/user")
 public class UserController {
     private IAuthService authService;
     private IUserService userService;
@@ -18,13 +23,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/my-profile")
-    public String profile(ModelMap model) {
-        model.addAttribute("user", authService.getUserAuthenticated());
-        return "profile-page";
+    @GetMapping("/profile")
+    public ResponseEntity<UserDto> getProfile() {
+        return ResponseEntity.ok(authService.getUserAuthenticated());
     }
 
-    @GetMapping("/my-profile/edit")
+    /*@GetMapping("/my-profile/edit")
     public String showEditProfile(ModelMap model) {
         model.addAttribute("user", authService.getUserAuthenticated());
         model.addAttribute("isEditable", true);
@@ -40,5 +44,5 @@ public class UserController {
 
         userService.saveUser(authUser);
         return "redirect:../my-profile";
-    }
+    }*/
 }

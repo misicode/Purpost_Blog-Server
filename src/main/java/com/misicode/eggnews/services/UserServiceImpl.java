@@ -2,9 +2,15 @@ package com.misicode.eggnews.services;
 
 import com.misicode.eggnews.domain.RoleEnum;
 import com.misicode.eggnews.domain.User;
+import com.misicode.eggnews.dto.UserDto;
+import com.misicode.eggnews.exception.ApplicationException;
+import com.misicode.eggnews.exception.error.ErrorResponseEnum;
+import com.misicode.eggnews.mapper.UserMapper;
 import com.misicode.eggnews.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -19,8 +25,10 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User getUserByEmail(String email) {
-        return userRepository.findByEmail(email).orElse(null);
+    public UserDto getUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .map(user -> UserMapper.mapToUserDto(user))
+                .orElseThrow(() -> new ApplicationException(ErrorResponseEnum.USER_NOT_FOUND, Map.of("email", email)));
     }
 
     @Override

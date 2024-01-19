@@ -1,12 +1,12 @@
-package com.misicode.eggnews.services;
+package com.misicode.eggnews.services.user;
 
 import com.misicode.eggnews.domain.User;
 import com.misicode.eggnews.dto.UserDto;
 
 public interface IUserService {
-    UserDto getUserByEmail(String email);
+    User getUserByEmail(String email);
 
     Boolean registerUser(User user);
 
-    void saveUser(User user);
+    User updateUser(UserDto user, String email);
 }

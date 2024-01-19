@@ -43,6 +43,13 @@ public class User {
     @NotNull
     private LocalDateTime updatedAt;
 
+    public User(String idUser, String email, String names, String surnames) {
+        this.idUser = idUser;
+        this.email = email;
+        this.names = names;
+        this.surnames = surnames;
+    }
+
     public String getIdUser() {
         return idUser;
     }

@@ -1,12 +1,13 @@
-package com.misicode.eggnews.services;
+package com.misicode.eggnews.services.auth;
 
-import com.misicode.eggnews.domain.User;
-import com.misicode.eggnews.dto.UserDto;
+import com.misicode.eggnews.domain.UserDetailsImpl;
 import com.misicode.eggnews.payload.SigninRequest;
 import com.misicode.eggnews.payload.SigninResponse;
 
 public interface IAuthService {
     SigninResponse login(SigninRequest signinRequest);
 
-    UserDto getUserAuthenticated();
+    UserDetailsImpl getUserAuthenticated();
+
+    String getUsernameAuthenticated();
 }

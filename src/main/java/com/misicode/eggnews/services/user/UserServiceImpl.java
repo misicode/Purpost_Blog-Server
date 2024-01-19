@@ -1,12 +1,12 @@
-package com.misicode.eggnews.services;
+package com.misicode.eggnews.services.user;
 
 import com.misicode.eggnews.domain.RoleEnum;
 import com.misicode.eggnews.domain.User;
 import com.misicode.eggnews.dto.UserDto;
 import com.misicode.eggnews.exception.ApplicationException;
 import com.misicode.eggnews.exception.error.ErrorResponseEnum;
-import com.misicode.eggnews.mapper.UserMapper;
 import com.misicode.eggnews.repositories.UserRepository;
+import com.misicode.eggnews.services.IRoleService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +25,8 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public UserDto getUserByEmail(String email) {
+    public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .map(user -> UserMapper.mapToUserDto(user))
                 .orElseThrow(() -> new ApplicationException(ErrorResponseEnum.USER_NOT_FOUND, Map.of("email", email)));
     }
 
@@ -47,7 +46,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void saveUser(User user) {
-        userRepository.save(user);
+    public User updateUser(UserDto user, String email) {
+        User newUser = getUserByEmail(email);
+
+        newUser.setNames(user.getNames());
+        newUser.setSurnames(user.getSurnames());
+
+        return userRepository.save(newUser);
     }
 }

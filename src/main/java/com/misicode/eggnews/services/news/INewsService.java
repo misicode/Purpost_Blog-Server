@@ -1,15 +1,14 @@
-package com.misicode.eggnews.services;
+package com.misicode.eggnews.services.news;
 
 import com.misicode.eggnews.domain.News;
 import com.misicode.eggnews.domain.User;
-import com.misicode.eggnews.dto.NewsDto;
 
 import java.util.List;
 
 public interface INewsService {
-    List<NewsDto> getNews();
+    List<News> getNews();
 
-    NewsDto getNewsById(String id);
+    News getNewsById(String id);
 
     List<News> getNewsByUser(User user);
 

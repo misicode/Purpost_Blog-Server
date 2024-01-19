@@ -1,8 +1,6 @@
-package com.misicode.eggnews.services;
+package com.misicode.eggnews.services.auth;
 
-import com.misicode.eggnews.domain.User;
 import com.misicode.eggnews.domain.UserDetailsImpl;
-import com.misicode.eggnews.dto.UserDto;
 import com.misicode.eggnews.exception.ApplicationException;
 import com.misicode.eggnews.exception.error.ErrorResponseEnum;
 import com.misicode.eggnews.payload.SigninRequest;
@@ -20,12 +18,10 @@ import java.util.Map;
 @Service
 public class AuthServiceImpl implements IAuthService {
     private AuthenticationManager authenticationManager;
-    private IUserService userService;
     private JwtUtils jwtUtils;
 
-    public AuthServiceImpl(AuthenticationManager authenticationManager, IUserService userService, JwtUtils jwtUtils) {
+    public AuthServiceImpl(AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
         this.authenticationManager = authenticationManager;
-        this.userService = userService;
         this.jwtUtils = jwtUtils;
     }
 
@@ -52,11 +48,14 @@ public class AuthServiceImpl implements IAuthService {
     }
 
     @Override
-    public UserDto getUserAuthenticated() {
+    public UserDetailsImpl getUserAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        return (UserDetailsImpl) authentication.getPrincipal();
+    }
 
-        return userService.getUserByEmail(userDetails.getUsername());
+    @Override
+    public String getUsernameAuthenticated() {
+        return getUserAuthenticated().getUsername();
     }
 }

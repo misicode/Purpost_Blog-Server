@@ -1,4 +1,4 @@
-package com.misicode.eggnews.services;
+package com.misicode.eggnews.services.news;
 
 import com.misicode.eggnews.domain.News;
 import com.misicode.eggnews.domain.User;
@@ -21,16 +21,13 @@ public class NewsServiceImpl implements INewsService {
     }
 
     @Override
-    public List<NewsDto> getNews() {
-        List<News> newsList = newsRepository.findByIsActiveTrueOrderByCreatedAtDesc();
-
-        return NewsMapper.mapToListNewsDto(newsList);
+    public List<News> getNews() {
+        return newsRepository.findByIsActiveTrueOrderByCreatedAtDesc();
     }
 
     @Override
-    public NewsDto getNewsById(String id) {
+    public News getNewsById(String id) {
         return newsRepository.findById(id)
-                .map(news -> NewsMapper.mapToNewsDto(news))
                 .orElseThrow(() -> new ApplicationException(ErrorResponseEnum.NEWS_NOT_FOUND, Map.of("id", id)));
     }
 

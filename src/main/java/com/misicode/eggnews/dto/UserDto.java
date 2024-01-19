@@ -1,9 +1,19 @@
 package com.misicode.eggnews.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class UserDto {
     private String idUser;
+
     private String email;
+
+    @NotBlank
+    @NotNull
     private String names;
+
+    @NotBlank
+    @NotNull
     private String surnames;
 
     public UserDto(String idUser, String email, String names, String surnames) {

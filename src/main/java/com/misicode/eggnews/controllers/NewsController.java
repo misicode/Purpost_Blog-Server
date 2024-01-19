@@ -30,13 +30,7 @@ public class NewsController {
         return ResponseEntity.ok(NewsMapper.mapToNewsDto(newsService.getNewsById(id)));
     }
 
-    /*@GetMapping("/my-news")
-    public String newsByAuthor(ModelMap model) {
-        model.addAttribute("allNews", newsService.getNewsByUser(authService.getUserAuthenticated()));
-        return "my-news-page";
-    }
-
-    @GetMapping("/my-news/create")
+    /*@GetMapping("/my-news/create")
     public String showCreateNews(ModelMap model) {
         model.addAttribute("subtitle", "Crear Noticia");
         model.addAttribute("sectionTitle", "Nuevo");

@@ -7,6 +7,7 @@ import com.misicode.eggnews.exception.ApplicationException;
 import com.misicode.eggnews.exception.error.ErrorResponseEnum;
 import com.misicode.eggnews.mapper.NewsMapper;
 import com.misicode.eggnews.repositories.NewsRepository;
+import com.misicode.eggnews.services.user.IUserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +16,11 @@ import java.util.Map;
 @Service
 public class NewsServiceImpl implements INewsService {
     private NewsRepository newsRepository;
+    private IUserService userService;
 
-    public NewsServiceImpl(NewsRepository newsRepository) {
+    public NewsServiceImpl(NewsRepository newsRepository, IUserService userService) {
         this.newsRepository = newsRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -32,7 +35,9 @@ public class NewsServiceImpl implements INewsService {
     }
 
     @Override
-    public List<News> getNewsByUser(User user) {
+    public List<News> getNewsByUser(String email) {
+        User user = userService.getUserByEmail(email);
+
         return newsRepository.findByUserAndIsActiveTrueOrderByCreatedAtDesc(user);
     }
 

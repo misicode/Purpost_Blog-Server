@@ -10,7 +10,7 @@ public interface INewsService {
 
     News getNewsById(String id);
 
-    List<News> getNewsByUser(User user);
+    List<News> getNewsByUser(String email);
 
     void saveNews(News news);
 

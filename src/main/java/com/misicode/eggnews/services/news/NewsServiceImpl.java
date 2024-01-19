@@ -1,12 +1,13 @@
 package com.misicode.eggnews.services.news;
 
+import com.misicode.eggnews.domain.Image;
 import com.misicode.eggnews.domain.News;
 import com.misicode.eggnews.domain.User;
-import com.misicode.eggnews.dto.NewsDto;
+import com.misicode.eggnews.dto.NewsRequest;
 import com.misicode.eggnews.exception.ApplicationException;
 import com.misicode.eggnews.exception.error.ErrorResponseEnum;
-import com.misicode.eggnews.mapper.NewsMapper;
 import com.misicode.eggnews.repositories.NewsRepository;
+import com.misicode.eggnews.services.image.IImageService;
 import com.misicode.eggnews.services.user.IUserService;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,12 @@ import java.util.Map;
 
 @Service
 public class NewsServiceImpl implements INewsService {
+    private IImageService imageService;
     private NewsRepository newsRepository;
     private IUserService userService;
 
-    public NewsServiceImpl(NewsRepository newsRepository, IUserService userService) {
+    public NewsServiceImpl(IImageService imageService, NewsRepository newsRepository, IUserService userService) {
+        this.imageService = imageService;
         this.newsRepository = newsRepository;
         this.userService = userService;
     }
@@ -42,8 +45,17 @@ public class NewsServiceImpl implements INewsService {
     }
 
     @Override
-    public void saveNews(News news) {
-        newsRepository.save(news);
+    public News saveNews(NewsRequest news, String email) {
+        User user = userService.getUserByEmail(email);
+        Image image = imageService.saveImage(news.getImage());
+
+        News newNews = new News();
+        newNews.setTitle(news.getTitle());
+        newNews.setBody(news.getBody());
+        newNews.setUser(user);
+        newNews.setImage(image);
+
+        return newsRepository.save(newNews);
     }
 
     @Override

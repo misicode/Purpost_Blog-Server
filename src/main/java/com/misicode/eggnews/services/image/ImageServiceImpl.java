@@ -1,7 +1,8 @@
-package com.misicode.eggnews.services;
+package com.misicode.eggnews.services.image;
 
 import com.misicode.eggnews.domain.Image;
 import com.misicode.eggnews.repositories.ImageRepository;
+import com.misicode.eggnews.services.cloudinary.ICloudinaryService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,18 +21,17 @@ public class ImageServiceImpl implements IImageService {
     }
 
     @Override
-    public Image saveImage(MultipartFile file) {
+    public Image saveImage(String base64File) {
         Image image = new Image();
 
         image.setName(UUID.randomUUID().toString().substring(0, 10) + "_" + LocalTime.now().format(DateTimeFormatter.ofPattern("HHmmss")));
-        image.setUrl(cloudinaryService.uploadFile(file, "EggNews/news"));
+        image.setUrl(cloudinaryService.uploadFile(base64File, "EggNews/news"));
 
         if(image.getUrl() == null) {
             System.out.println("Error al guardar la imagen");
             return null;
         }
 
-        imageRepository.save(image);
-        return image;
+        return imageRepository.save(image);
     }
 }

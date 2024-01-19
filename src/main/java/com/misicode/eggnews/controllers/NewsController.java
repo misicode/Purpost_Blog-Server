@@ -1,8 +1,8 @@
 package com.misicode.eggnews.controllers;
 
-import com.misicode.eggnews.dto.NewsDto;
+import com.misicode.eggnews.dto.NewsResponse;
 import com.misicode.eggnews.mapper.NewsMapper;
-import com.misicode.eggnews.services.IImageService;
+import com.misicode.eggnews.services.image.IImageService;
 import com.misicode.eggnews.services.news.INewsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,25 +21,16 @@ public class NewsController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<NewsDto>> getNews() {
-        return ResponseEntity.ok(NewsMapper.mapToListNewsDto(newsService.getNews()));
+    public ResponseEntity<List<NewsResponse>> getNews() {
+        return ResponseEntity.ok(NewsMapper.mapToListNewsResponse(newsService.getNews()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<NewsDto> getNewsById(@PathVariable String id) {
-        return ResponseEntity.ok(NewsMapper.mapToNewsDto(newsService.getNewsById(id)));
+    public ResponseEntity<NewsResponse> getNewsById(@PathVariable String id) {
+        return ResponseEntity.ok(NewsMapper.mapToNewsResponse(newsService.getNewsById(id)));
     }
 
-    /*@GetMapping("/my-news/create")
-    public String showCreateNews(ModelMap model) {
-        model.addAttribute("subtitle", "Crear Noticia");
-        model.addAttribute("sectionTitle", "Nuevo");
-        model.addAttribute("isNew", true);
-        model.addAttribute("btnName", "Guardar");
-        model.addAttribute("news", new News());
-        return "form-news-page";
-    }
-
+    /*
     @GetMapping("/my-news/edit/{id}")
     public String showEditNews(@PathVariable String id, ModelMap model) {
         model.addAttribute("subtitle", "Editar Noticia");

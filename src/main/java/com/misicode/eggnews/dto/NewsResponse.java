@@ -2,23 +2,25 @@ package com.misicode.eggnews.dto;
 
 import java.time.LocalDateTime;
 
-public class NewsDto {
+public class NewsResponse {
     private String idNews;
     private String title;
     private String body;
     private UserDto user;
     private ImageDto image;
-    private LocalDateTime createdAt;
     private Boolean isActive;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    public NewsDto(String idNews, String title, String body, UserDto user, ImageDto image, LocalDateTime createdAt, Boolean isActive) {
+    public NewsResponse(String idNews, String title, String body, UserDto user, ImageDto image, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.idNews = idNews;
         this.title = title;
         this.body = body;
         this.user = user;
         this.image = image;
-        this.createdAt = createdAt;
         this.isActive = isActive;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public String getIdNews() {
@@ -41,11 +43,15 @@ public class NewsDto {
         return image;
     }
 
+    public Boolean getActive() {
+        return isActive;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public Boolean getActive() {
-        return isActive;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 }

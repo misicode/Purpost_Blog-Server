@@ -1,6 +1,7 @@
 package com.misicode.eggnews.controllers;
 
-import com.misicode.eggnews.dto.NewsDto;
+import com.misicode.eggnews.dto.NewsRequest;
+import com.misicode.eggnews.dto.NewsResponse;
 import com.misicode.eggnews.dto.UserDto;
 import com.misicode.eggnews.mapper.NewsMapper;
 import com.misicode.eggnews.mapper.UserMapper;
@@ -41,9 +42,16 @@ public class UserController {
     }
 
     @GetMapping("/news")
-    public ResponseEntity<List<NewsDto>> getNews() {
+    public ResponseEntity<List<NewsResponse>> getNews() {
         return ResponseEntity.ok(
-                NewsMapper.mapToListNewsDto(newsService.getNewsByUser(authService.getUsernameAuthenticated()))
+                NewsMapper.mapToListNewsResponse(newsService.getNewsByUser(authService.getUsernameAuthenticated()))
+        );
+    }
+
+    @PostMapping("/news")
+    public ResponseEntity<NewsResponse> createNews(@RequestBody @Valid NewsRequest news) {
+        return ResponseEntity.ok(
+                NewsMapper.mapToNewsResponse(newsService.saveNews(news, authService.getUsernameAuthenticated()))
         );
     }
 }

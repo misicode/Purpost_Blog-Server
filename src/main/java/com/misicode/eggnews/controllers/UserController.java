@@ -54,4 +54,11 @@ public class UserController {
                 NewsMapper.mapToNewsResponse(newsService.saveNews(news, authService.getUsernameAuthenticated()))
         );
     }
+
+    @PutMapping("/news/{id}")
+    public ResponseEntity<NewsResponse> updateNews(@PathVariable String id, @RequestBody NewsRequest news) {
+        return ResponseEntity.ok(
+                NewsMapper.mapToNewsResponse(newsService.updateNews(id, news))
+        );
+    }
 }

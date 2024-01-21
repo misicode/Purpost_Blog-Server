@@ -49,13 +49,28 @@ public class NewsServiceImpl implements INewsService {
         User user = userService.getUserByEmail(email);
         Image image = imageService.saveImage(news.getImage());
 
-        News newNews = new News();
-        newNews.setTitle(news.getTitle());
-        newNews.setBody(news.getBody());
-        newNews.setUser(user);
-        newNews.setImage(image);
+        News savedNews = new News();
+        savedNews.setTitle(news.getTitle());
+        savedNews.setBody(news.getBody());
+        savedNews.setUser(user);
+        savedNews.setImage(image);
 
-        return newsRepository.save(newNews);
+        return newsRepository.save(savedNews);
+    }
+
+    @Override
+    public News updateNews(String id, NewsRequest news) {
+        News updatedNews = getNewsById(id);
+
+        updatedNews.setTitle(news.getTitle());
+        updatedNews.setBody(news.getBody());
+
+        if(!news.getImage().isEmpty()) {
+            Image image = imageService.saveImage(news.getImage());
+            updatedNews.setImage(image);
+        }
+
+        return newsRepository.save(updatedNews);
     }
 
     @Override

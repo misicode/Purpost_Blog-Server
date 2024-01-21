@@ -14,5 +14,7 @@ public interface INewsService {
 
     News saveNews(NewsRequest news, String email);
 
+    News updateNews(String id, NewsRequest news);
+
     void deleteNews(String id);
 }

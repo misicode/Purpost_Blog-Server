@@ -1,6 +1,5 @@
 package com.misicode.eggnews.exception.error;
 
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 
 public enum ErrorResponseEnum implements IErrorResponse {

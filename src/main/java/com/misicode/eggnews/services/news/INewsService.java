@@ -1,7 +1,8 @@
 package com.misicode.eggnews.services.news;
 
 import com.misicode.eggnews.domain.News;
-import com.misicode.eggnews.dto.NewsRequest;
+import com.misicode.eggnews.dto.NewsCreateRequest;
+import com.misicode.eggnews.dto.NewsUpdateRequest;
 
 import java.util.List;
 
@@ -12,9 +13,9 @@ public interface INewsService {
 
     List<News> getNewsByUser(String email);
 
-    News saveNews(NewsRequest news, String email);
+    News saveNews(NewsCreateRequest news, String email);
 
-    News updateNews(String id, NewsRequest news);
+    News updateNews(String id, NewsUpdateRequest news);
 
     void deleteNews(String id);
 }

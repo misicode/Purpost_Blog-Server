@@ -3,7 +3,7 @@ package com.misicode.eggnews.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public class NewsRequest {
+public class NewsUpdateRequest {
     @NotBlank
     @NotNull
     private String title;
@@ -12,11 +12,9 @@ public class NewsRequest {
     @NotNull
     private String body;
 
-    @NotBlank
-    @NotNull
-    private String image;
+    private ImageRequest image;
 
-    public NewsRequest(String title, String body, String image) {
+    public NewsUpdateRequest(String title, String body, ImageRequest image) {
         this.title = title;
         this.body = body;
         this.image = image;
@@ -30,7 +28,7 @@ public class NewsRequest {
         return body;
     }
 
-    public String getImage() {
+    public ImageRequest getImage() {
         return image;
     }
 }

@@ -1,10 +1,10 @@
 package com.misicode.eggnews.dto;
 
-public class ImageDto {
+public class ImageResponse {
     private String name;
     private String url;
 
-    public ImageDto(String name, String url) {
+    public ImageResponse(String name, String url) {
         this.name = name;
         this.url = url;
     }

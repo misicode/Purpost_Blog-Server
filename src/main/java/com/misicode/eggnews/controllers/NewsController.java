@@ -32,16 +32,6 @@ public class NewsController {
     }
 
     /*
-    @GetMapping("/my-news/edit/{id}")
-    public String showEditNews(@PathVariable String id, ModelMap model) {
-        model.addAttribute("subtitle", "Editar Noticia");
-        model.addAttribute("sectionTitle", "Editar");
-        model.addAttribute("isNew", false);
-        model.addAttribute("btnName", "Actualizar");
-        model.addAttribute("news", newsService.getNewsById(id));
-        return "form-news-page";
-    }
-
     @PostMapping("/my-news/form")
     public String formNews(News news, @RequestParam("file-upload") MultipartFile file) {
         if(news.getIdNews() != null) {

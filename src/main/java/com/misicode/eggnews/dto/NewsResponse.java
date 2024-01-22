@@ -7,12 +7,12 @@ public class NewsResponse {
     private String title;
     private String body;
     private UserDto user;
-    private ImageDto image;
+    private ImageResponse image;
     private Boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public NewsResponse(String idNews, String title, String body, UserDto user, ImageDto image, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public NewsResponse(String idNews, String title, String body, UserDto user, ImageResponse image, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.idNews = idNews;
         this.title = title;
         this.body = body;
@@ -39,7 +39,7 @@ public class NewsResponse {
         return user;
     }
 
-    public ImageDto getImage() {
+    public ImageResponse getImage() {
         return image;
     }
 

@@ -1,6 +1,9 @@
 package com.misicode.eggnews.security.jwt;
 
+import com.misicode.eggnews.exception.ApplicationException;
+import com.misicode.eggnews.exception.error.ErrorResponseEnum;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.Map;
 import java.util.function.Function;
 
 @Component
@@ -33,10 +37,19 @@ public class JwtUtils {
         try {
             getAllClaims(token);
             return true;
+        /*} catch (MalformedJwtException e) {
+            logger.error("Invalid JWT token: {}", e.getMessage());
+        } catch (ExpiredJwtException e) {
+            //throw new ApplicationException(ErrorResponseEnum.INVALID_TOKEN, Map.of("message", e.getMessage()));
+        } catch (UnsupportedJwtException e) {
+            logger.error("JWT token is unsupported: {}", e.getMessage());
+        } catch (IllegalArgumentException e) {
+            logger.error("JWT claims string is empty: {}", e.getMessage());*/
         } catch(Exception e) {
             System.out.println("Token inválido, ERROR: " + e.getMessage());
-            return false;
+
         }
+        return false;
     }
 
     public String getUsernameFromToken(String token){

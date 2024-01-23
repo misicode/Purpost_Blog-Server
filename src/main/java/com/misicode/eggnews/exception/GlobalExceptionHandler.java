@@ -2,6 +2,8 @@ package com.misicode.eggnews.exception;
 
 import com.misicode.eggnews.constants.HttpConstants;
 import com.misicode.eggnews.exception.error.ConstraintsViolationError;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.context.MessageSource;
@@ -31,6 +33,12 @@ public class GlobalExceptionHandler extends DefaultErrorAttributes {
     public ResponseEntity<Map<String, Object>> handle(ApplicationException ex,
                                                       WebRequest request) {
         return ofType(request, ex.getErrorResponse().getHttpStatus(), ex);
+    }
+
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<Map<String, Object>> handle(ExpiredJwtException ex,
+                                                      WebRequest request) {
+        return ofType(request, HttpStatus.UNAUTHORIZED, ex.getLocalizedMessage(), ex.getMessage(), null);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

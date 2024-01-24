@@ -6,13 +6,13 @@ public class NewsResponse {
     private String idNews;
     private String title;
     private String body;
-    private UserDto user;
+    private UserResponse user;
     private ImageResponse image;
     private Boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public NewsResponse(String idNews, String title, String body, UserDto user, ImageResponse image, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public NewsResponse(String idNews, String title, String body, UserResponse user, ImageResponse image, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.idNews = idNews;
         this.title = title;
         this.body = body;
@@ -35,7 +35,7 @@ public class NewsResponse {
         return body;
     }
 
-    public UserDto getUser() {
+    public UserResponse getUser() {
         return user;
     }
 

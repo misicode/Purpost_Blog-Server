@@ -1,9 +1,6 @@
 package com.misicode.eggnews.controllers;
 
-import com.misicode.eggnews.dto.NewsCreateRequest;
-import com.misicode.eggnews.dto.NewsResponse;
-import com.misicode.eggnews.dto.NewsUpdateRequest;
-import com.misicode.eggnews.dto.UserDto;
+import com.misicode.eggnews.dto.*;
 import com.misicode.eggnews.mapper.NewsMapper;
 import com.misicode.eggnews.mapper.UserMapper;
 import com.misicode.eggnews.services.auth.IAuthService;
@@ -29,16 +26,16 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public ResponseEntity<UserDto> getProfile() {
+    public ResponseEntity<UserResponse> getProfile() {
         return ResponseEntity.ok(
-                UserMapper.mapToUserDto(userService.getUserByEmail(authService.getUsernameAuthenticated()))
+                UserMapper.mapToUserResponse(userService.getUserByEmail(authService.getUsernameAuthenticated()))
         );
     }
 
     @PutMapping("/profile")
-    public ResponseEntity<UserDto> updateProfile(@RequestBody @Valid UserDto user) {
+    public ResponseEntity<UserResponse> updateProfile(@RequestBody @Valid UserUpdateRequest user) {
         return ResponseEntity.ok(
-                UserMapper.mapToUserDto(userService.updateUser(user, authService.getUsernameAuthenticated()))
+                UserMapper.mapToUserResponse(userService.updateUser(user, authService.getUsernameAuthenticated()))
         );
     }
 

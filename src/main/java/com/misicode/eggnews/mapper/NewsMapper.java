@@ -11,8 +11,8 @@ public class NewsMapper {
                 news.getIdNews(),
                 news.getTitle(),
                 news.getBody(),
-                UserMapper.mapToUserDto(news.getUser()),
-                ImageMapper.mapToImageDto(news.getImage()),
+                UserMapper.mapToUserResponse(news.getUser()),
+                ImageMapper.mapToImageResponse(news.getImage()),
                 news.getActive(),
                 news.getCreatedAt(),
                 news.getUpdatedAt()

@@ -1,22 +1,15 @@
 package com.misicode.eggnews.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-
-public class UserDto {
+public class UserResponse {
     private String idUser;
 
     private String email;
 
-    @NotBlank
-    @NotNull
     private String names;
 
-    @NotBlank
-    @NotNull
     private String surnames;
 
-    public UserDto(String idUser, String email, String names, String surnames) {
+    public UserResponse(String idUser, String email, String names, String surnames) {
         this.idUser = idUser;
         this.email = email;
         this.names = names;

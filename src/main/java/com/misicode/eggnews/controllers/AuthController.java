@@ -1,7 +1,10 @@
 package com.misicode.eggnews.controllers;
 
+import com.misicode.eggnews.dto.UserResponse;
+import com.misicode.eggnews.mapper.UserMapper;
 import com.misicode.eggnews.payload.SigninRequest;
 import com.misicode.eggnews.payload.SigninResponse;
+import com.misicode.eggnews.dto.UserCreateRequest;
 import com.misicode.eggnews.services.auth.IAuthService;
 import com.misicode.eggnews.services.user.IUserService;
 import jakarta.validation.Valid;
@@ -20,21 +23,17 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @PostMapping("/signin")
-    public ResponseEntity<SigninResponse> signIn(@RequestBody @Valid SigninRequest request) {
+    @PostMapping("/login")
+    public ResponseEntity<SigninResponse> login(@RequestBody @Valid SigninRequest request) {
         SigninResponse response = authService.login(request);
 
         return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, response.getToken()).body(null);
     }
 
-    /*@GetMapping("/signup")
-    public String showSignUp(ModelMap model) {
-        model.addAttribute("user", new User());
-        return "signup-page";
+    @PostMapping("/register")
+    public ResponseEntity<UserResponse> register(@RequestBody @Valid UserCreateRequest request) {
+        return ResponseEntity.ok(
+                UserMapper.mapToUserResponse(userService.createUser(request))
+        );
     }
-
-    @PostMapping("/signup/form")
-    public String signUp(User user) {
-        return userService.registerUser(user) ? "redirect:../signin" : "redirect:./error";
-    }*/
 }

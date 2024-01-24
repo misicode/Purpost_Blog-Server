@@ -1,7 +1,6 @@
-package com.misicode.eggnews.services;
+package com.misicode.eggnews.services.userdetails;
 
 import com.misicode.eggnews.domain.User;
-import com.misicode.eggnews.domain.UserDetailsImpl;
 import com.misicode.eggnews.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

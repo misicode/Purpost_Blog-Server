@@ -6,7 +6,7 @@ import com.misicode.eggnews.dto.UserDto;
 import com.misicode.eggnews.exception.ApplicationException;
 import com.misicode.eggnews.exception.error.ErrorResponseEnum;
 import com.misicode.eggnews.repositories.UserRepository;
-import com.misicode.eggnews.services.IRoleService;
+import com.misicode.eggnews.services.role.IRoleService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

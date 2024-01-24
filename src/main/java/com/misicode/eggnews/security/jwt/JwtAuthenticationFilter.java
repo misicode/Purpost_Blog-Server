@@ -1,6 +1,6 @@
 package com.misicode.eggnews.security.jwt;
 
-import com.misicode.eggnews.services.UserDetailsServiceImpl;
+import com.misicode.eggnews.services.userdetails.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

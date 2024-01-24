@@ -1,4 +1,4 @@
-package com.misicode.eggnews.services;
+package com.misicode.eggnews.services.role;
 
 import com.misicode.eggnews.domain.RoleEnum;
 import com.misicode.eggnews.domain.Role;

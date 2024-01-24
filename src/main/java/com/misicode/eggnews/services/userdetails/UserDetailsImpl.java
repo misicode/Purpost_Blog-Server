@@ -1,5 +1,6 @@
-package com.misicode.eggnews.domain;
+package com.misicode.eggnews.services.userdetails;
 
+import com.misicode.eggnews.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

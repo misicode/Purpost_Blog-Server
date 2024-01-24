@@ -2,7 +2,7 @@ package com.misicode.eggnews.security;
 
 import com.misicode.eggnews.exception.AuthEntryPointJwt;
 import com.misicode.eggnews.security.jwt.JwtAuthenticationFilter;
-import com.misicode.eggnews.services.UserDetailsServiceImpl;
+import com.misicode.eggnews.services.userdetails.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

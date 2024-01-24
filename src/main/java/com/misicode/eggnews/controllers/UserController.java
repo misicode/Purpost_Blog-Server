@@ -62,4 +62,13 @@ public class UserController {
                 NewsMapper.mapToNewsResponse(newsService.updateNews(id, news))
         );
     }
+
+    @DeleteMapping("/news/{id}")
+    public ResponseEntity<String> deleteNewsById(@PathVariable String id) {
+        newsService.deleteNews(id);
+
+        return ResponseEntity.ok(
+            "Noticia eliminada exitosamente!"
+        );
+    }
 }

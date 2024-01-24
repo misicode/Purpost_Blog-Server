@@ -76,6 +76,7 @@ public class NewsServiceImpl implements INewsService {
 
     @Override
     public void deleteNews(String id) {
+        getNewsById(id);
         newsRepository.softDelete(id);
     }
 }

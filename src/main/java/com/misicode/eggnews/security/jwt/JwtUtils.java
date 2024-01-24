@@ -37,19 +37,10 @@ public class JwtUtils {
         try {
             getAllClaims(token);
             return true;
-        /*} catch (MalformedJwtException e) {
-            logger.error("Invalid JWT token: {}", e.getMessage());
-        } catch (ExpiredJwtException e) {
-            //throw new ApplicationException(ErrorResponseEnum.INVALID_TOKEN, Map.of("message", e.getMessage()));
-        } catch (UnsupportedJwtException e) {
-            logger.error("JWT token is unsupported: {}", e.getMessage());
-        } catch (IllegalArgumentException e) {
-            logger.error("JWT claims string is empty: {}", e.getMessage());*/
         } catch(Exception e) {
             System.out.println("Token inválido, ERROR: " + e.getMessage());
-
+            return false;
         }
-        return false;
     }
 
     public String getUsernameFromToken(String token){

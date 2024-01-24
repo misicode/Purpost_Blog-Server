@@ -1,5 +1,6 @@
 package com.misicode.eggnews.security;
 
+import com.misicode.eggnews.exception.AuthEntryPointJwt;
 import com.misicode.eggnews.security.jwt.JwtAuthenticationFilter;
 import com.misicode.eggnews.services.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -24,10 +25,12 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    private AuthEntryPointJwt authEntryPointJwt;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserDetailsServiceImpl userDetailsService;
 
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, UserDetailsServiceImpl userDetailsService) {
+    public SecurityConfig(AuthEntryPointJwt authEntryPointJwt, JwtAuthenticationFilter jwtAuthenticationFilter, UserDetailsServiceImpl userDetailsService) {
+        this.authEntryPointJwt = authEntryPointJwt;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.userDetailsService = userDetailsService;
     }
@@ -74,6 +77,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/user/**").hasRole("USER")
                         .requestMatchers("/my-news/**").hasRole("USER")
                         .anyRequest().authenticated()
+                )
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(authEntryPointJwt)
                 )
                 .sessionManagement(sessionManager -> sessionManager
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

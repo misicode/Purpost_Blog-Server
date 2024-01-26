@@ -16,6 +16,11 @@
     <description>EggNews</description>
     <properties>
         <java.version>17</java.version>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.login>admin</sonar.login>
+        <sonar.password>admin1</sonar.password>
+        <sonar.projectKey>server-egg-news</sonar.projectKey>
+        <sonar.projectName>Egg News - Server</sonar.projectName>
     </properties>
     <dependencies>
         <dependency>

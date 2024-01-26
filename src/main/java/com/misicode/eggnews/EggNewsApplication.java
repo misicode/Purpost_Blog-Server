@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @SpringBootApplication
 @EnableMongoAuditing
-@EnableMongoRepositories
+@EnableMongoRepositories(basePackages = "com.misicode.eggnews.repositories")
 public class EggNewsApplication {
 
     public static void main(String[] args) {

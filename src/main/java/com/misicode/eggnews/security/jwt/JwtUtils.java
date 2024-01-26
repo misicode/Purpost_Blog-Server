@@ -1,27 +1,21 @@
 package com.misicode.eggnews.security.jwt;
 
-import com.misicode.eggnews.exception.ApplicationException;
-import com.misicode.eggnews.exception.error.ErrorResponseEnum;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
-import java.util.Map;
 import java.util.function.Function;
 
 @Component
+@ConfigurationProperties(prefix = "jwt")
 public class JwtUtils {
-    @Value("${jwt.secret_key}")
     private String secretKey;
-
-    @Value("${jwt.expiration_time}")
     private String expirationTime;
 
     public String generateJwtToken(String email){

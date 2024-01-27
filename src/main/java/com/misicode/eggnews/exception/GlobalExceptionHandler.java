@@ -17,7 +17,6 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends DefaultErrorAttributes {
@@ -40,7 +39,7 @@ public class GlobalExceptionHandler extends DefaultErrorAttributes {
                 .getFieldErrors()
                 .stream()
                 .map(error -> new ConstraintsViolationError(error.getField(), error.getDefaultMessage()))
-                .collect(Collectors.toList());
+                .toList();
 
         String localizedMessage = messageSource.getMessage(ex.getClass().getName().concat(".message"),
                 new Object[]{}, LocaleContextHolder.getLocale());
@@ -52,14 +51,14 @@ public class GlobalExceptionHandler extends DefaultErrorAttributes {
                                                          HttpStatus status,
                                                          ApplicationException ex) {
         return ofType(request, status, ex.getLocalizedMessage(LocaleContextHolder.getLocale(), messageSource),
-                ex.getErrorResponse().getKey(), Collections.EMPTY_LIST);
+                ex.getErrorResponse().getKey(), Collections.emptyList());
     }
 
     private ResponseEntity<Map<String, Object>> ofType(WebRequest request,
                                                        HttpStatus status,
                                                        String message,
                                                        String key,
-                                                       List validationErrors) {
+                                                       List<?> validationErrors) {
         Map<String, Object> attributes = getErrorAttributes(request, ErrorAttributeOptions.defaults());
         attributes.put(HttpConstants.STATUS, status.value());
         attributes.put(HttpConstants.ERROR, status);

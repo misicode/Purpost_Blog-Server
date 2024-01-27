@@ -8,4 +8,8 @@ public final class HttpConstants {
     public static final String ERRORS = "errors";
     public static final String TIMESTAMP = "timestamp";
     public static final String ERROR_KEY = "errorKey";
+
+    private HttpConstants() {
+        throw new UnsupportedOperationException();
+    }
 }

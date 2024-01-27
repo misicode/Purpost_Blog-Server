@@ -2,15 +2,23 @@ package com.misicode.eggnews.exception;
 
 import com.misicode.eggnews.exception.error.IErrorResponse;
 import org.apache.commons.text.StringSubstitutor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Locale;
 import java.util.Map;
 
-public class ApplicationException extends RuntimeException {
-    private final IErrorResponse errorResponse;
-    private final Map<String, Object> messageArguments;
+public class ApplicationException extends RuntimeException implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationException.class);
+
+    private final transient IErrorResponse errorResponse;
+    private final transient Map<String, Object> messageArguments;
 
     public IErrorResponse getErrorResponse() {
         return errorResponse;
@@ -53,8 +61,7 @@ public class ApplicationException extends RuntimeException {
                     ? localizedMessage
                     : StringSubstitutor.replace(localizedMessage, messageArguments, "{", "}");
         } catch (NoSuchMessageException exception) {
-            System.out.println("Please consider adding localized message for key "
-                    + errorResponse.getKey());
+            LOGGER.warn("Considere agregar un mensaje localizado para la clave {}", errorResponse.getKey());
         }
 
         return getMessage();

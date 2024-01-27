@@ -12,15 +12,15 @@ public class NewsResponse {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public NewsResponse(String idNews, String title, String body, UserResponse user, ImageResponse image, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.idNews = idNews;
-        this.title = title;
-        this.body = body;
-        this.user = user;
-        this.image = image;
-        this.isActive = isActive;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    private NewsResponse(Builder builder) {
+        this.idNews = builder.idNews;
+        this.title = builder.title;
+        this.body = builder.body;
+        this.user = builder.user;
+        this.image = builder.image;
+        this.isActive = builder.isActive;
+        this.createdAt = builder.createdAt;
+        this.updatedAt = builder.updatedAt;
     }
 
     public String getIdNews() {
@@ -53,5 +53,60 @@ public class NewsResponse {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public static class Builder {
+        private String idNews;
+        private String title;
+        private String body;
+        private UserResponse user;
+        private ImageResponse image;
+        private Boolean isActive;
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
+
+        public Builder idNews(String idNews) {
+            this.idNews = idNews;
+            return this;
+        }
+
+        public Builder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder body(String body) {
+            this.body = body;
+            return this;
+        }
+
+        public Builder user(UserResponse user) {
+            this.user = user;
+            return this;
+        }
+
+        public Builder image(ImageResponse image) {
+            this.image = image;
+            return this;
+        }
+
+        public Builder isActive(Boolean isActive) {
+            this.isActive = isActive;
+            return this;
+        }
+
+        public Builder createdAt(LocalDateTime createdAt) {
+            this.createdAt = createdAt;
+            return this;
+        }
+
+        public Builder updatedAt(LocalDateTime updatedAt) {
+            this.updatedAt = updatedAt;
+            return this;
+        }
+
+        public NewsResponse build() {
+            return new NewsResponse(this);
+        }
     }
 }

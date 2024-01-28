@@ -7,6 +7,8 @@ import com.misicode.eggnews.payload.SigninResponse;
 import com.misicode.eggnews.dto.UserCreateRequest;
 import com.misicode.eggnews.services.auth.IAuthService;
 import com.misicode.eggnews.services.user.IUserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
+@Tag(
+        name = "Auth Controller",
+        description = "Controlador con las rutas de las peticiones de autenticación:" +
+                "\n- Login" +
+                "\n- Registro"
+)
 public class AuthController {
     private IAuthService authService;
     private IUserService userService;
@@ -24,6 +32,10 @@ public class AuthController {
     }
 
     @PostMapping("/login")
+    @Operation(
+            summary = "Login",
+            description = "Esta petición permite loguear un usuario y obtener un token de acceso."
+    )
     public ResponseEntity<SigninResponse> login(@RequestBody @Valid SigninRequest request) {
         SigninResponse response = authService.login(request);
 
@@ -31,6 +43,10 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @Operation(
+            summary = "Registro",
+            description = "Esta petición permite registrar un usuario."
+    )
     public ResponseEntity<UserResponse> register(@RequestBody @Valid UserCreateRequest request) {
         return ResponseEntity.ok(
                 UserMapper.mapToUserResponse(userService.createUser(request))

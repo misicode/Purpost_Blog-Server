@@ -74,7 +74,7 @@ public class SecurityConfig {
                 .addFilterBefore(corsFilter(), CorsFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authRequest -> authRequest
-                        .requestMatchers("/styles/**", "/scripts/**", "/api/news/**", "/api/auth/**").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/api/news/**", "/api/auth/**").permitAll()
                         .requestMatchers("/api/user/**").hasRole("USER")
                         .requestMatchers("/my-news/**").hasRole("USER")
                         .anyRequest().authenticated()

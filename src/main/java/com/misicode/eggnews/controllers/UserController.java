@@ -83,7 +83,7 @@ public class UserController {
 
     @PutMapping("/news/{id}")
     @Operation(
-            summary = "Crear noticia",
+            summary = "Editar noticia",
             description = "Esta petición permite editar una noticia por su ID."
     )
     public ResponseEntity<NewsResponse> updateNews(@PathVariable String id, @RequestBody @Valid NewsUpdateRequest news) {
@@ -94,7 +94,7 @@ public class UserController {
 
     @DeleteMapping("/news/{id}")
     @Operation(
-            summary = "Crear noticia",
+            summary = "Eliminar noticia",
             description = "Esta petición permite borrar una noticia por su ID."
     )
     public ResponseEntity<String> deleteNewsById(@PathVariable String id) {

@@ -40,6 +40,9 @@ springdoc.swagger-ui.enabled=true
 
 
 ## 📄 Documentación
+- Para visualizar la documentación en la interfaz gráfica de Swagger: `{URL_BASE}/swagger-ui/index.html`
+- Para visualizar la documentación en formato JSON: `{URL_BASE}/v3/api-docs`
+
 <img src="https://github.com/misicode/Server-EggNews/assets/88341114/a590ddfb-76e4-4c40-a409-36a9f530b198" width=740px />
 
 

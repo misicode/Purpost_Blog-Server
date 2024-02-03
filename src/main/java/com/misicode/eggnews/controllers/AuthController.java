@@ -36,10 +36,12 @@ public class AuthController {
             summary = "Login",
             description = "Esta petición permite loguear un usuario y obtener un token de acceso."
     )
-    public ResponseEntity<SigninResponse> login(@RequestBody @Valid SigninRequest request) {
+    public ResponseEntity<String> login(@RequestBody @Valid SigninRequest request) {
         SigninResponse response = authService.login(request);
 
-        return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, response.getToken()).body(null);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.AUTHORIZATION, response.getToken())
+                .body(response.getEmail());
     }
 
     @PostMapping("/register")

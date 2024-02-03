@@ -41,7 +41,7 @@ public class AuthServiceImpl implements IAuthService {
 
             String token = jwtUtils.generateJwtToken(user.getUsername());
 
-            return new SigninResponse(token);
+            return new SigninResponse(token, user.getUsername());
         } catch(AuthenticationException e) {
             throw new ApplicationException(ErrorResponseEnum.AUTH_FAILED, Map.of("message", e.getMessage()));
         }

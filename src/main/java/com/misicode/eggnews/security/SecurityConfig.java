@@ -56,6 +56,8 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        configuration.addAllowedMethod("*");
+        configuration.addAllowedHeader("*");
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -76,7 +78,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authRequest -> authRequest
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/api/news/**", "/api/auth/**").permitAll()
                         .requestMatchers("/api/user/**").hasRole("USER")
-                        .requestMatchers("/my-news/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception

@@ -1,19 +1,21 @@
 package com.misicode.eggnews.payload;
 
+import com.misicode.eggnews.dto.UserResponse;
+
 public class SigninResponse {
     private String token;
-    private String email;
+    private UserResponse user;
 
-    public SigninResponse(String token, String email) {
+    public SigninResponse(String token, UserResponse user) {
         this.token = token;
-        this.email = email;
+        this.user = user;
     }
 
     public String getToken() {
         return token;
     }
 
-    public String getEmail() {
-        return email;
+    public UserResponse getUser() {
+        return user;
     }
 }

@@ -1,5 +1,8 @@
 package com.misicode.eggnews.services.auth;
 
+import com.misicode.eggnews.dto.UserResponse;
+import com.misicode.eggnews.mapper.UserMapper;
+import com.misicode.eggnews.services.user.UserServiceImpl;
 import com.misicode.eggnews.services.userdetails.UserDetailsImpl;
 import com.misicode.eggnews.exception.ApplicationException;
 import com.misicode.eggnews.exception.error.ErrorResponseEnum;
@@ -19,10 +22,12 @@ import java.util.Map;
 public class AuthServiceImpl implements IAuthService {
     private AuthenticationManager authenticationManager;
     private JwtUtils jwtUtils;
+    private UserServiceImpl userService;
 
-    public AuthServiceImpl(AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
+    public AuthServiceImpl(AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserServiceImpl userService) {
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
+        this.userService = userService;
     }
 
     @Override
@@ -37,11 +42,13 @@ public class AuthServiceImpl implements IAuthService {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-            String token = jwtUtils.generateJwtToken(user.getUsername());
+            String token = jwtUtils.generateJwtToken(userDetails.getUsername());
 
-            return new SigninResponse(token, user.getUsername());
+            UserResponse user = UserMapper.mapToUserResponse(userService.getUserByEmail(userDetails.getUsername()));
+
+            return new SigninResponse(token, user);
         } catch(AuthenticationException e) {
             throw new ApplicationException(ErrorResponseEnum.AUTH_FAILED, Map.of("message", e.getMessage()));
         }

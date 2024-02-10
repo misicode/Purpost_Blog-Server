@@ -10,6 +10,7 @@ import com.misicode.eggnews.payload.SigninRequest;
 import com.misicode.eggnews.payload.SigninResponse;
 import com.misicode.eggnews.security.jwt.JwtUtils;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -49,6 +50,8 @@ public class AuthServiceImpl implements IAuthService {
             UserResponse user = UserMapper.mapToUserResponse(userService.getUserByEmail(userDetails.getUsername()));
 
             return new SigninResponse(token, user);
+        } catch(BadCredentialsException e) {
+            throw new ApplicationException(ErrorResponseEnum.BAD_CREDENTIALS);
         } catch(AuthenticationException e) {
             throw new ApplicationException(ErrorResponseEnum.AUTH_FAILED, Map.of("message", e.getMessage()));
         }

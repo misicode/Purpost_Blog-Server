@@ -10,7 +10,6 @@ import com.misicode.eggnews.services.user.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,9 +36,9 @@ public class AuthController {
             description = "Esta petición permite loguear un usuario y obtener un token de acceso."
     )
     public ResponseEntity<SigninResponse> login(@RequestBody @Valid SigninRequest request) {
-        SigninResponse response = authService.login(request);
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(
+                authService.login(request)
+        );
     }
 
     @PostMapping("/register")

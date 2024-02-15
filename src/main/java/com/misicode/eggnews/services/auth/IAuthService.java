@@ -7,6 +7,8 @@ import com.misicode.eggnews.payload.SigninResponse;
 public interface IAuthService {
     SigninResponse login(SigninRequest signinRequest);
 
+    SigninResponse checkToken(String token);
+
     UserDetailsImpl getUserAuthenticated();
 
     String getUsernameAuthenticated();

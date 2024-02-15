@@ -10,6 +10,7 @@ import com.misicode.eggnews.services.user.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,8 @@ import org.springframework.web.bind.annotation.*;
         name = "Auth Controller",
         description = "Controlador con las rutas de las peticiones de autenticación:" +
                 "\n- Login" +
-                "\n- Registro"
+                "\n- Registro" +
+                "\n- Validar token"
 )
 public class AuthController {
     private IAuthService authService;
@@ -49,6 +51,17 @@ public class AuthController {
     public ResponseEntity<UserResponse> register(@RequestBody @Valid UserCreateRequest request) {
         return ResponseEntity.ok(
                 UserMapper.mapToUserResponse(userService.createUser(request))
+        );
+    }
+
+    @PostMapping("/token")
+    @Operation(
+            summary = "Validar token",
+            description = "Esta petición permite validar el token de acceso de un usuario."
+    )
+    public ResponseEntity<SigninResponse> checkToken(@RequestHeader(name = "Authorization") @NotNull String token) {
+        return ResponseEntity.ok(
+                authService.checkToken(token)
         );
     }
 }

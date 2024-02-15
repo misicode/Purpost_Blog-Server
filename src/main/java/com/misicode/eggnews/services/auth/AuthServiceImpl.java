@@ -15,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -55,6 +56,23 @@ public class AuthServiceImpl implements IAuthService {
         } catch(AuthenticationException e) {
             throw new ApplicationException(ErrorResponseEnum.AUTH_FAILED, Map.of("message", e.getMessage()));
         }
+    }
+
+    @Override
+    public SigninResponse checkToken(String token) {
+        if(token.startsWith("Bearer ")){
+            String splitToken = token.substring(7);
+
+            if(jwtUtils.isValidJwtToken(splitToken)){
+                String username = jwtUtils.getUsernameFromToken(splitToken);
+
+                UserResponse user = UserMapper.mapToUserResponse(userService.getUserByEmail(username));
+
+                return new SigninResponse(splitToken, user);
+            }
+        }
+
+        throw new ApplicationException(ErrorResponseEnum.INVALIDATE_TOKEN);
     }
 
     @Override

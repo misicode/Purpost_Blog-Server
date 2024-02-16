@@ -54,7 +54,7 @@ public class AuthController {
         );
     }
 
-    @PostMapping("/token")
+    @GetMapping("/token")
     @Operation(
             summary = "Validar token",
             description = "Esta petición permite validar el token de acceso de un usuario."

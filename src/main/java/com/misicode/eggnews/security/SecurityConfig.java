@@ -3,6 +3,7 @@ package com.misicode.eggnews.security;
 import com.misicode.eggnews.exception.AuthEntryPointJwt;
 import com.misicode.eggnews.security.jwt.JwtAuthenticationFilter;
 import com.misicode.eggnews.services.userdetails.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,6 +31,9 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserDetailsServiceImpl userDetailsService;
 
+    @Value("${eggnews_origin}")
+    private String eggnewsOrigin;
+
     public SecurityConfig(AuthEntryPointJwt authEntryPointJwt, JwtAuthenticationFilter jwtAuthenticationFilter, UserDetailsServiceImpl userDetailsService) {
         this.authEntryPointJwt = authEntryPointJwt;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
@@ -55,7 +59,7 @@ public class SecurityConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        configuration.setAllowedOrigins(List.of(eggnewsOrigin));
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
 

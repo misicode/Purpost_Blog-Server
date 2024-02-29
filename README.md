@@ -6,9 +6,11 @@ API REST de la aplicación EggNews desarrollada con Spring Boot para la gestión
 
 ## 💻 Configuración
 - **Sobre las variables de entorno**:<br>
-  En el archivo `application.properties` se deberá modificar los siguientes campos para la configuración de nuestra base de datos en MongoDB, la configuración de JWT y la configuración del servicio de Cloudinary.
+  En el archivo `application.properties` se deberá modificar los siguientes campos para definir la URL de los origenes que consumirán nuestra API, la configuración nuestra base de datos en MongoDB, la configuración de JWT y la configuración del servicio de Cloudinary.
 
 ```properties
+# Allowed origins configuration
+eggnews.origin=${eggnews_origin}
 # Database configuration
 spring.data.mongodb.uri=${mongodb_uri}
 # JWT configuration

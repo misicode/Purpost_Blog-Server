@@ -14,9 +14,11 @@ import java.util.List;
 @RequestMapping("/api/news")
 @Tag(
         name = "News Controller",
-        description = "Controlador con las rutas de las peticiones de noticias:" +
-                "\n- Listar noticias" +
-                "\n- Ver noticias por ID"
+        description = """
+                Controlador con las rutas de las peticiones de noticias:
+                - Listar noticias
+                - Ver noticias por ID
+                """
 )
 public class NewsController {
     private INewsService newsService;

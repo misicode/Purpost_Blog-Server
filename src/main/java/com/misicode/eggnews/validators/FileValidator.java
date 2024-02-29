@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileValidator implements ConstraintValidator<ValidFile, MultipartFile> {
     @Override
     public void initialize(ValidFile constraintAnnotation) {
+        // Este método está vacío porque la lógica de inicialización no es necesaria para esta validación
     }
 
     @Override

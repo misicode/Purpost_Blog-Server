@@ -22,13 +22,15 @@ import java.util.List;
 @RequestMapping("/api/user")
 @Tag(
         name = "User Controller",
-        description = "Controlador con las rutas de las peticiones de usuario:" +
-                "\n- Ver perfil de usuario" +
-                "\n- Editar perfil de usuario" +
-                "\n- Ver noticias del usuario" +
-                "\n- Crear noticia" +
-                "\n- Editar noticia" +
-                "\n- Borrar noticia"
+        description = """
+                Controlador con las rutas de las peticiones de usuario:
+                - Ver perfil de usuario
+                - Editar perfil de usuario
+                - Ver noticias del usuario
+                - Crear noticia
+                - Editar noticia
+                - Borrar noticia
+                """
 )
 public class UserController {
     private IAuthService authService;

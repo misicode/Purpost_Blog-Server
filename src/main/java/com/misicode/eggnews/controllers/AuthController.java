@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 @Tag(
         name = "Auth Controller",
-        description = "Controlador con las rutas de las peticiones de autenticación:" +
-                "\n- Login" +
-                "\n- Registro" +
-                "\n- Validar token"
+        description = """
+                Controlador con las rutas de las peticiones de autenticación:
+                - Login
+                - Registro
+                - Validar token
+                """
 )
 public class AuthController {
     private IAuthService authService;

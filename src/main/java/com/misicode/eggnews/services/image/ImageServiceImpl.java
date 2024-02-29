@@ -6,6 +6,7 @@ import com.misicode.eggnews.services.cloudinary.ICloudinaryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -24,11 +25,11 @@ public class ImageServiceImpl implements IImageService {
     }
 
     @Override
-    public Image saveImage(String base64File) {
+    public Image saveImage(MultipartFile file) {
         Image image = new Image();
 
         image.setName(UUID.randomUUID().toString().substring(0, 10) + "_" + LocalTime.now().format(DateTimeFormatter.ofPattern("HHmmss")));
-        image.setUrl(cloudinaryService.uploadFile(base64File, "EggNews/news"));
+        image.setUrl(cloudinaryService.uploadFile(file, "EggNews/news"));
 
         if(image.getUrl() == null) {
             LOGGER.error("El URL de la imagen no se creó correctamente");

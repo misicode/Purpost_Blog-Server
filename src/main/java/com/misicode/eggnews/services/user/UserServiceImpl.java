@@ -2,10 +2,10 @@ package com.misicode.eggnews.services.user;
 
 import com.misicode.eggnews.domain.RoleEnum;
 import com.misicode.eggnews.domain.User;
-import com.misicode.eggnews.dto.UserUpdateRequest;
+import com.misicode.eggnews.dto.user.UserUpdateRequest;
 import com.misicode.eggnews.exception.ApplicationException;
 import com.misicode.eggnews.exception.error.ErrorResponseEnum;
-import com.misicode.eggnews.dto.UserCreateRequest;
+import com.misicode.eggnews.dto.user.UserCreateRequest;
 import com.misicode.eggnews.repositories.UserRepository;
 import com.misicode.eggnews.services.role.IRoleService;
 import org.springframework.security.crypto.password.PasswordEncoder;

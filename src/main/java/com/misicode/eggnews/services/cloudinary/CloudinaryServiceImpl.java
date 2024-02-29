@@ -5,9 +5,9 @@ import com.cloudinary.Transformation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Base64;
 import java.util.Map;
 
 @Service
@@ -21,11 +21,9 @@ public class CloudinaryServiceImpl implements ICloudinaryService {
     }
 
     @Override
-    public String uploadFile(String base64Image, String folderName) {
+    public String uploadFile(MultipartFile file, String folderName) {
         try {
-            byte[] decodedBytes = Base64.getDecoder().decode(base64Image);
-
-            Map<?,?> uploadedFile = cloudinary.uploader().upload(decodedBytes,
+            Map<?,?> uploadedFile = cloudinary.uploader().upload(file.getBytes(),
                     Map.of("folder", folderName, "transformation", new Transformation<>().quality(70)));
 
             String publicId = (String) uploadedFile.get("public_id");

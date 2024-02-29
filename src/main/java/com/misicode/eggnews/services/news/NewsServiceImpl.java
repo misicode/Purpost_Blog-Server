@@ -3,8 +3,8 @@ package com.misicode.eggnews.services.news;
 import com.misicode.eggnews.domain.Image;
 import com.misicode.eggnews.domain.News;
 import com.misicode.eggnews.domain.User;
-import com.misicode.eggnews.dto.NewsCreateRequest;
-import com.misicode.eggnews.dto.NewsUpdateRequest;
+import com.misicode.eggnews.dto.news.NewsCreateRequest;
+import com.misicode.eggnews.dto.news.NewsUpdateRequest;
 import com.misicode.eggnews.exception.ApplicationException;
 import com.misicode.eggnews.exception.error.ErrorResponseEnum;
 import com.misicode.eggnews.repositories.NewsRepository;
@@ -67,7 +67,7 @@ public class NewsServiceImpl implements INewsService {
         updatedNews.setBody(news.getBody());
 
         if(news.getImage() != null) {
-            Image image = imageService.saveImage(news.getImage().getBase64Image());
+            Image image = imageService.saveImage(news.getImage());
             updatedNews.setImage(image);
         }
 

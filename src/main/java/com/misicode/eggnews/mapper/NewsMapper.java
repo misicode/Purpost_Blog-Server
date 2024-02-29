@@ -1,7 +1,7 @@
 package com.misicode.eggnews.mapper;
 
 import com.misicode.eggnews.domain.News;
-import com.misicode.eggnews.dto.NewsResponse;
+import com.misicode.eggnews.dto.news.NewsResponse;
 
 import java.util.List;
 

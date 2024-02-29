@@ -1,7 +1,7 @@
 package com.misicode.eggnews.mapper;
 
 import com.misicode.eggnews.domain.User;
-import com.misicode.eggnews.dto.UserResponse;
+import com.misicode.eggnews.dto.user.UserResponse;
 
 public class UserMapper {
     private UserMapper() {
@@ -13,7 +13,8 @@ public class UserMapper {
                 user.getIdUser(),
                 user.getEmail(),
                 user.getNames(),
-                user.getSurnames()
+                user.getSurnames(),
+                user.getRole().getName().name()
         );
     }
 }

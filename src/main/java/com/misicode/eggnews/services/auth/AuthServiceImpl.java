@@ -1,6 +1,6 @@
 package com.misicode.eggnews.services.auth;
 
-import com.misicode.eggnews.dto.UserResponse;
+import com.misicode.eggnews.dto.user.UserResponse;
 import com.misicode.eggnews.mapper.UserMapper;
 import com.misicode.eggnews.services.user.UserServiceImpl;
 import com.misicode.eggnews.services.userdetails.UserDetailsImpl;
@@ -15,7 +15,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;

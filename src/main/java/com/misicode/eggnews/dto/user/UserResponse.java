@@ -1,4 +1,4 @@
-package com.misicode.eggnews.dto;
+package com.misicode.eggnews.dto.user;
 
 public class UserResponse {
     private String idUser;
@@ -9,11 +9,14 @@ public class UserResponse {
 
     private String surnames;
 
-    public UserResponse(String idUser, String email, String names, String surnames) {
+    private String role;
+
+    public UserResponse(String idUser, String email, String names, String surnames, String role) {
         this.idUser = idUser;
         this.email = email;
         this.names = names;
         this.surnames = surnames;
+        this.role = role;
     }
 
     public String getIdUser() {
@@ -30,5 +33,9 @@ public class UserResponse {
 
     public String getSurnames() {
         return surnames;
+    }
+
+    public String getRole() {
+        return role;
     }
 }

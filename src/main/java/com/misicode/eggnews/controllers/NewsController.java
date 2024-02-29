@@ -1,6 +1,6 @@
 package com.misicode.eggnews.controllers;
 
-import com.misicode.eggnews.dto.NewsResponse;
+import com.misicode.eggnews.dto.news.NewsResponse;
 import com.misicode.eggnews.mapper.NewsMapper;
 import com.misicode.eggnews.services.news.INewsService;
 import io.swagger.v3.oas.annotations.Operation;

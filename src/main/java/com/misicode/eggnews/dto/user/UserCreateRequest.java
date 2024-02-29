@@ -1,4 +1,4 @@
-package com.misicode.eggnews.dto;
+package com.misicode.eggnews.dto.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

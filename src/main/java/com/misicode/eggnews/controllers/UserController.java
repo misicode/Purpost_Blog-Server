@@ -1,6 +1,10 @@
 package com.misicode.eggnews.controllers;
 
-import com.misicode.eggnews.dto.*;
+import com.misicode.eggnews.dto.news.NewsCreateRequest;
+import com.misicode.eggnews.dto.news.NewsResponse;
+import com.misicode.eggnews.dto.news.NewsUpdateRequest;
+import com.misicode.eggnews.dto.user.UserResponse;
+import com.misicode.eggnews.dto.user.UserUpdateRequest;
 import com.misicode.eggnews.mapper.NewsMapper;
 import com.misicode.eggnews.mapper.UserMapper;
 import com.misicode.eggnews.services.auth.IAuthService;
@@ -70,23 +74,23 @@ public class UserController {
         );
     }
 
-    @PostMapping("/news")
+    @PostMapping(value = "/news", consumes = "multipart/form-data")
     @Operation(
             summary = "Crear noticia",
             description = "Esta petición permite crear una noticia."
     )
-    public ResponseEntity<NewsResponse> createNews(@RequestBody @Valid NewsCreateRequest news) {
+    public ResponseEntity<NewsResponse> createNews(@ModelAttribute @Valid NewsCreateRequest news) {
         return ResponseEntity.ok(
                 NewsMapper.mapToNewsResponse(newsService.saveNews(news, authService.getUsernameAuthenticated()))
         );
     }
 
-    @PutMapping("/news/{id}")
+    @PutMapping(value = "/news/{id}", consumes = "multipart/form-data")
     @Operation(
             summary = "Editar noticia",
             description = "Esta petición permite editar una noticia por su ID."
     )
-    public ResponseEntity<NewsResponse> updateNews(@PathVariable String id, @RequestBody @Valid NewsUpdateRequest news) {
+    public ResponseEntity<NewsResponse> updateNews(@PathVariable String id, @ModelAttribute @Valid NewsUpdateRequest news) {
         return ResponseEntity.ok(
                 NewsMapper.mapToNewsResponse(newsService.updateNews(id, news))
         );

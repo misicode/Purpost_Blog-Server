@@ -1,4 +1,7 @@
-package com.misicode.eggnews.dto;
+package com.misicode.eggnews.dto.news;
+
+import com.misicode.eggnews.dto.user.UserResponse;
+import com.misicode.eggnews.dto.image.ImageResponse;
 
 import java.time.LocalDateTime;
 

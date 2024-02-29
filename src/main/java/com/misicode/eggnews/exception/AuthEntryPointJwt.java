@@ -10,6 +10,8 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,9 +26,10 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
         final Map<String, Object> body = new HashMap<>();
+        body.put(HttpConstants.TIMESTAMP, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(ZonedDateTime.now()));
         body.put(HttpConstants.STATUS, HttpServletResponse.SC_UNAUTHORIZED);
         body.put(HttpConstants.ERROR, "Unauthorized");
-        body.put(HttpConstants.MESSAGE, authException.getMessage());
+        body.put(HttpConstants.MESSAGE, "Sesión inválida");
         body.put(HttpConstants.PATH, request.getServletPath());
 
         final ObjectMapper mapper = new ObjectMapper();

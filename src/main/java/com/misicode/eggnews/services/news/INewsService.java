@@ -1,8 +1,8 @@
 package com.misicode.eggnews.services.news;
 
 import com.misicode.eggnews.domain.News;
-import com.misicode.eggnews.dto.NewsCreateRequest;
-import com.misicode.eggnews.dto.NewsUpdateRequest;
+import com.misicode.eggnews.dto.news.NewsCreateRequest;
+import com.misicode.eggnews.dto.news.NewsUpdateRequest;
 
 import java.util.List;
 

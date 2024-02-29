@@ -1,6 +1,6 @@
 package com.misicode.eggnews.payload;
 
-import com.misicode.eggnews.dto.UserResponse;
+import com.misicode.eggnews.dto.user.UserResponse;
 
 public class SigninResponse {
     private String token;

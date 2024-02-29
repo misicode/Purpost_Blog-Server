@@ -1,7 +1,9 @@
-package com.misicode.eggnews.dto;
+package com.misicode.eggnews.dto.news;
 
+import com.misicode.eggnews.validators.ValidFile;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.web.multipart.MultipartFile;
 
 public class NewsCreateRequest {
     @NotBlank
@@ -12,11 +14,11 @@ public class NewsCreateRequest {
     @NotNull
     private String body;
 
-    @NotBlank
     @NotNull
-    private String image;
+    @ValidFile
+    private MultipartFile image;
 
-    public NewsCreateRequest(String title, String body, String image) {
+    public NewsCreateRequest(String title, String body, MultipartFile image) {
         this.title = title;
         this.body = body;
         this.image = image;
@@ -30,7 +32,7 @@ public class NewsCreateRequest {
         return body;
     }
 
-    public String getImage() {
+    public MultipartFile getImage() {
         return image;
     }
 }

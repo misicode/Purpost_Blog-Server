@@ -1,4 +1,4 @@
-package com.misicode.eggnews.dto;
+package com.misicode.eggnews.dto.image;
 
 public class ImageResponse {
     private String name;

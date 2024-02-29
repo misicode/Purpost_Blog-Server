@@ -1,7 +1,7 @@
 package com.misicode.eggnews.mapper;
 
 import com.misicode.eggnews.domain.Image;
-import com.misicode.eggnews.dto.ImageResponse;
+import com.misicode.eggnews.dto.image.ImageResponse;
 
 public class ImageMapper {
     private ImageMapper() {

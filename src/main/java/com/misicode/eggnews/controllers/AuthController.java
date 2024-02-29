@@ -1,10 +1,10 @@
 package com.misicode.eggnews.controllers;
 
-import com.misicode.eggnews.dto.UserResponse;
+import com.misicode.eggnews.dto.user.UserResponse;
 import com.misicode.eggnews.mapper.UserMapper;
 import com.misicode.eggnews.payload.SigninRequest;
 import com.misicode.eggnews.payload.SigninResponse;
-import com.misicode.eggnews.dto.UserCreateRequest;
+import com.misicode.eggnews.dto.user.UserCreateRequest;
 import com.misicode.eggnews.services.auth.IAuthService;
 import com.misicode.eggnews.services.user.IUserService;
 import io.swagger.v3.oas.annotations.Operation;

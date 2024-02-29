@@ -32,10 +32,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
         String tokenHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-        if(tokenHeader != null && tokenHeader.startsWith("Bearer ")){
+        if (tokenHeader != null && tokenHeader.startsWith("Bearer ")) {
             String token = tokenHeader.substring(7);
 
-            if(jwtUtils.isValidJwtToken(token)){
+            if (jwtUtils.isValidJwtToken(token)) {
                 String username = jwtUtils.getUsernameFromToken(token);
 
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);

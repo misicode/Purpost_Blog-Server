@@ -1,5 +1,7 @@
 package com.misicode.eggnews.services.cloudinary;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public interface ICloudinaryService {
-    String uploadFile(String base64Image, String folderName);
+    String uploadFile(MultipartFile file, String folderName);
 }

@@ -1,3 +1,16 @@
+server:
+  port: 8090
+
 spring:
   application:
     name: msvc-post
+  data:
+    mongodb:
+      uri: ${posts_mongodb_uri}
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

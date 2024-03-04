@@ -5,7 +5,7 @@ Aplicación de microservicios del proyecto PurPost Blog para la gestión de publ
 
 
 ## 📌 Arquitectura
-<img src="https://github.com/misicode/Server-PurPostBlog/assets/88341114/d0770331-3b63-4709-9309-5ccf4210a478" width=800 />
+<img src="https://github.com/misicode/Server-PurPostBlog/assets/88341114/335be7b3-913a-4dfa-9993-710e97ce497a" width=800 />
 
 
 ## 🛠️ Herramientas utilizadas

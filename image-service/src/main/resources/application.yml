@@ -1,1 +1,21 @@
+server:
+  port: 10090
 
+spring:
+  application:
+    name: msvc-image
+  data:
+    mongodb:
+      uri: ${images_mongodb_uri}
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+cloudinary:
+  cloud_name: ${cloudinary_cloud_name}
+  api_key: ${cloudinary_api_key}
+  api_secret: ${cloudinary_api_secret}

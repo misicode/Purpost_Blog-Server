@@ -1,6 +1,5 @@
 package com.misicode.purpost.imageservice.domain;
 
-import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,10 +8,8 @@ public class Image {
     @Id
     private String idImage;
 
-    @NotNull
     private String name;
 
-    @NotNull
     private String url;
 
     public String getName() {

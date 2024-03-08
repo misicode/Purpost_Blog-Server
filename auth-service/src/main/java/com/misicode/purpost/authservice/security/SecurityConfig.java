@@ -1,6 +1,7 @@
 package com.misicode.purpost.authservice.security;
 
 import com.misicode.purpost.authservice.security.jwt.JwtAuthenticationFilter;
+import com.misicode.purpost.authservice.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

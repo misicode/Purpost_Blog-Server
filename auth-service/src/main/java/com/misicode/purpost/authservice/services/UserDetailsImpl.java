@@ -1,5 +1,6 @@
 package com.misicode.purpost.authservice.services;
 
+import com.misicode.purpost.authservice.dto.UserResponse;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -18,9 +19,9 @@ public class UserDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static UserDetailsImpl build(User user) {
+    public static UserDetailsImpl build(UserResponse user) {
         Collection<? extends GrantedAuthority> authorities = Collections.singletonList(
-                (GrantedAuthority) () -> user.getRole().getName().name());
+                (GrantedAuthority) () -> user.getRole().getName());
 
         return new UserDetailsImpl(
                 user.getEmail(),

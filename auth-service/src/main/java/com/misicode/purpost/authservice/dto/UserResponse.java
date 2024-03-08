@@ -13,9 +13,41 @@ public class UserResponse {
 
     private Boolean isActive = true;
 
-    private Role role;
+    private RoleResponse role;
 
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getNames() {
+        return names;
+    }
+
+    public String getSurnames() {
+        return surnames;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public RoleResponse getRole() {
+        return role;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
 }

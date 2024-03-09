@@ -1,13 +1,13 @@
 package com.misicode.purpost.authservice.services.auth;
 
-import com.misicode.purpost.authservice.payload.SigninRequest;
-import com.misicode.purpost.authservice.payload.SigninResponse;
+import com.misicode.purpost.authservice.payload.LoginRequest;
+import com.misicode.purpost.authservice.payload.LoginResponse;
 import com.misicode.purpost.authservice.services.userdetails.UserDetailsImpl;
 
 public interface IAuthService {
-    SigninResponse login(SigninRequest signinRequest);
+    LoginResponse login(LoginRequest loginRequest);
 
-    SigninResponse checkToken(String token);
+    LoginResponse checkToken(String token);
 
     UserDetailsImpl getUserAuthenticated();
 

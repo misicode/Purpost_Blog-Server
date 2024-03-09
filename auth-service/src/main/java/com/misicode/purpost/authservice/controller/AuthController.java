@@ -1,7 +1,7 @@
 package com.misicode.purpost.authservice.controller;
 
-import com.misicode.purpost.authservice.payload.SigninRequest;
-import com.misicode.purpost.authservice.payload.SigninResponse;
+import com.misicode.purpost.authservice.payload.LoginRequest;
+import com.misicode.purpost.authservice.payload.LoginResponse;
 import com.misicode.purpost.authservice.services.auth.IAuthService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -18,14 +18,14 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<SigninResponse> login(@RequestBody @Valid SigninRequest request) {
+    public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
         return ResponseEntity.ok(
                 authService.login(request)
         );
     }
 
     @GetMapping("/token")
-    public ResponseEntity<SigninResponse> checkToken(@RequestHeader(name = "Authorization") @NotNull String token) {
+    public ResponseEntity<LoginResponse> checkToken(@RequestHeader(name = "Authorization") @NotNull String token) {
         return ResponseEntity.ok(
                 authService.checkToken(token)
         );

@@ -1,10 +1,12 @@
 package com.misicode.purpost.authservice.services.auth;
 
-import com.misicode.purpost.authservice.client.UserClient;
+import com.misicode.purpost.authservice.dto.UserCreateRequest;
 import com.misicode.purpost.authservice.dto.UserResponse;
-import com.misicode.purpost.authservice.payload.SigninRequest;
-import com.misicode.purpost.authservice.payload.SigninResponse;
+import com.misicode.purpost.authservice.mappers.UserMapper;
+import com.misicode.purpost.authservice.payload.LoginRequest;
+import com.misicode.purpost.authservice.payload.LoginResponse;
 import com.misicode.purpost.authservice.security.jwt.JwtUtils;
+import com.misicode.purpost.authservice.services.user.UserServiceImpl;
 import com.misicode.purpost.authservice.services.userdetails.UserDetailsImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,21 +19,21 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements IAuthService {
     private AuthenticationManager authenticationManager;
     private JwtUtils jwtUtils;
-    private UserClient userClient;
+    private UserServiceImpl userService;
 
-    public AuthServiceImpl(AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserClient userClient) {
+    public AuthServiceImpl(AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserServiceImpl userService) {
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
-        this.userClient = userClient;
+        this.userService = userService;
     }
 
     @Override
-    public SigninResponse login(SigninRequest signinRequest) {
+    public LoginResponse login(LoginRequest loginRequest) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            signinRequest.getEmail(),
-                            signinRequest.getPassword()
+                            loginRequest.getEmail(),
+                            loginRequest.getPassword()
                     )
             );
 
@@ -41,9 +43,9 @@ public class AuthServiceImpl implements IAuthService {
 
             String token = jwtUtils.generateJwtToken(userDetails.getUsername());
 
-            UserResponse user = userClient.getUserByEmail(userDetails.getUsername());
+            UserResponse user = UserMapper.mapToUserResponse(userService.getUserByEmail(userDetails.getUsername()));
 
-            return new SigninResponse(token, user);
+            return new LoginResponse(token, user);
         } catch(AuthenticationException e) {
             System.out.println("ERROR: " + e.getMessage());
             return null;
@@ -51,18 +53,20 @@ public class AuthServiceImpl implements IAuthService {
     }
 
     @Override
-    public SigninResponse checkToken(String token) {
+    public LoginResponse checkToken(String token) {
         if(token.startsWith("Bearer ")){
             String splitToken = token.substring(7);
 
             if(jwtUtils.isValidJwtToken(splitToken)){
                 String username = jwtUtils.getUsernameFromToken(splitToken);
 
-                UserResponse user = userClient.getUserByEmail(username);
+                UserResponse user = UserMapper.mapToUserResponse(userService.getUserByEmail(username));
 
-                return new SigninResponse(splitToken, user);
+                return new LoginResponse(splitToken, user);
             }
         }
+
+        throw new RuntimeException("Token inválido");
     }
 
     @Override

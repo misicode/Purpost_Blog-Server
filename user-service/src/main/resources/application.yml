@@ -1,6 +1,0 @@
-server:
-  port: 10090
-
-spring:
-  application:
-    name: msvc-user

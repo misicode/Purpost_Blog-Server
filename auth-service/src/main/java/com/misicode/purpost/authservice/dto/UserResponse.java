@@ -1,30 +1,30 @@
 package com.misicode.purpost.authservice.dto;
 
-import java.time.LocalDateTime;
-
 public class UserResponse {
-    private String email;
+    private String idUser;
 
-    private String password;
+    private String email;
 
     private String names;
 
     private String surnames;
 
-    private Boolean isActive = true;
+    private String role;
 
-    private RoleResponse role;
+    public UserResponse(String idUser, String email, String names, String surnames, String role) {
+        this.idUser = idUser;
+        this.email = email;
+        this.names = names;
+        this.surnames = surnames;
+        this.role = role;
+    }
 
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
+    public String getIdUser() {
+        return idUser;
+    }
 
     public String getEmail() {
         return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getNames() {
@@ -35,19 +35,7 @@ public class UserResponse {
         return surnames;
     }
 
-    public Boolean getActive() {
-        return isActive;
-    }
-
-    public RoleResponse getRole() {
+    public String getRole() {
         return role;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
     }
 }

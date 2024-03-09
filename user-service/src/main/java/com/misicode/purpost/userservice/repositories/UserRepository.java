@@ -1,6 +1,6 @@
-package com.misicode.purpost.authservice.repositories;
+package com.misicode.purpost.userservice.repositories;
 
-import com.misicode.purpost.authservice.domain.User;
+import com.misicode.purpost.userservice.domain.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

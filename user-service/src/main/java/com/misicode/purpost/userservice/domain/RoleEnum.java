@@ -1,4 +1,4 @@
-package com.misicode.purpost.authservice.domain;
+package com.misicode.purpost.userservice.domain;
 
 public enum RoleEnum {
     ROLE_ADMIN,

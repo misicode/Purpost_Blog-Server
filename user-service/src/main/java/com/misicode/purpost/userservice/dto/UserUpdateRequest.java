@@ -1,4 +1,4 @@
-package com.misicode.purpost.authservice.dto;
+package com.misicode.purpost.userservice.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

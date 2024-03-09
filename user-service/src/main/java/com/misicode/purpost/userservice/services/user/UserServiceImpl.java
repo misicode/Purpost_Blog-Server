@@ -1,11 +1,12 @@
-package com.misicode.purpost.authservice.services.user;
+package com.misicode.purpost.userservice.services.user;
 
-import com.misicode.purpost.authservice.domain.RoleEnum;
-import com.misicode.purpost.authservice.domain.User;
-import com.misicode.purpost.authservice.dto.UserCreateRequest;
-import com.misicode.purpost.authservice.dto.UserUpdateRequest;
-import com.misicode.purpost.authservice.repositories.UserRepository;
-import com.misicode.purpost.authservice.services.role.IRoleService;
+import com.misicode.purpost.userservice.domain.RoleEnum;
+import com.misicode.purpost.userservice.domain.User;
+import com.misicode.purpost.userservice.dto.UserCreateRequest;
+import com.misicode.purpost.userservice.dto.UserUpdateRequest;
+import com.misicode.purpost.userservice.repositories.UserRepository;
+import com.misicode.purpost.userservice.services.role.IRoleService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +16,8 @@ public class UserServiceImpl implements IUserService {
     private IRoleService roleService;
     private UserRepository userRepository;
 
-    public UserServiceImpl(PasswordEncoder passwordEncoder, IRoleService roleService, UserRepository userRepository) {
-        this.passwordEncoder = passwordEncoder;
+    public UserServiceImpl(IRoleService roleService, UserRepository userRepository) {
+        this.passwordEncoder = new BCryptPasswordEncoder();
         this.roleService = roleService;
         this.userRepository = userRepository;
     }

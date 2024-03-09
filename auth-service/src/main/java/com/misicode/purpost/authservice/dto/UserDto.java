@@ -1,18 +1,8 @@
-package com.misicode.purpost.authservice.domain;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+package com.misicode.purpost.authservice.dto;
 
 import java.time.LocalDateTime;
 
-@Document(collection = "users")
-public class User {
-    @Id
-    private String idUser;
-
+public class UserDto {
     private String email;
 
     private String password;
@@ -23,28 +13,20 @@ public class User {
 
     private Boolean isActive = true;
 
-    @DBRef
-    private Role role;
+    private RoleDto role;
 
-    @CreatedDate
     private LocalDateTime createdAt;
 
-    @LastModifiedDate
     private LocalDateTime updatedAt;
 
 
-    public User() {
+    public UserDto() {
     }
 
-    public User(String idUser, String email, String names, String surnames) {
-        this.idUser = idUser;
+    public UserDto(String email, String names, String surnames) {
         this.email = email;
         this.names = names;
         this.surnames = surnames;
-    }
-
-    public String getIdUser() {
-        return idUser;
     }
 
     public String getEmail() {
@@ -79,11 +61,11 @@ public class User {
         this.surnames = surnames;
     }
 
-    public Role getRole() {
+    public RoleDto getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(RoleDto role) {
         this.role = role;
     }
 }

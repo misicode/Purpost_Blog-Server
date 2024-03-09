@@ -1,8 +1,8 @@
-package com.misicode.purpost.authservice.services.role;
+package com.misicode.purpost.userservice.services.role;
 
-import com.misicode.purpost.authservice.domain.Role;
-import com.misicode.purpost.authservice.domain.RoleEnum;
-import com.misicode.purpost.authservice.repositories.RoleRepository;
+import com.misicode.purpost.userservice.domain.Role;
+import com.misicode.purpost.userservice.domain.RoleEnum;
+import com.misicode.purpost.userservice.repositories.RoleRepository;
 import org.springframework.stereotype.Service;
 
 @Service

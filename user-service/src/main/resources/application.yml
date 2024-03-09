@@ -1,13 +1,14 @@
 server:
-  port: 8090
+  port: 11090
 
 spring:
   application:
-    name: msvc-auth
-
-jwt:
-  secret_key: ${jwt_secret_key}
-  expiration_time: ${jwt_expiration_time}
+    name: msvc-user
+  data:
+    mongodb:
+      uri: ${users_mongodb_uri}
+  config:
+    import: optional:configserver:http://localhost:8888
 
 eureka:
   instance:

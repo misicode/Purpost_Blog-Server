@@ -1,12 +1,10 @@
 package com.misicode.purpost.authservice.services.auth;
 
-import com.misicode.purpost.authservice.dto.UserCreateRequest;
-import com.misicode.purpost.authservice.dto.UserResponse;
-import com.misicode.purpost.authservice.mappers.UserMapper;
+import com.misicode.purpost.authservice.clients.UserClient;
+import com.misicode.purpost.authservice.dto.UserDto;
 import com.misicode.purpost.authservice.payload.LoginRequest;
 import com.misicode.purpost.authservice.payload.LoginResponse;
 import com.misicode.purpost.authservice.security.jwt.JwtUtils;
-import com.misicode.purpost.authservice.services.user.UserServiceImpl;
 import com.misicode.purpost.authservice.services.userdetails.UserDetailsImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,12 +17,12 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements IAuthService {
     private AuthenticationManager authenticationManager;
     private JwtUtils jwtUtils;
-    private UserServiceImpl userService;
+    private UserClient userClient;
 
-    public AuthServiceImpl(AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserServiceImpl userService) {
+    public AuthServiceImpl(AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserClient userClient) {
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
-        this.userService = userService;
+        this.userClient = userClient;
     }
 
     @Override
@@ -43,7 +41,7 @@ public class AuthServiceImpl implements IAuthService {
 
             String token = jwtUtils.generateJwtToken(userDetails.getUsername());
 
-            UserResponse user = UserMapper.mapToUserResponse(userService.getUserByEmail(userDetails.getUsername()));
+            UserDto user = userClient.getUserByEmail(userDetails.getUsername());
 
             return new LoginResponse(token, user);
         } catch(AuthenticationException e) {
@@ -60,7 +58,7 @@ public class AuthServiceImpl implements IAuthService {
             if(jwtUtils.isValidJwtToken(splitToken)){
                 String username = jwtUtils.getUsernameFromToken(splitToken);
 
-                UserResponse user = UserMapper.mapToUserResponse(userService.getUserByEmail(username));
+                UserDto user = userClient.getUserByEmail(username);
 
                 return new LoginResponse(splitToken, user);
             }

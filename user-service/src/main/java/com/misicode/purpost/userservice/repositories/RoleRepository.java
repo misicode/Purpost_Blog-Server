@@ -1,7 +1,7 @@
-package com.misicode.purpost.authservice.repositories;
+package com.misicode.purpost.userservice.repositories;
 
-import com.misicode.purpost.authservice.domain.Role;
-import com.misicode.purpost.authservice.domain.RoleEnum;
+import com.misicode.purpost.userservice.domain.Role;
+import com.misicode.purpost.userservice.domain.RoleEnum;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

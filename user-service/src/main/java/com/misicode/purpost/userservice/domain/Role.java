@@ -1,4 +1,4 @@
-package com.misicode.purpost.authservice.domain;
+package com.misicode.purpost.userservice.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

@@ -28,6 +28,7 @@
         <module>auth-service</module>
         <module>image-service</module>
         <module>post-service</module>
+        <module>user-service</module>
     </modules>
 
     <dependencies>

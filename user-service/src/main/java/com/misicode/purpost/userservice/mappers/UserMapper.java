@@ -1,7 +1,7 @@
-package com.misicode.purpost.authservice.mappers;
+package com.misicode.purpost.userservice.mappers;
 
-import com.misicode.purpost.authservice.domain.User;
-import com.misicode.purpost.authservice.dto.UserResponse;
+import com.misicode.purpost.userservice.domain.User;
+import com.misicode.purpost.userservice.dto.UserResponse;
 
 public class UserMapper {
     private UserMapper() {

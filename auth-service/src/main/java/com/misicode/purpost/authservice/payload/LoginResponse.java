@@ -1,12 +1,12 @@
 package com.misicode.purpost.authservice.payload;
 
-import com.misicode.purpost.authservice.dto.UserResponse;
+import com.misicode.purpost.authservice.dto.UserDto;
 
 public class LoginResponse {
     private String token;
-    private UserResponse user;
+    private UserDto user;
 
-    public LoginResponse(String token, UserResponse user) {
+    public LoginResponse(String token, UserDto user) {
         this.token = token;
         this.user = user;
     }
@@ -15,7 +15,7 @@ public class LoginResponse {
         return token;
     }
 
-    public UserResponse getUser() {
+    public UserDto getUser() {
         return user;
     }
 }

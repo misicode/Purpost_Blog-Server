@@ -1,6 +1,6 @@
 package com.misicode.purpost.authservice.security.jwt;
 
-import com.misicode.purpost.authservice.services.UserDetailsServiceImpl;
+import com.misicode.purpost.authservice.services.userdetails.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

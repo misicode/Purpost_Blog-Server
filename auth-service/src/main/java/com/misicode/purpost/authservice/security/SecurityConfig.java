@@ -1,7 +1,8 @@
 package com.misicode.purpost.authservice.security;
 
+import com.misicode.purpost.authservice.exception.AuthEntryPoint;
 import com.misicode.purpost.authservice.security.jwt.JwtAuthenticationFilter;
-import com.misicode.purpost.authservice.services.UserDetailsServiceImpl;
+import com.misicode.purpost.authservice.services.userdetails.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,14 +27,14 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private final AuthEntryPointJwt authEntryPointJwt;
+    private final AuthEntryPoint authEntryPointJwt;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserDetailsServiceImpl userDetailsService;
 
     @Value("${eggnews_origin}")
     private String eggnewsOrigin;
 
-    public SecurityConfig(AuthEntryPointJwt authEntryPointJwt, JwtAuthenticationFilter jwtAuthenticationFilter, UserDetailsServiceImpl userDetailsService) {
+    public SecurityConfig(AuthEntryPoint authEntryPointJwt, JwtAuthenticationFilter jwtAuthenticationFilter, UserDetailsServiceImpl userDetailsService) {
         this.authEntryPointJwt = authEntryPointJwt;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.userDetailsService = userDetailsService;
@@ -79,7 +80,7 @@ public class SecurityConfig {
                 .addFilterBefore(corsFilter(), CorsFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authRequest -> authRequest
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/api/news/**", "/api/auth/**").permitAll()
+                        .requestMatchers("/api/v1/news/**", "/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/user/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )

@@ -1,4 +1,4 @@
-package com.misicode.purpost.authservice.services;
+package com.misicode.purpost.authservice.services.userdetails;
 
 import com.misicode.purpost.authservice.dto.UserResponse;
 import org.springframework.security.core.GrantedAuthority;

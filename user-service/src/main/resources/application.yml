@@ -1,18 +1,5 @@
-server:
-  port: 11090
-
 spring:
   application:
     name: msvc-user
-  data:
-    mongodb:
-      uri: ${users_mongodb_uri}
   config:
     import: optional:configserver:http://localhost:8888
-
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/

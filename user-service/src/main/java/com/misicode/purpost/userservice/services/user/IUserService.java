@@ -9,5 +9,5 @@ public interface IUserService {
 
     User createUser(UserCreateRequest userRequest);
 
-    User updateUser(UserUpdateRequest userRequest, String email);
+    User updateUser(UserUpdateRequest userRequest);
 }

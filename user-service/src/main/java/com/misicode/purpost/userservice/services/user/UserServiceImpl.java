@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements IUserService {
-    private PasswordEncoder passwordEncoder;
-    private IRoleService roleService;
-    private UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final IRoleService roleService;
+    private final UserRepository userRepository;
 
     public UserServiceImpl(IRoleService roleService, UserRepository userRepository) {
         this.passwordEncoder = new BCryptPasswordEncoder();
@@ -45,8 +45,8 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User updateUser(UserUpdateRequest userRequest, String email) {
-        User user = getUserByEmail(email);
+    public User updateUser(UserUpdateRequest userRequest) {
+        User user = getUserByEmail(userRequest.getEmail());
 
         user.setNames(userRequest.getNames());
         user.setSurnames(userRequest.getSurnames());

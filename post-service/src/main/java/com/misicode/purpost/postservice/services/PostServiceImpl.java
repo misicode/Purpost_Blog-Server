@@ -1,8 +1,11 @@
 package com.misicode.purpost.postservice.services;
 
+import com.misicode.purpost.postservice.clients.ImageClient;
 import com.misicode.purpost.postservice.clients.UserClient;
 import com.misicode.purpost.postservice.domain.Post;
+import com.misicode.purpost.postservice.dto.ImageResponse;
 import com.misicode.purpost.postservice.dto.PostCreateRequest;
+import com.misicode.purpost.postservice.dto.PostUpdateRequest;
 import com.misicode.purpost.postservice.dto.UserResponse;
 import com.misicode.purpost.postservice.repositories.PostRepository;
 import org.springframework.stereotype.Service;
@@ -13,10 +16,12 @@ import java.util.List;
 public class PostServiceImpl implements IPostService {
     private final PostRepository postRepository;
     private final UserClient userClient;
+    private final ImageClient imageClient;
 
-    public PostServiceImpl(PostRepository postRepository, UserClient userClient) {
+    public PostServiceImpl(PostRepository postRepository, UserClient userClient, ImageClient imageClient) {
         this.postRepository = postRepository;
         this.userClient = userClient;
+        this.imageClient = imageClient;
     }
 
     @Override
@@ -25,7 +30,7 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public List<Post> getPostByUser(String email) {
+    public List<Post> getPostsByUser(String email) {
         UserResponse user = userClient.getUserByEmail(email);
 
         return postRepository.findByIdUserAndIsActiveTrueOrderByCreatedAtDesc(user.getIdUser());
@@ -39,12 +44,30 @@ public class PostServiceImpl implements IPostService {
 
     @Override
     public Post createPost(PostCreateRequest postRequest) {
-        return null;
+        UserResponse user = userClient.getUserByEmail(postRequest.getEmail());
+        ImageResponse image = imageClient.saveImage(postRequest.getImage());
+
+        Post post = new Post();
+        post.setTitle(postRequest.getTitle());
+        post.setBody(postRequest.getBody());
+        post.setIdUser(user.getIdUser());
+        post.setIdImage(image.getIdImage());
+
+        return postRepository.save(post);
     }
 
     @Override
-    public Post updatePost(PostCreateRequest postRequest) {
-        return null;
+    public Post updatePost(PostUpdateRequest postRequest) {
+        Post post = getPostById(postRequest.getIdPost());
+
+        post.setTitle(post.getTitle());
+        post.setBody(post.getBody());
+
+        if(postRequest.getImage() != null) {
+            imageClient.updateImage(post.getIdImage(), postRequest.getImage());
+        }
+
+        return postRepository.save(post);
     }
 
     @Override

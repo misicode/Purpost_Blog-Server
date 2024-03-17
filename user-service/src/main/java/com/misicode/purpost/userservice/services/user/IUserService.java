@@ -5,6 +5,8 @@ import com.misicode.purpost.userservice.dto.UserCreateRequest;
 import com.misicode.purpost.userservice.dto.UserUpdateRequest;
 
 public interface IUserService {
+    User getUserById(String id);
+
     User getUserByEmail(String email);
 
     User createUser(UserCreateRequest userRequest);

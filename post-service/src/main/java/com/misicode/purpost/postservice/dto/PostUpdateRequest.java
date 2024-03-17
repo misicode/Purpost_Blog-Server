@@ -1,15 +1,13 @@
 package com.misicode.purpost.postservice.dto;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.web.multipart.MultipartFile;
 
-public class PostCreateRequest {
+public class PostUpdateRequest {
     @NotBlank
     @NotNull
-    @Email
-    private String email;
+    private String idPost;
 
     @NotBlank
     @NotNull
@@ -19,11 +17,10 @@ public class PostCreateRequest {
     @NotNull
     private String body;
 
-    @NotNull
     private MultipartFile image;
 
-    public String getEmail() {
-        return email;
+    public String getIdPost() {
+        return idPost;
     }
 
     public String getTitle() {

@@ -18,6 +18,13 @@ public class ImageController {
         this.imageService = imageService;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ImageResponse> getImageById(@PathVariable String id) {
+        return ResponseEntity.ok(
+                ImageMapper.mapToImageResponse(imageService.getImageById(id))
+        );
+    }
+
     @PostMapping(consumes = "multipart/form-data")
     public ResponseEntity<ImageResponse> saveImage(@ModelAttribute @Valid ImageCreateRequest imageRequest) {
         return ResponseEntity.ok(

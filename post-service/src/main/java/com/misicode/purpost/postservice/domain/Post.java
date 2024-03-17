@@ -1,6 +1,5 @@
 package com.misicode.purpost.postservice.domain;
 
-import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -13,20 +12,97 @@ public class Post {
     @Id
     private String idPost;
 
-    @NotNull
     private String title;
 
-    @NotNull
     private String body;
 
-    @NotNull
     private Boolean isActive = true;
 
+    private String idUser;
+
+    private String idImage;
+
     @CreatedDate
-    @NotNull
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @NotNull
     private LocalDateTime updatedAt;
+
+    public Post() {
+    }
+
+    public Post(String idPost, String title, String body, Boolean isActive, String idUser, String idImage, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.idPost = idPost;
+        this.title = title;
+        this.body = body;
+        this.isActive = isActive;
+        this.idUser = idUser;
+        this.idImage = idImage;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public String getIdPost() {
+        return idPost;
+    }
+
+    public void setIdPost(String idPost) {
+        this.idPost = idPost;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getIdImage() {
+        return idImage;
+    }
+
+    public void setIdImage(String idImage) {
+        this.idImage = idImage;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

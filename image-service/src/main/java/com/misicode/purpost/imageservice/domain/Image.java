@@ -12,6 +12,14 @@ public class Image {
 
     private String url;
 
+    public String getIdImage() {
+        return idImage;
+    }
+
+    public void setIdImage(String idImage) {
+        this.idImage = idImage;
+    }
+
     public String getName() {
         return name;
     }

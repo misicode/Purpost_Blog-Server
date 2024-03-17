@@ -10,6 +10,7 @@ public class ImageMapper {
 
     public static ImageResponse mapToImageResponse(Image image) {
         return new ImageResponse(
+                image.getIdImage(),
                 image.getName(),
                 image.getUrl()
         );

@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Service
 public class CloudinaryServiceImpl implements ICloudinaryService {
-    private Cloudinary cloudinary;
+    private final Cloudinary cloudinary;
 
     public CloudinaryServiceImpl(Cloudinary cloudinary) {
         this.cloudinary = cloudinary;

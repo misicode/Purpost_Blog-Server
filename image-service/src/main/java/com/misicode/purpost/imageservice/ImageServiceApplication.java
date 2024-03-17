@@ -3,7 +3,9 @@ package com.misicode.purpost.imageservice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
+@EnableMongoRepositories(basePackages = "com.misicode.purpost.imageservice.repositories")
 @EnableDiscoveryClient
 @SpringBootApplication
 public class ImageServiceApplication {

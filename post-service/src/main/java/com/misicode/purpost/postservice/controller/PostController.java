@@ -15,43 +15,45 @@ import java.util.List;
 @RequestMapping("/api/v1/post")
 public class PostController {
     private final IPostService postService;
+    private final PostMapper postMapper;
 
-    public PostController(IPostService postService) {
+    public PostController(IPostService postService, PostMapper postMapper) {
         this.postService = postService;
+        this.postMapper = postMapper;
     }
 
     @GetMapping()
     public ResponseEntity<List<PostResponse>> getPosts() {
         return ResponseEntity.ok(
-                PostMapper.mapToListPostResponse(postService.getPosts())
+                postMapper.mapToListPostResponse(postService.getPosts())
         );
     }
 
     @GetMapping("/{email}")
     public ResponseEntity<List<PostResponse>> getPostsByUser(@PathVariable String email) {
         return ResponseEntity.ok(
-                PostMapper.mapToListPostWithoutUserResponse(postService.getPostsByUser(email))
+                postMapper.mapToListPostWithoutUserResponse(postService.getPostsByUser(email))
         );
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<PostResponse> getPostById(@PathVariable String id) {
         return ResponseEntity.ok(
-                PostMapper.mapToPostResponse(postService.getPostById(id))
+                postMapper.mapToPostResponse(postService.getPostById(id))
         );
     }
 
     @PostMapping(consumes = "multipart/form-data")
     public ResponseEntity<PostResponse> createPost(@ModelAttribute @Valid PostCreateRequest post) {
         return ResponseEntity.ok(
-                PostMapper.mapToPostResponse(postService.createPost(post))
+                postMapper.mapToPostResponse(postService.createPost(post))
         );
     }
 
     @PutMapping(consumes = "multipart/form-data")
     public ResponseEntity<PostResponse> updatePost(@ModelAttribute @Valid PostUpdateRequest post) {
         return ResponseEntity.ok(
-                PostMapper.mapToPostResponse(postService.updatePost(post))
+                postMapper.mapToPostResponse(postService.updatePost(post))
         );
     }
 

@@ -19,6 +19,13 @@ public class PostUpdateRequest {
 
     private MultipartFile image;
 
+    public PostUpdateRequest(String idPost, String title, String body, MultipartFile image) {
+        this.idPost = idPost;
+        this.title = title;
+        this.body = body;
+        this.image = image;
+    }
+
     public String getIdPost() {
         return idPost;
     }

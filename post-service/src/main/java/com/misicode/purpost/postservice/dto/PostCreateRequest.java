@@ -22,6 +22,13 @@ public class PostCreateRequest {
     @NotNull
     private MultipartFile image;
 
+    public PostCreateRequest(String email, String title, String body, MultipartFile image) {
+        this.email = email;
+        this.title = title;
+        this.body = body;
+        this.image = image;
+    }
+
     public String getEmail() {
         return email;
     }

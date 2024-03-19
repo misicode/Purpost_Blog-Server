@@ -4,19 +4,21 @@ import com.misicode.purpost.postservice.clients.ImageClient;
 import com.misicode.purpost.postservice.clients.UserClient;
 import com.misicode.purpost.postservice.domain.Post;
 import com.misicode.purpost.postservice.dto.PostResponse;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PostMapper {
-    private static UserClient userClient;
-    private static ImageClient imageClient;
+    private UserClient userClient;
+    private ImageClient imageClient;
 
-    private PostMapper(UserClient userClient, ImageClient imageClient) {
-        PostMapper.userClient = userClient;
-        PostMapper.imageClient = imageClient;
+    public PostMapper(UserClient userClient, ImageClient imageClient) {
+        this.userClient = userClient;
+        this.imageClient = imageClient;
     }
 
-    public static PostResponse mapToPostResponse(Post post) {
+    public PostResponse mapToPostResponse(Post post) {
         return new PostResponse.Builder()
                 .idPost(post.getIdPost())
                 .title(post.getTitle())
@@ -29,7 +31,7 @@ public class PostMapper {
                 .build();
     }
 
-    public static PostResponse mapToPostWithoutUserResponse(Post post) {
+    public PostResponse mapToPostWithoutUserResponse(Post post) {
         return new PostResponse.Builder()
                 .idPost(post.getIdPost())
                 .title(post.getTitle())
@@ -41,15 +43,15 @@ public class PostMapper {
                 .build();
     }
 
-    public static List<PostResponse> mapToListPostResponse(List<Post> postList) {
+    public List<PostResponse> mapToListPostResponse(List<Post> postList) {
         return postList.stream()
-                .map(PostMapper::mapToPostResponse)
+                .map(this::mapToPostResponse)
                 .toList();
     }
 
-    public static List<PostResponse> mapToListPostWithoutUserResponse(List<Post> postList) {
+    public List<PostResponse> mapToListPostWithoutUserResponse(List<Post> postList) {
         return postList.stream()
-                .map(PostMapper::mapToPostWithoutUserResponse)
+                .map(this::mapToPostWithoutUserResponse)
                 .toList();
     }
 }

@@ -10,8 +10,8 @@ import java.util.List;
 
 @Service
 public class PostMapper {
-    private UserClient userClient;
-    private ImageClient imageClient;
+    private final UserClient userClient;
+    private final ImageClient imageClient;
 
     public PostMapper(UserClient userClient, ImageClient imageClient) {
         this.userClient = userClient;
@@ -31,27 +31,9 @@ public class PostMapper {
                 .build();
     }
 
-    public PostResponse mapToPostWithoutUserResponse(Post post) {
-        return new PostResponse.Builder()
-                .idPost(post.getIdPost())
-                .title(post.getTitle())
-                .body(post.getBody())
-                .image(imageClient.getImageById(post.getIdImage()))
-                .isActive(post.getActive())
-                .createdAt(post.getCreatedAt())
-                .updatedAt(post.getUpdatedAt())
-                .build();
-    }
-
     public List<PostResponse> mapToListPostResponse(List<Post> postList) {
         return postList.stream()
                 .map(this::mapToPostResponse)
-                .toList();
-    }
-
-    public List<PostResponse> mapToListPostWithoutUserResponse(List<Post> postList) {
-        return postList.stream()
-                .map(this::mapToPostWithoutUserResponse)
                 .toList();
     }
 }

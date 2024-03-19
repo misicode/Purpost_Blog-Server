@@ -32,7 +32,7 @@ public class PostController {
     @GetMapping("/{email}")
     public ResponseEntity<List<PostResponse>> getPostsByUser(@PathVariable String email) {
         return ResponseEntity.ok(
-                postMapper.mapToListPostWithoutUserResponse(postService.getPostsByUser(email))
+                postMapper.mapToListPostResponse(postService.getPostsByUser(email))
         );
     }
 

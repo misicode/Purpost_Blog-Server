@@ -60,8 +60,8 @@ public class PostServiceImpl implements IPostService {
     public Post updatePost(PostUpdateRequest postRequest) {
         Post post = getPostById(postRequest.getIdPost());
 
-        post.setTitle(post.getTitle());
-        post.setBody(post.getBody());
+        post.setTitle(postRequest.getTitle());
+        post.setBody(postRequest.getBody());
 
         if(postRequest.getImage() != null) {
             imageClient.updateImage(post.getIdImage(), postRequest.getImage());

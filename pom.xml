@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.misicode</groupId>
-    <artifactId>server-purpost</artifactId>
+    <artifactId>purpost-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Purpost Server</name>
     <description>Purpost Server Microservices Container</description>

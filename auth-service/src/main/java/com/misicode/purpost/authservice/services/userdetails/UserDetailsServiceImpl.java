@@ -1,7 +1,7 @@
 package com.misicode.purpost.authservice.services.userdetails;
 
 import com.misicode.purpost.authservice.clients.UserClient;
-import com.misicode.purpost.authservice.dto.UserDto;
+import com.misicode.purpost.authservice.dto.UserDataResponse;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,7 +17,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserDto user = userClient.getUserByEmail(email);
+        UserDataResponse user = userClient.getUserDataByEmail(email);
 
         if(user == null) {
             throw new UsernameNotFoundException("El usuario con correo " + email + " no existe");

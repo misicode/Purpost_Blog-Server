@@ -1,7 +1,6 @@
 package com.misicode.purpost.authservice.services.auth;
 
 import com.misicode.purpost.authservice.clients.UserClient;
-import com.misicode.purpost.authservice.dto.UserDto;
 import com.misicode.purpost.authservice.payload.LoginRequest;
 import com.misicode.purpost.authservice.payload.LoginResponse;
 import com.misicode.purpost.authservice.security.jwt.JwtUtils;
@@ -41,9 +40,7 @@ public class AuthServiceImpl implements IAuthService {
 
             String token = jwtUtils.generateJwtToken(userDetails.getUsername());
 
-            UserDto user = userClient.getUserByEmail(userDetails.getUsername());
-
-            return new LoginResponse(token, user);
+            return new LoginResponse(token);
         } catch(AuthenticationException e) {
             System.out.println("ERROR: " + e.getMessage());
             return null;
@@ -56,11 +53,12 @@ public class AuthServiceImpl implements IAuthService {
             String splitToken = token.substring(7);
 
             if(jwtUtils.isValidJwtToken(splitToken)){
-                String username = jwtUtils.getUsernameFromToken(splitToken);
+                //String username = jwtUtils.getUsernameFromToken(splitToken);
 
-                UserDto user = userClient.getUserByEmail(username);
+                //UserDto user = userClient.getUserByEmail(username);
 
-                return new LoginResponse(splitToken, user);
+                //return new LoginResponse(splitToken, user);
+                return new LoginResponse(splitToken);
             }
         }
 

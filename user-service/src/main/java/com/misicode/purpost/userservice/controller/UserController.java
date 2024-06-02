@@ -1,8 +1,10 @@
 package com.misicode.purpost.userservice.controller;
 
 import com.misicode.purpost.userservice.dto.UserCreateRequest;
+import com.misicode.purpost.userservice.dto.UserDataResponse;
 import com.misicode.purpost.userservice.dto.UserResponse;
 import com.misicode.purpost.userservice.dto.UserUpdateRequest;
+import com.misicode.purpost.userservice.mappers.UserDataMapper;
 import com.misicode.purpost.userservice.mappers.UserMapper;
 import com.misicode.purpost.userservice.services.user.IUserService;
 import jakarta.validation.Valid;
@@ -29,6 +31,13 @@ public class UserController {
     public ResponseEntity<UserResponse> getUserByEmail(@PathVariable String email) {
         return ResponseEntity.ok(
                 UserMapper.mapToUserResponse(userService.getUserByEmail(email))
+        );
+    }
+
+    @GetMapping("/{email}")
+    public ResponseEntity<UserDataResponse> getUserDataByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(
+                UserDataMapper.mapToUserDataResponse(userService.getUserByEmail(email))
         );
     }
 

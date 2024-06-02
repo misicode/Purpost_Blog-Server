@@ -31,8 +31,8 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserDetailsServiceImpl userDetailsService;
 
-    @Value("${eggnews_origin}")
-    private String eggnewsOrigin;
+    @Value("${purpost.origin}")
+    private String purpostOrigin;
 
     public SecurityConfig(AuthEntryPoint authEntryPointJwt, JwtAuthenticationFilter jwtAuthenticationFilter, UserDetailsServiceImpl userDetailsService) {
         this.authEntryPointJwt = authEntryPointJwt;
@@ -59,7 +59,7 @@ public class SecurityConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of(eggnewsOrigin));
+        configuration.setAllowedOrigins(List.of(purpostOrigin));
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
 

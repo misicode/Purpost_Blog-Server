@@ -1,12 +1,12 @@
 package com.misicode.purpost.authservice.dto;
 
-public class RoleDto {
+public class RoleResponse {
     private String name;
 
-    public RoleDto() {
+    public RoleResponse() {
     }
 
-    public RoleDto(String name) {
+    public RoleResponse(String name) {
         this.name = name;
     }
 

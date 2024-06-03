@@ -1,6 +1,8 @@
 package com.misicode.purpost.authservice.services.auth;
 
 import com.misicode.purpost.authservice.clients.UserClient;
+import com.misicode.purpost.authservice.exception.ApplicationException;
+import com.misicode.purpost.authservice.exception.error.ErrorResponseEnum;
 import com.misicode.purpost.authservice.payload.LoginRequest;
 import com.misicode.purpost.authservice.payload.LoginResponse;
 import com.misicode.purpost.authservice.security.jwt.JwtUtils;
@@ -11,6 +13,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 public class AuthServiceImpl implements IAuthService {
@@ -42,8 +46,7 @@ public class AuthServiceImpl implements IAuthService {
 
             return new LoginResponse(token);
         } catch(AuthenticationException e) {
-            System.out.println("ERROR: " + e.getMessage());
-            return null;
+            throw new ApplicationException(ErrorResponseEnum.AUTH_FAILED, Map.of("message", e.getMessage()));
         }
     }
 

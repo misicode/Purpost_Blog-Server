@@ -13,14 +13,14 @@ import java.util.Date;
 import java.util.function.Function;
 
 @Component
-public class JwtUtils {
+public class JwtUtil {
     @Value("${jwt.secret_key}")
     private String secretKey;
 
     @Value("${jwt.expiration_time}")
     private String expirationTime;
 
-    public String generateJwtToken(String email){
+    public String generateJwtToken(String email) {
         return Jwts.builder()
                 .setSubject(email)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
@@ -43,20 +43,20 @@ public class JwtUtils {
         return getClaim(token, Claims::getSubject);
     }
 
+    public Key getKey() {
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
+    }
+
     public <T> T getClaim(String token, Function<Claims, T> claimsResolver){
         Claims claims = getAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
-    public Claims getAllClaims(String token){
+    public Claims getAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-    }
-
-    public Key getKey() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
     }
 }

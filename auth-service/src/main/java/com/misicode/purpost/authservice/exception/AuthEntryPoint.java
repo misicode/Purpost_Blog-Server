@@ -28,7 +28,7 @@ public class AuthEntryPoint implements AuthenticationEntryPoint {
         final Map<String, Object> body = new HashMap<>();
         body.put(HttpConstants.TIMESTAMP, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(ZonedDateTime.now()));
         body.put(HttpConstants.STATUS, HttpServletResponse.SC_UNAUTHORIZED);
-        body.put(HttpConstants.ERROR, "Unauthorized");
+        body.put(HttpConstants.ERROR, "UNAUTHORIZED");
         body.put(HttpConstants.MESSAGE, "Sesión inválida");
         body.put(HttpConstants.PATH, request.getServletPath());
 

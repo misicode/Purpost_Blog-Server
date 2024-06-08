@@ -7,7 +7,7 @@
   <h1 align="center">Purpost Server</h1>
 
   <p align="center">
-    <span>Blog de publicaciones variadas</span><br>
+    <span>Microservicios de Purpost Blog</span><br>
     <a href="https://github.com/misicode/Purpost_Blog-Server/issues">Reportar Bug</a>
     |
     <a href="https://github.com/misicode/Purpost_Blog-Server/issues">Solicitar Feature</a>

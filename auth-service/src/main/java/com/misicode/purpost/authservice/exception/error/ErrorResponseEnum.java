@@ -8,9 +8,9 @@ public enum ErrorResponseEnum implements IErrorResponse {
     USER_EXISTS("USER_EXISTS", HttpStatus.CONFLICT, "El usuario con correo {email} ya se encuentra registrado"),
     USER_NOT_FOUND("USER_NOT_FOUND", HttpStatus.NOT_FOUND, "El usuario con correo {email} no fue encontrado");
 
-    String key;
-    HttpStatus httpStatus;
-    String message;
+    final String key;
+    final HttpStatus httpStatus;
+    final String message;
 
     ErrorResponseEnum(String key, HttpStatus httpStatus, String message) {
         this.message = message;

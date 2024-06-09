@@ -1,7 +1,7 @@
-package com.misicode.purpost.authservice.security;
+package com.misicode.purpost.authservice.config;
 
 import com.misicode.purpost.authservice.exception.AuthEntryPoint;
-import com.misicode.purpost.authservice.security.jwt.JwtAuthenticationFilter;
+import com.misicode.purpost.authservice.filter.JwtAuthenticationFilter;
 import com.misicode.purpost.authservice.services.userdetails.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

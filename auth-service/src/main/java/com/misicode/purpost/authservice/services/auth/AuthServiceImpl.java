@@ -5,7 +5,7 @@ import com.misicode.purpost.authservice.exception.ApplicationException;
 import com.misicode.purpost.authservice.exception.error.ErrorResponseEnum;
 import com.misicode.purpost.authservice.payload.LoginRequest;
 import com.misicode.purpost.authservice.payload.LoginResponse;
-import com.misicode.purpost.authservice.security.jwt.JwtUtil;
+import com.misicode.purpost.authservice.util.JwtUtil;
 import com.misicode.purpost.authservice.services.userdetails.UserDetailsImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

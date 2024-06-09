@@ -29,7 +29,8 @@ public class AuthEntryPoint implements AuthenticationEntryPoint {
         body.put(HttpConstants.TIMESTAMP, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(ZonedDateTime.now()));
         body.put(HttpConstants.STATUS, HttpServletResponse.SC_UNAUTHORIZED);
         body.put(HttpConstants.ERROR, "UNAUTHORIZED");
-        body.put(HttpConstants.MESSAGE, "Sesión inválida");
+        body.put(HttpConstants.ERROR_KEY, "AUTH_EXCEPTION");
+        body.put(HttpConstants.MESSAGE, "Operación inválida");
         body.put(HttpConstants.PATH, request.getServletPath());
 
         final ObjectMapper mapper = new ObjectMapper();

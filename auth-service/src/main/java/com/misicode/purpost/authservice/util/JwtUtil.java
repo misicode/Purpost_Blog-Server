@@ -1,4 +1,4 @@
-package com.misicode.purpost.authservice.security.jwt;
+package com.misicode.purpost.authservice.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

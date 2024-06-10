@@ -3,13 +3,15 @@ package com.misicode.purpost.imageservice.services.image;
 import com.misicode.purpost.imageservice.domain.Image;
 import com.misicode.purpost.imageservice.dto.ImageCreateRequest;
 import com.misicode.purpost.imageservice.dto.ImageUpdateRequest;
+import com.misicode.purpost.imageservice.exception.ApplicationException;
+import com.misicode.purpost.imageservice.exception.error.ErrorResponseEnum;
 import com.misicode.purpost.imageservice.repositories.ImageRepository;
 import com.misicode.purpost.imageservice.services.cloudinary.ICloudinaryService;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -25,7 +27,7 @@ public class ImageServiceImpl implements IImageService {
     @Override
     public Image getImageById(String id) {
         return imageRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Imagen no encontrada"));
+                .orElseThrow(() -> new ApplicationException(ErrorResponseEnum.IMAGE_NOT_FOUND, Map.of("id", id)));
     }
 
     @Override
@@ -35,11 +37,6 @@ public class ImageServiceImpl implements IImageService {
         image.setName(UUID.randomUUID().toString().substring(0, 10) + "_" + LocalTime.now().format(DateTimeFormatter.ofPattern("HHmmss")));
         image.setUrl(cloudinaryService.uploadFile(imageRequest.getImage(), "Purpost/posts"));
 
-        if(image.getUrl() == null) {
-            System.out.println("El URL de la imagen no se creó correctamente");
-            return null;
-        }
-
         return imageRepository.save(image);
     }
 
@@ -48,11 +45,6 @@ public class ImageServiceImpl implements IImageService {
         Image image = getImageById(imageRequest.getIdImage());
 
         image.setUrl(cloudinaryService.uploadFile(imageRequest.getImage(), "Purpost/posts"));
-
-        if(image.getUrl() == null) {
-            System.out.println("El URL de la imagen no se creó correctamente");
-            return null;
-        }
 
         return imageRepository.save(image);
     }

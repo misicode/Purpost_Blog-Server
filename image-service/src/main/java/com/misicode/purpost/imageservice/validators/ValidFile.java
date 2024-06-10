@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidFile {
-    String message() default "El campo debe ser de tipo File";
+    String message() default "El campo debe tener un archivo válido";
 
     Class<?>[] groups() default {};
 

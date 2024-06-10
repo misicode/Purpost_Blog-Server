@@ -4,11 +4,15 @@ import com.misicode.purpost.userservice.domain.RoleEnum;
 import com.misicode.purpost.userservice.domain.User;
 import com.misicode.purpost.userservice.dto.UserCreateRequest;
 import com.misicode.purpost.userservice.dto.UserUpdateRequest;
+import com.misicode.purpost.userservice.exception.ApplicationException;
+import com.misicode.purpost.userservice.exception.error.ErrorResponseEnum;
 import com.misicode.purpost.userservice.repositories.UserRepository;
 import com.misicode.purpost.userservice.services.role.IRoleService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -25,19 +29,19 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User getUserById(String id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new ApplicationException(ErrorResponseEnum.USER_NOT_FOUND, Map.of("id", "ID", "value", id)));
     }
 
     @Override
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new ApplicationException(ErrorResponseEnum.USER_NOT_FOUND, Map.of("id", "correo", "value", email)));
     }
 
     @Override
     public User createUser(UserCreateRequest userRequest) {
         if(userRepository.existsByEmail(userRequest.getEmail())) {
-            throw new RuntimeException("Usuario ya existe");
+            throw new ApplicationException(ErrorResponseEnum.USER_EXISTS);
         }
 
         User user = new User();

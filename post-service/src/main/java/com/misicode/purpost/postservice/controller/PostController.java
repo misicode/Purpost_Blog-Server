@@ -29,17 +29,17 @@ public class PostController {
         );
     }
 
-    @GetMapping("/{email}")
-    public ResponseEntity<List<PostResponse>> getPostsByUser(@PathVariable String email) {
-        return ResponseEntity.ok(
-                postMapper.mapToListPostResponse(postService.getPostsByUser(email))
-        );
-    }
-
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<PostResponse> getPostById(@PathVariable String id) {
         return ResponseEntity.ok(
                 postMapper.mapToPostResponse(postService.getPostById(id))
+        );
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<List<PostResponse>> getPostsByUser(@PathVariable String email) {
+        return ResponseEntity.ok(
+                postMapper.mapToListPostResponse(postService.getPostsByUser(email))
         );
     }
 

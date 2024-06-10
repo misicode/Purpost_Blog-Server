@@ -7,10 +7,13 @@ import com.misicode.purpost.postservice.dto.ImageResponse;
 import com.misicode.purpost.postservice.dto.PostCreateRequest;
 import com.misicode.purpost.postservice.dto.PostUpdateRequest;
 import com.misicode.purpost.postservice.dto.UserResponse;
+import com.misicode.purpost.postservice.exception.ApplicationException;
+import com.misicode.purpost.postservice.exception.error.ErrorResponseEnum;
 import com.misicode.purpost.postservice.repositories.PostRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PostServiceImpl implements IPostService {
@@ -30,16 +33,20 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public List<Post> getPostsByUser(String email) {
-        UserResponse user = userClient.getUserByEmail(email);
-
-        return postRepository.findByIdUserAndIsActiveTrueOrderByCreatedAtDesc(user.getIdUser());
+    public Post getPostById(String id) {
+        return postRepository.findById(id)
+                .orElseThrow(() -> new ApplicationException(ErrorResponseEnum.POST_NOT_FOUND, Map.of("id", id)));
     }
 
     @Override
-    public Post getPostById(String id) {
-        return postRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Publicación no encontrada"));
+    public List<Post> getPostsByUser(String email) {
+        try {
+            UserResponse user = userClient.getUserByEmail(email);
+
+            return postRepository.findByIdUserAndIsActiveTrueOrderByCreatedAtDesc(user.getIdUser());
+        } catch(Exception e) {
+            throw new ApplicationException(ErrorResponseEnum.USER_NOT_FOUND, Map.of("email", email));
+        }
     }
 
     @Override

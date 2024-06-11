@@ -43,21 +43,21 @@ public class PostController {
         );
     }
 
-    @PostMapping(consumes = "multipart/form-data")
+    @PostMapping(value="/private", consumes = "multipart/form-data")
     public ResponseEntity<PostResponse> createPost(@ModelAttribute @Valid PostCreateRequest post) {
         return ResponseEntity.ok(
                 postMapper.mapToPostResponse(postService.createPost(post))
         );
     }
 
-    @PutMapping(consumes = "multipart/form-data")
+    @PutMapping(value="/private", consumes = "multipart/form-data")
     public ResponseEntity<PostResponse> updatePost(@ModelAttribute @Valid PostUpdateRequest post) {
         return ResponseEntity.ok(
                 postMapper.mapToPostResponse(postService.updatePost(post))
         );
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/private/{id}")
     public ResponseEntity<String> deletePost(@PathVariable String id) {
         postService.deletePost(id);
 

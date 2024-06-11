@@ -25,14 +25,14 @@ public class ImageController {
         );
     }
 
-    @PostMapping(consumes = "multipart/form-data")
+    @PostMapping(value = "/private", consumes = "multipart/form-data")
     public ResponseEntity<ImageResponse> saveImage(@ModelAttribute @Valid ImageCreateRequest imageRequest) {
         return ResponseEntity.ok(
                 ImageMapper.mapToImageResponse(imageService.saveImage(imageRequest))
         );
     }
 
-    @PutMapping(consumes = "multipart/form-data")
+    @PutMapping(value = "/private", consumes = "multipart/form-data")
     public ResponseEntity<ImageResponse> updateImage(@ModelAttribute @Valid ImageUpdateRequest imageRequest) {
         return ResponseEntity.ok(
                 ImageMapper.mapToImageResponse(imageService.updateImage(imageRequest))

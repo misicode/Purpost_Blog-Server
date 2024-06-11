@@ -34,21 +34,21 @@ public class UserController {
         );
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/private/{email}")
     public ResponseEntity<UserDataResponse> getUserDataByEmail(@PathVariable String email) {
         return ResponseEntity.ok(
                 UserDataMapper.mapToUserDataResponse(userService.getUserByEmail(email))
         );
     }
 
-    @PostMapping()
+    @PostMapping("/private")
     public ResponseEntity<UserResponse> createUser(@RequestBody @Valid UserCreateRequest userRequest) {
         return ResponseEntity.ok(
                 UserMapper.mapToUserResponse(userService.createUser(userRequest))
         );
     }
 
-    @PutMapping()
+    @PutMapping("/private")
     public ResponseEntity<UserResponse> updateUser(@RequestBody @Valid UserUpdateRequest userRequest) {
         return ResponseEntity.ok(
                 UserMapper.mapToUserResponse(userService.updateUser(userRequest))

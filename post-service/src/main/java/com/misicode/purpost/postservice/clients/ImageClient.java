@@ -10,10 +10,10 @@ public interface ImageClient {
     @GetMapping("/{id}")
     ImageResponse getImageById(@PathVariable String id);
 
-    @PostMapping(consumes = "multipart/form-data")
+    @PostMapping(value = "/private", consumes = "multipart/form-data")
     ImageResponse saveImage(@RequestPart(name = "image") MultipartFile image);
 
-    @PutMapping(consumes = "multipart/form-data")
+    @PutMapping(value = "/private", consumes = "multipart/form-data")
     ImageResponse updateImage(@RequestPart(name = "idImage") String idImage,
                                 @RequestPart(name = "image") MultipartFile image);
 }

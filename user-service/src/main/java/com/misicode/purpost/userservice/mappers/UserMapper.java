@@ -11,6 +11,7 @@ public class UserMapper {
     public static UserResponse mapToUserResponse(User user) {
         return new UserResponse(
                 user.getIdUser(),
+                user.getUsername(),
                 user.getEmail(),
                 user.getNames(),
                 user.getSurnames(),

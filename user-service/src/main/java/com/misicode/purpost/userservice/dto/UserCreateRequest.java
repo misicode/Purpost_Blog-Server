@@ -3,15 +3,12 @@ package com.misicode.purpost.userservice.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class UserCreateRequest {
     @NotBlank
     @NotNull
-    private String names;
-
-    @NotBlank
-    @NotNull
-    private String surnames;
+    private String username;
 
     @NotBlank
     @NotNull
@@ -20,14 +17,19 @@ public class UserCreateRequest {
 
     @NotBlank
     @NotNull
+    @Size(min = 6)
     private String password;
 
-    public String getNames() {
-        return names;
-    }
+    @NotBlank
+    @NotNull
+    private String names;
 
-    public String getSurnames() {
-        return surnames;
+    @NotBlank
+    @NotNull
+    private String surnames;
+
+    public String getUsername() {
+        return username;
     }
 
     public String getEmail() {
@@ -36,5 +38,13 @@ public class UserCreateRequest {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getNames() {
+        return names;
+    }
+
+    public String getSurnames() {
+        return surnames;
     }
 }

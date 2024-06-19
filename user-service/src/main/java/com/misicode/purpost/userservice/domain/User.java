@@ -13,6 +13,8 @@ public class User {
     @Id
     private String idUser;
 
+    private String username;
+
     private String email;
 
     private String password;
@@ -36,7 +38,8 @@ public class User {
     public User() {
     }
 
-    public User(String idUser, String email, String names, String surnames) {
+    public User(String idUser, String username, String email, String names, String surnames) {
+        this.username = username;
         this.idUser = idUser;
         this.email = email;
         this.names = names;
@@ -45,6 +48,14 @@ public class User {
 
     public String getIdUser() {
         return idUser;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

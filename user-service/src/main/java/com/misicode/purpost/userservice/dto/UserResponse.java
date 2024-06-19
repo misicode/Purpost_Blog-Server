@@ -3,6 +3,8 @@ package com.misicode.purpost.userservice.dto;
 public class UserResponse {
     private String idUser;
 
+    private String username;
+
     private String email;
 
     private String names;
@@ -11,8 +13,9 @@ public class UserResponse {
 
     private String role;
 
-    public UserResponse(String idUser, String email, String names, String surnames, String role) {
+    public UserResponse(String idUser, String username, String email, String names, String surnames, String role) {
         this.idUser = idUser;
+        this.username = username;
         this.email = email;
         this.names = names;
         this.surnames = surnames;
@@ -21,6 +24,10 @@ public class UserResponse {
 
     public String getIdUser() {
         return idUser;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getEmail() {

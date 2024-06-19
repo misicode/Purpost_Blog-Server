@@ -10,7 +10,7 @@ public class UserDataResponse {
     public UserDataResponse() {
     }
 
-    public UserDataResponse(String email, String password, String names, String surnames, RoleResponse role) {
+    public UserDataResponse(String email, String password, RoleResponse role) {
         this.email = email;
         this.password = password;
         this.role = role;

@@ -29,24 +29,51 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User getUserById(String id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new ApplicationException(ErrorResponseEnum.USER_NOT_FOUND, Map.of("id", "ID", "value", id)));
+                .orElseThrow(() -> new ApplicationException(
+                        ErrorResponseEnum.USER_NOT_FOUND,
+                        Map.of("id", "usuario con ID", "value", id)
+                ));
     }
 
     @Override
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new ApplicationException(ErrorResponseEnum.USER_NOT_FOUND, Map.of("id", "correo", "value", email)));
+                .orElseThrow(() -> new ApplicationException(
+                        ErrorResponseEnum.USER_NOT_FOUND,
+                        Map.of("id", "usuario con correo", "value", email)
+                ));
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new ApplicationException(
+                        ErrorResponseEnum.USER_NOT_FOUND,
+                        Map.of("id", "usuario", "value", username)
+                ));
     }
 
     @Override
     public User createUser(UserCreateRequest userRequest) {
         if(userRepository.existsByEmail(userRequest.getEmail())) {
-            throw new ApplicationException(ErrorResponseEnum.USER_EXISTS);
+            throw new ApplicationException(
+                    ErrorResponseEnum.USER_EXISTS,
+                    Map.of("id", "correo", "value", userRequest.getEmail())
+            );
+        }
+
+        if(userRepository.existsByUsername(userRequest.getUsername())) {
+            throw new ApplicationException(
+                    ErrorResponseEnum.USER_EXISTS,
+                    Map.of("id", "usuario", "value", userRequest.getUsername())
+            );
         }
 
         User user = new User();
+
         user.setNames(userRequest.getNames());
         user.setSurnames(userRequest.getSurnames());
+        user.setUsername(userRequest.getUsername());
         user.setEmail(userRequest.getEmail());
         user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         user.setRole(roleService.getRoleByName(RoleEnum.ROLE_USER));

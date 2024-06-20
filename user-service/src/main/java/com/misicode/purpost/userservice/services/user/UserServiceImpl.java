@@ -54,6 +54,15 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public User getUserByUsernameOrEmail(String account) {
+        return userRepository.findByUsernameOrEmail(account, account)
+                .orElseThrow(() -> new ApplicationException(
+                        ErrorResponseEnum.USER_NOT_FOUND,
+                        Map.of("id", "nombre de usuario o correo", "value", account)
+                ));
+    }
+
+    @Override
     public User createUser(UserCreateRequest userRequest) {
         if(userRepository.existsByEmail(userRequest.getEmail())) {
             throw new ApplicationException(

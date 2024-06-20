@@ -11,6 +11,8 @@ public interface IUserService {
 
     User getUserByUsername(String username);
 
+    User getUserByUsernameOrEmail(String account);
+
     User createUser(UserCreateRequest userRequest);
 
     User updateUser(UserUpdateRequest userRequest);

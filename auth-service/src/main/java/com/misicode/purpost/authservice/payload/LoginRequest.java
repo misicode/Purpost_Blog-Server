@@ -7,15 +7,14 @@ import jakarta.validation.constraints.NotNull;
 public class LoginRequest {
     @NotBlank
     @NotNull
-    @Email
-    private String email;
+    private String account;
 
     @NotBlank
     @NotNull
     private String password;
 
-    public String getEmail() {
-        return email;
+    public String getAccount() {
+        return account;
     }
 
     public String getPassword() {

@@ -41,17 +41,10 @@ public class UserController {
         );
     }
 
-    @GetMapping("/account/{account}")
-    public ResponseEntity<UserResponse> getUserByUsernameOrEmail(@PathVariable String account) {
+    @GetMapping("/private/{account}")
+    public ResponseEntity<UserDataResponse> getUserDataByUsernameOrEmail(@PathVariable String account) {
         return ResponseEntity.ok(
-                UserMapper.mapToUserResponse(userService.getUserByUsernameOrEmail(account))
-        );
-    }
-
-    @GetMapping("/private/{email}")
-    public ResponseEntity<UserDataResponse> getUserDataByEmail(@PathVariable String email) {
-        return ResponseEntity.ok(
-                UserDataMapper.mapToUserDataResponse(userService.getUserByEmail(email))
+                UserDataMapper.mapToUserDataResponse(userService.getUserByUsernameOrEmail(account))
         );
     }
 

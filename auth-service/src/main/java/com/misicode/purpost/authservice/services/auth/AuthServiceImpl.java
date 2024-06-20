@@ -33,7 +33,7 @@ public class AuthServiceImpl implements IAuthService {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            loginRequest.getEmail(),
+                            loginRequest.getAccount(),
                             loginRequest.getPassword()
                     )
             );

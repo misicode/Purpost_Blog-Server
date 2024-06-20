@@ -23,7 +23,7 @@ public class UserDetailsImpl implements UserDetails {
                 (GrantedAuthority) () -> user.getRole().getName());
 
         return new UserDetailsImpl(
-                user.getEmail(),
+                user.getUsername(),
                 user.getPassword(),
                 authorities
         );

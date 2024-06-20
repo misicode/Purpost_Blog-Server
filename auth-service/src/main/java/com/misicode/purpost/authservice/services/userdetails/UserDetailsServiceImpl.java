@@ -16,11 +16,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserDataResponse user = userClient.getUserDataByEmail(email);
+    public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
+        UserDataResponse user = userClient.getUserDataByUsernameOrEmail(account);
 
         if(user == null) {
-            throw new UsernameNotFoundException("El usuario con correo " + email + " no existe");
+            throw new UsernameNotFoundException("El nombre de usuario o correo " + account + " no existe");
         }
 
         return UserDetailsImpl.build(user);

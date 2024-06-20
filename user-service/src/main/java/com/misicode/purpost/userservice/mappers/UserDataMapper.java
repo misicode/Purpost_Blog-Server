@@ -10,7 +10,7 @@ public class UserDataMapper {
 
     public static UserDataResponse mapToUserDataResponse(User user) {
         return new UserDataResponse(
-                user.getEmail(),
+                user.getUsername(),
                 user.getPassword(),
                 user.getRole().getName().name()
         );

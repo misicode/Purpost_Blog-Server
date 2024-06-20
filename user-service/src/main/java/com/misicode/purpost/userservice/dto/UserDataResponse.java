@@ -1,20 +1,20 @@
 package com.misicode.purpost.userservice.dto;
 
 public class UserDataResponse {
-    private String email;
+    private String username;
 
     private String password;
 
     private String role;
 
-    public UserDataResponse(String email, String password, String role) {
-        this.email = email;
+    public UserDataResponse(String username, String password, String role) {
+        this.username = username;
         this.password = password;
         this.role = role;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {

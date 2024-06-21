@@ -36,10 +36,10 @@ public class PostController {
         );
     }
 
-    @GetMapping("/email/{email}")
-    public ResponseEntity<List<PostResponse>> getPostsByUser(@PathVariable String email) {
+    @GetMapping("/username/{username}")
+    public ResponseEntity<List<PostResponse>> getPostsByUser(@PathVariable String username) {
         return ResponseEntity.ok(
-                postMapper.mapToListPostResponse(postService.getPostsByUser(email))
+                postMapper.mapToListPostResponse(postService.getPostsByUser(username))
         );
     }
 

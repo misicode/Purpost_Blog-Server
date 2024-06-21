@@ -3,7 +3,7 @@ package com.misicode.purpost.postservice.exception.error;
 import org.springframework.http.HttpStatus;
 
 public enum ErrorResponseEnum implements IErrorResponse {
-    USER_NOT_FOUND("USER_NOT_FOUND", HttpStatus.NOT_FOUND, "El usuario con correo {email} no fue encontrado"),
+    USER_NOT_FOUND("USER_NOT_FOUND", HttpStatus.NOT_FOUND, "El nombre de usuario {username} no fue encontrado"),
     POST_NOT_FOUND( "POST_NOT_FOUND", HttpStatus.NOT_FOUND , "La publicación con ID {id} no fue encontrada");
 
     final String key;

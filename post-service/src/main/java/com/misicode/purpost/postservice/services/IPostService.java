@@ -9,7 +9,7 @@ import java.util.List;
 public interface IPostService {
     List<Post> getPosts();
 
-    List<Post> getPostsByUser(String email);
+    List<Post> getPostsByUser(String username);
 
     Post getPostById(String id);
 

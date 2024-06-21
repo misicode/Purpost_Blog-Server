@@ -10,6 +10,6 @@ public interface UserClient {
     @GetMapping("/id/{id}")
     UserResponse getUserById(@PathVariable String id);
 
-    @GetMapping("/email/{email}")
-    UserResponse getUserByEmail(@PathVariable String email);
+    @GetMapping("/username/{username}")
+    UserResponse getUserByUsername(@PathVariable String username);
 }

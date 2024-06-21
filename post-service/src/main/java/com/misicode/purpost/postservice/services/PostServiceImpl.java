@@ -39,19 +39,19 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public List<Post> getPostsByUser(String email) {
+    public List<Post> getPostsByUser(String username) {
         try {
-            UserResponse user = userClient.getUserByEmail(email);
+            UserResponse user = userClient.getUserByUsername(username);
 
             return postRepository.findByIdUserAndIsActiveTrueOrderByCreatedAtDesc(user.getIdUser());
         } catch(Exception e) {
-            throw new ApplicationException(ErrorResponseEnum.USER_NOT_FOUND, Map.of("email", email));
+            throw new ApplicationException(ErrorResponseEnum.USER_NOT_FOUND, Map.of("username", username));
         }
     }
 
     @Override
     public Post createPost(PostCreateRequest postRequest) {
-        UserResponse user = userClient.getUserByEmail(postRequest.getEmail());
+        UserResponse user = userClient.getUserByUsername(postRequest.getEmail());
         ImageResponse image = imageClient.saveImage(postRequest.getImage());
 
         Post post = new Post();

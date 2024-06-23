@@ -92,7 +92,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User updateUser(UserUpdateRequest userRequest) {
-        User user = getUserByEmail(userRequest.getEmail());
+        User user = getUserByUsername(userRequest.getUsername());
 
         user.setNames(userRequest.getNames());
         user.setSurnames(userRequest.getSurnames());

@@ -51,7 +51,7 @@ public class PostServiceImpl implements IPostService {
 
     @Override
     public Post createPost(PostCreateRequest postRequest) {
-        UserResponse user = userClient.getUserByUsername(postRequest.getEmail());
+        UserResponse user = userClient.getUserByUsername(postRequest.getUsername());
         ImageResponse image = imageClient.saveImage(postRequest.getImage());
 
         Post post = new Post();

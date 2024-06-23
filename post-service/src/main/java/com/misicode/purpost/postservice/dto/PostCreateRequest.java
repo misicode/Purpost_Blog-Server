@@ -1,6 +1,5 @@
 package com.misicode.purpost.postservice.dto;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.web.multipart.MultipartFile;
@@ -8,8 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class PostCreateRequest {
     @NotBlank
     @NotNull
-    @Email
-    private String email;
+    private String username;
 
     @NotBlank
     @NotNull
@@ -22,15 +20,15 @@ public class PostCreateRequest {
     @NotNull
     private MultipartFile image;
 
-    public PostCreateRequest(String email, String title, String body, MultipartFile image) {
-        this.email = email;
+    public PostCreateRequest(String username, String title, String body, MultipartFile image) {
+        this.username = username;
         this.title = title;
         this.body = body;
         this.image = image;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
     public String getTitle() {

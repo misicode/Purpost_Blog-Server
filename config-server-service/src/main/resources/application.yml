@@ -8,4 +8,4 @@ spring:
     config:
       server:
         git:
-          uri: file:///${config_server_git_uri}
+          uri: file:///${CONFIG_SERVER_GIT_URI}

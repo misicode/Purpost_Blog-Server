@@ -11,7 +11,7 @@
 
 	<groupId>com.misicode.purpost</groupId>
 	<artifactId>eureka-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>Eureka Microservice</name>
 	<description>Purpost Eureka Microservice</description>
 

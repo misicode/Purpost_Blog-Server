@@ -11,7 +11,7 @@
 
     <groupId>com.misicode.purpost</groupId>
     <artifactId>auth-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>Authorization Microservice</name>
     <description>Purpost Authorization Microservice</description>
 

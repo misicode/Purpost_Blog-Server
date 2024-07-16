@@ -1,0 +1,105 @@
+version: '3.8'
+
+services:
+  config-server:
+    image: purpost-config-server:latest
+    build:
+      context: ./config-server-service
+    environment:
+      CONFIG_SERVER_GIT_URI: ${CONFIG_SERVER_GIT_URI}
+    volumes:
+      - ${CONFIG_SERVER_GIT_PATH}:/config-server
+    ports:
+      - "8888:8888"
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "http://localhost:8888/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  eureka:
+    image: purpost-eureka:latest
+    build:
+      context: ./eureka-service
+    depends_on:
+      config-server:
+        condition: service_healthy
+    ports:
+      - "8761:8761"
+    environment:
+      CONFIG_SERVER: config-server
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "http://localhost:8761/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  gateway:
+    image: purpost-gateway:latest
+    build:
+      context: ./gateway-service
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      CONFIG_SERVER: config-server
+
+  image:
+    image: purpost-image:latest
+    build:
+      context: ./image-service
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+    ports:
+      - "9090:9090"
+    environment:
+      CONFIG_SERVER: config-server
+
+  user:
+    image: purpost-user:latest
+    build:
+      context: ./user-service
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+    ports:
+      - "11090:11090"
+    environment:
+      CONFIG_SERVER: config-server
+
+  post:
+    image: purpost-post:latest
+    build:
+      context: ./post-service
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+    ports:
+      - "10090:10090"
+    environment:
+      CONFIG_SERVER: config-server
+
+  auth:
+    image: purpost-auth:latest
+    build:
+      context: ./auth-service
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+    ports:
+      - "8090:8090"
+    environment:
+      CONFIG_SERVER: config-server

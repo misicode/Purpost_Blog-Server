@@ -27,7 +27,8 @@ services:
     ports:
       - "8761:8761"
     environment:
-      CONFIG_SERVER: config-server
+      CONFIG_SERVER_HOST: config-server
+      EUREKA_HOST: eureka
     healthcheck:
       test: [ "CMD", "wget", "--spider", "http://localhost:8761/actuator/health" ]
       interval: 30s
@@ -41,12 +42,14 @@ services:
     depends_on:
       config-server:
         condition: service_healthy
-      eureka:
-        condition: service_healthy
     ports:
       - "8080:8080"
     environment:
-      CONFIG_SERVER: config-server
+      CONFIG_SERVER_HOST: config-server
+      AUTH_HOST: auth
+      IMAGE_HOST: image
+      POST_HOST: post
+      USER_HOST: user
 
   image:
     image: purpost-image:latest
@@ -60,7 +63,8 @@ services:
     ports:
       - "9090:9090"
     environment:
-      CONFIG_SERVER: config-server
+      CONFIG_SERVER_HOST: config-server
+      EUREKA_HOST: eureka
 
   user:
     image: purpost-user:latest
@@ -74,7 +78,8 @@ services:
     ports:
       - "11090:11090"
     environment:
-      CONFIG_SERVER: config-server
+      CONFIG_SERVER_HOST: config-server
+      EUREKA_HOST: eureka
 
   post:
     image: purpost-post:latest
@@ -88,7 +93,8 @@ services:
     ports:
       - "10090:10090"
     environment:
-      CONFIG_SERVER: config-server
+      CONFIG_SERVER_HOST: config-server
+      EUREKA_HOST: eureka
 
   auth:
     image: purpost-auth:latest
@@ -102,4 +108,5 @@ services:
     ports:
       - "8090:8090"
     environment:
-      CONFIG_SERVER: config-server
+      CONFIG_SERVER_HOST: config-server
+      EUREKA_HOST: eureka

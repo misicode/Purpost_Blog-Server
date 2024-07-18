@@ -2,4 +2,4 @@ spring:
   application:
     name: msvc-post
   config:
-    import: optional:configserver:http://${CONFIG_SERVER:localhost}:8888
+    import: optional:configserver:http://${CONFIG_SERVER_HOST:localhost}:8888

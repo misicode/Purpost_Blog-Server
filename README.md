@@ -26,7 +26,7 @@ Aplicación de microservicios desarrollado con Spring Boot del proyecto Purpost 
 ### Construido con
 
 | Herramienta                                                    | Descripción                                   | Versión                 |
-|----------------------------------------------------------------| --------------------------------------------- | ----------------------- |
+|----------------------------------------------------------------|-----------------------------------------------|-------------------------|
 | [![Java][java-badge]][java-url]                                | Lenguaje de programación utilizado            | 17.0.1                  |
 | [![Spring Boot][springboot-badge]][springboot-url]             | Framework para el desarrollo de aplicaciones  | 3.2.4                   |
 | [![Spring Security][springsecurity-badge]][springsecurity-url] | Framework para la seguridad de acceso         | 6.2.3                   |
@@ -34,6 +34,7 @@ Aplicación de microservicios desarrollado con Spring Boot del proyecto Purpost 
 | [![MongoDB][mongodb-badge]][mongodb-url]                       | Base de datos NoSQL                           | 4.2.1                   |
 | [![Swagger][swagger-badge]][swagger-url]                       | Estándar para la especificación de APIs       | 3.0                     |
 | [![Sonarqube][sonarqube-badge]][sonarqube-url]                 | Plataforma para evaluar código fuente         | 10.5                    |
+| [![Docker][docker-badge]][docker-url]                          | Plataforma para desplegar contenedores        | 27.0.3                  |
 | [![Apache Maven][maven-badge]][maven-url]                      | Herramienta para la gestión de dependencias   | 3.9.2                   |
 | [![IntelliJ IDEA][intellijidea-badge]][intellijidea-url]       | Entorno de desarrollo del proyecto            | 2023.2 Ultimate Edition |
 
@@ -69,6 +70,8 @@ _Desarrollado por_ **Alessandra Mincia**
 [swagger-url]: https://swagger.io/specification/
 [sonarqube-badge]: https://img.shields.io/badge/SonarQube-black?style=for-the-badge&logo=sonarqube&logoColor=4E9BCD
 [sonarqube-url]: https://docs.sonarqube.org/latest/
+[docker-badge]: https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white
+[docker-url]: https://www.docker.com/blog/kickstart-your-spring-boot-application-development/
 [maven-badge]: https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white
 [maven-url]: https://maven.apache.org
 [intellijidea-badge]: https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white

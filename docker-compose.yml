@@ -95,6 +95,8 @@ services:
     environment:
       CONFIG_SERVER_HOST: config-server
       EUREKA_HOST: eureka
+      IMAGE_HOST: image
+      USER_HOST: user
 
   auth:
     image: purpost-auth:latest
@@ -110,3 +112,4 @@ services:
     environment:
       CONFIG_SERVER_HOST: config-server
       EUREKA_HOST: eureka
+      USER_HOST: user

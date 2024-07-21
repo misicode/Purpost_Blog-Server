@@ -21,7 +21,7 @@
 Aplicación de microservicios desarrollado con Spring Boot del proyecto Purpost Blog para la gestión de publicaciones y autenticación de usuarios.
 
 ### Arquitectura
-<img src="https://github.com/misicode/Purpost_Blog-Server/assets/88341114/493107e7-b804-49fe-8216-cd606b3821b3" width=800 />
+<img src="https://github.com/user-attachments/assets/964f8c7f-4a7d-4aff-a3ea-2b546dd1f417" width=800 />
 
 ### Construido con
 

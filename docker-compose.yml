@@ -7,7 +7,7 @@ services:
       context: ./config-server-service
     environment:
       CONFIG_SERVER_GIT_URI: ${CONFIG_SERVER_GIT_URI}
-    volumes:
+    volumes: # Only if your ConfigServer repository is local
       - ${CONFIG_SERVER_GIT_PATH}:/config-server
     ports:
       - "8888:8888"
@@ -45,6 +45,7 @@ services:
     ports:
       - "8080:8080"
     environment:
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
       CONFIG_SERVER_HOST: config-server
       AUTH_HOST: auth
       IMAGE_HOST: image
@@ -63,6 +64,10 @@ services:
     ports:
       - "9090:9090"
     environment:
+      IMAGE_MONGODB_URI: ${IMAGE_MONGODB_URI}
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET}
       CONFIG_SERVER_HOST: config-server
       EUREKA_HOST: eureka
 
@@ -78,6 +83,7 @@ services:
     ports:
       - "11090:11090"
     environment:
+      USER_MONGODB_URI: ${USER_MONGODB_URI}
       CONFIG_SERVER_HOST: config-server
       EUREKA_HOST: eureka
 
@@ -93,6 +99,7 @@ services:
     ports:
       - "10090:10090"
     environment:
+      POST_MONGODB_URI: ${POST_MONGODB_URI}
       CONFIG_SERVER_HOST: config-server
       EUREKA_HOST: eureka
       IMAGE_HOST: image
@@ -111,5 +118,6 @@ services:
       - "8090:8090"
     environment:
       CONFIG_SERVER_HOST: config-server
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
       EUREKA_HOST: eureka
       USER_HOST: user

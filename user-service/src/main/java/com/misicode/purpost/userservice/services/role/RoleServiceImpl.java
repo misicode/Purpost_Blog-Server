@@ -4,6 +4,7 @@ import com.misicode.purpost.userservice.domain.Role;
 import com.misicode.purpost.userservice.domain.RoleEnum;
 import com.misicode.purpost.userservice.repositories.RoleRepository;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 @Service
 public class RoleServiceImpl implements IRoleService {
@@ -14,13 +15,8 @@ public class RoleServiceImpl implements IRoleService {
     }
 
     @Override
-    public Role getRoleByName(RoleEnum name) {
-        Role role = roleRepository.findByName(name).orElse(null);
-
-        if(role == null) {
-            role = roleRepository.save(new Role(name));
-        }
-
-        return role;
+    public Mono<Role> getRoleByName(RoleEnum name) {
+        return roleRepository.findByName(name)
+                .switchIfEmpty(roleRepository.save(new Role(name)));
     }
 }

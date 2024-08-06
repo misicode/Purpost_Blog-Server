@@ -17,6 +17,10 @@ public class Role {
         this.name = name;
     }
 
+    public String getIdRole() {
+        return idRole;
+    }
+
     public RoleEnum getName() {
         return name;
     }

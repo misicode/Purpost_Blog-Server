@@ -3,7 +3,6 @@ package com.misicode.purpost.userservice.domain;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -25,8 +24,7 @@ public class User {
 
     private Boolean isActive = true;
 
-    @DBRef
-    private Role role;
+    private String idRole;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -90,11 +88,11 @@ public class User {
         this.surnames = surnames;
     }
 
-    public Role getRole() {
-        return role;
+    public String getIdRole() {
+        return idRole;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setIdRole(String idRole) {
+        this.idRole = idRole;
     }
 }

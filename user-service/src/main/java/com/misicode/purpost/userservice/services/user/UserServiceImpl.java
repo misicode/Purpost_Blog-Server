@@ -11,6 +11,7 @@ import com.misicode.purpost.userservice.services.role.IRoleService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
@@ -27,76 +28,85 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User getUserById(String id) {
+    public Mono<User> getUserById(String id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new ApplicationException(
+                .switchIfEmpty(Mono.error(new ApplicationException(
                         ErrorResponseEnum.USER_NOT_FOUND,
                         Map.of("id", "usuario con ID", "value", id)
-                ));
+                )));
     }
 
     @Override
-    public User getUserByEmail(String email) {
+    public Mono<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new ApplicationException(
+                .switchIfEmpty(Mono.error(new ApplicationException(
                         ErrorResponseEnum.USER_NOT_FOUND,
                         Map.of("id", "usuario con correo", "value", email)
-                ));
+                )));
     }
 
     @Override
-    public User getUserByUsername(String username) {
+    public Mono<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username)
-                .orElseThrow(() -> new ApplicationException(
+                .switchIfEmpty(Mono.error(new ApplicationException(
                         ErrorResponseEnum.USER_NOT_FOUND,
                         Map.of("id", "usuario", "value", username)
-                ));
+                )));
     }
 
     @Override
-    public User getUserByUsernameOrEmail(String account) {
+    public Mono<User> getUserByUsernameOrEmail(String account) {
         return userRepository.findByUsernameOrEmail(account, account)
-                .orElseThrow(() -> new ApplicationException(
+                .switchIfEmpty(Mono.error(new ApplicationException(
                         ErrorResponseEnum.USER_NOT_FOUND,
                         Map.of("id", "nombre de usuario o correo", "value", account)
+                )));
+    }
+
+    @Override
+    public Mono<User> createUser(UserCreateRequest userRequest) {
+        return Mono.zip(
+                userRepository.existsByEmail(userRequest.getEmail()),
+                userRepository.existsByUsername(userRequest.getUsername())
+        ).flatMap(exists -> {
+            if (exists.getT1()) {
+                return Mono.error(new ApplicationException(
+                        ErrorResponseEnum.USER_EXISTS,
+                        Map.of("id", "correo", "value", userRequest.getEmail())
                 ));
+            }
+
+            if (exists.getT2()) {
+                return Mono.error(new ApplicationException(
+                        ErrorResponseEnum.USER_EXISTS,
+                        Map.of("id", "usuario", "value", userRequest.getUsername())
+                ));
+            }
+
+            return roleService.getRoleByName(RoleEnum.ROLE_USER)
+                    .flatMap(role -> {
+                        User user = new User();
+
+                        user.setNames(userRequest.getNames());
+                        user.setSurnames(userRequest.getSurnames());
+                        user.setUsername(userRequest.getUsername());
+                        user.setEmail(userRequest.getEmail());
+                        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+                        user.setIdRole(role.getIdRole());
+
+                        return userRepository.save(user);
+                    });
+        });
     }
 
     @Override
-    public User createUser(UserCreateRequest userRequest) {
-        if(userRepository.existsByEmail(userRequest.getEmail())) {
-            throw new ApplicationException(
-                    ErrorResponseEnum.USER_EXISTS,
-                    Map.of("id", "correo", "value", userRequest.getEmail())
-            );
-        }
+    public Mono<User> updateUser(UserUpdateRequest userRequest) {
+        return getUserByUsername(userRequest.getUsername())
+                .flatMap(user -> {
+                    user.setNames(userRequest.getNames());
+                    user.setSurnames(userRequest.getSurnames());
 
-        if(userRepository.existsByUsername(userRequest.getUsername())) {
-            throw new ApplicationException(
-                    ErrorResponseEnum.USER_EXISTS,
-                    Map.of("id", "usuario", "value", userRequest.getUsername())
-            );
-        }
-
-        User user = new User();
-
-        user.setNames(userRequest.getNames());
-        user.setSurnames(userRequest.getSurnames());
-        user.setUsername(userRequest.getUsername());
-        user.setEmail(userRequest.getEmail());
-        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-        user.setRole(roleService.getRoleByName(RoleEnum.ROLE_USER));
-
-        return userRepository.save(user);
-    }
-
-    @Override
-    public User updateUser(UserUpdateRequest userRequest) {
-        User user = getUserByUsername(userRequest.getUsername());
-
-        user.setNames(userRequest.getNames());
-        user.setSurnames(userRequest.getSurnames());
-
-        return userRepository.save(user);
+                    return userRepository.save(user);
+                });
     }
 }

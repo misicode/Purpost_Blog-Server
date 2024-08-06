@@ -11,15 +11,15 @@ public class UserResponse {
 
     private String surnames;
 
-    private String role;
+    private String idRole;
 
-    public UserResponse(String idUser, String username, String email, String names, String surnames, String role) {
+    public UserResponse(String idUser, String username, String email, String names, String surnames, String idRole) {
         this.idUser = idUser;
         this.username = username;
         this.email = email;
         this.names = names;
         this.surnames = surnames;
-        this.role = role;
+        this.idRole = idRole;
     }
 
     public String getIdUser() {
@@ -42,7 +42,7 @@ public class UserResponse {
         return surnames;
     }
 
-    public String getRole() {
-        return role;
+    public String getIdRole() {
+        return idRole;
     }
 }

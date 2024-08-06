@@ -12,7 +12,7 @@ public class UserDataMapper {
         return new UserDataResponse(
                 user.getUsername(),
                 user.getPassword(),
-                user.getRole().getName().name()
+                user.getIdRole()
         );
     }
 }

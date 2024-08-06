@@ -5,12 +5,12 @@ public class UserDataResponse {
 
     private String password;
 
-    private String role;
+    private String idRole;
 
-    public UserDataResponse(String username, String password, String role) {
+    public UserDataResponse(String username, String password, String idRole) {
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.idRole = idRole;
     }
 
     public String getUsername() {
@@ -21,7 +21,7 @@ public class UserDataResponse {
         return password;
     }
 
-    public String getRole() {
-        return role;
+    public String getIdRole() {
+        return idRole;
     }
 }

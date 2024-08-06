@@ -3,9 +3,9 @@ package com.misicode.purpost.userservice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
-@EnableMongoRepositories(basePackages = "com.misicode.purpost.userservice.repositories")
+@EnableReactiveMongoRepositories(basePackages = "com.misicode.purpost.userservice.repositories")
 @EnableDiscoveryClient
 @SpringBootApplication
 public class UserServiceApplication {

@@ -3,17 +3,18 @@ package com.misicode.purpost.userservice.services.user;
 import com.misicode.purpost.userservice.domain.User;
 import com.misicode.purpost.userservice.dto.UserCreateRequest;
 import com.misicode.purpost.userservice.dto.UserUpdateRequest;
+import reactor.core.publisher.Mono;
 
 public interface IUserService {
-    User getUserById(String id);
+    Mono<User> getUserById(String id);
 
-    User getUserByEmail(String email);
+    Mono<User> getUserByEmail(String email);
 
-    User getUserByUsername(String username);
+    Mono<User> getUserByUsername(String username);
 
-    User getUserByUsernameOrEmail(String account);
+    Mono<User> getUserByUsernameOrEmail(String account);
 
-    User createUser(UserCreateRequest userRequest);
+    Mono<User> createUser(UserCreateRequest userRequest);
 
-    User updateUser(UserUpdateRequest userRequest);
+    Mono<User> updateUser(UserUpdateRequest userRequest);
 }

@@ -5,9 +5,9 @@ import com.misicode.purpost.userservice.exception.error.ConstraintsViolationErro
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -27,14 +27,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ApplicationException.class)
     public Mono<Map<String, Object>> handle(ApplicationException ex,
                                             ServerWebExchange exchange) {
+        exchange.getResponse().setStatusCode(ex.getErrorResponse().getHttpStatus());
         return ofType(exchange, ex.getErrorResponse().getHttpStatus(), ex);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public final Mono<Map<String, Object>> handle(MethodArgumentNotValidException ex,
-                                                            ServerWebExchange exchange) {
-        List<ConstraintsViolationError> validationErrors = ex.getBindingResult()
-                .getFieldErrors()
+    @ExceptionHandler(WebExchangeBindException.class)
+    public final Mono<Map<String, Object>> handle(WebExchangeBindException ex,
+                                                  ServerWebExchange exchange) {
+        List<ConstraintsViolationError> validationErrors = ex.getFieldErrors()
                 .stream()
                 .map(error -> new ConstraintsViolationError(error.getField(), error.getDefaultMessage()))
                 .toList();
@@ -42,6 +42,7 @@ public class GlobalExceptionHandler {
         String localizedMessage = messageSource.getMessage(ex.getClass().getName().concat(".message"),
                 new Object[]{}, LocaleContextHolder.getLocale());
 
+        exchange.getResponse().setStatusCode(HttpStatus.BAD_REQUEST);
         return ofType(exchange, HttpStatus.BAD_REQUEST, localizedMessage, "INVALID_ARGUMENTS", validationErrors);
     }
 
@@ -57,7 +58,7 @@ public class GlobalExceptionHandler {
                                              String message,
                                              String key,
                                              List<?> validationErrors) {
-        Map<String, Object> attributes = new HashMap<>();//getErrorAttributes(request, ErrorAttributeOptions.defaults());
+        Map<String, Object> attributes = new HashMap<>();
 
         attributes.put(HttpConstants.STATUS, status.value());
         attributes.put(HttpConstants.ERROR, status);

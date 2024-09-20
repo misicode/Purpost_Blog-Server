@@ -1,7 +1,8 @@
-package com.misicode.purpost.imageservice.domain.exceptions;
+package com.misicode.purpost.imageservice.infrastructure.exceptions;
 
-import com.misicode.purpost.imageservice.domain.exceptions.constants.HttpConstants;
-import com.misicode.purpost.imageservice.domain.exceptions.error.ConstraintsViolationError;
+import com.misicode.purpost.imageservice.application.exceptions.ApplicationException;
+import com.misicode.purpost.imageservice.infrastructure.exceptions.utils.HttpConstants;
+import com.misicode.purpost.imageservice.infrastructure.exceptions.utils.ConstraintsViolationError;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.context.MessageSource;

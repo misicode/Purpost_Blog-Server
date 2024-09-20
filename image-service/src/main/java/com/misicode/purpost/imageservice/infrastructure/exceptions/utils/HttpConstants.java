@@ -1,4 +1,4 @@
-package com.misicode.purpost.imageservice.domain.exceptions.constants;
+package com.misicode.purpost.imageservice.infrastructure.exceptions.utils;
 
 public final class HttpConstants {
     public static final String STATUS = "status";

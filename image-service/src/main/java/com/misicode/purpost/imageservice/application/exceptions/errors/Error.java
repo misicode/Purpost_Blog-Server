@@ -1,8 +1,8 @@
-package com.misicode.purpost.imageservice.domain.exceptions.error;
+package com.misicode.purpost.imageservice.application.exceptions.errors;
 
 import org.springframework.http.HttpStatus;
 
-public interface IErrorResponse {
+public interface Error {
     String getKey();
     String getMessage();
     HttpStatus getHttpStatus();

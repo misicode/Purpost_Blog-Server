@@ -3,8 +3,8 @@ package com.misicode.purpost.imageservice.application.services;
 import com.misicode.purpost.imageservice.application.ports.in.CloudinaryServicePort;
 import com.misicode.purpost.imageservice.application.ports.in.ImageServicePort;
 import com.misicode.purpost.imageservice.application.ports.out.ImagePersistencePort;
-import com.misicode.purpost.imageservice.domain.exceptions.ApplicationException;
-import com.misicode.purpost.imageservice.domain.exceptions.error.ErrorResponseEnum;
+import com.misicode.purpost.imageservice.application.exceptions.ApplicationException;
+import com.misicode.purpost.imageservice.application.exceptions.errors.ErrorCatalog;
 import com.misicode.purpost.imageservice.domain.model.Image;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class ImageService implements ImageServicePort {
         return imagePersistencePort
                 .findById(id)
                 .orElseThrow(
-                        () -> new ApplicationException(ErrorResponseEnum.IMAGE_NOT_FOUND, Map.of("id", id))
+                        () -> new ApplicationException(ErrorCatalog.IMAGE_NOT_FOUND, Map.of("id", id))
                 );
     }
 

@@ -3,8 +3,8 @@ package com.misicode.purpost.imageservice.infrastructure.adapters.in.rest;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.Transformation;
 import com.misicode.purpost.imageservice.application.ports.in.CloudinaryServicePort;
-import com.misicode.purpost.imageservice.domain.exceptions.ApplicationException;
-import com.misicode.purpost.imageservice.domain.exceptions.error.ErrorResponseEnum;
+import com.misicode.purpost.imageservice.application.exceptions.ApplicationException;
+import com.misicode.purpost.imageservice.application.exceptions.errors.ErrorCatalog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ public class CloudinaryAdapter implements CloudinaryServicePort {
             return cloudinary.url().secure(true).generate(publicId);
         } catch(IOException e) {
             LOGGER.error("Ocurrió un problema al subir el archivo, ERROR: {}", e.getMessage());
-            throw new ApplicationException(ErrorResponseEnum.UPLOAD_FILE_FAILED, Map.of("error", e.getMessage()));
+            throw new ApplicationException(ErrorCatalog.UPLOAD_FILE_FAILED, Map.of("error", e.getMessage()));
         }
     }
 }

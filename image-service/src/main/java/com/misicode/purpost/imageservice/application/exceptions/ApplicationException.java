@@ -1,6 +1,6 @@
-package com.misicode.purpost.imageservice.domain.exceptions;
+package com.misicode.purpost.imageservice.application.exceptions;
 
-import com.misicode.purpost.imageservice.domain.exceptions.error.IErrorResponse;
+import com.misicode.purpost.imageservice.application.exceptions.errors.Error;
 import org.apache.commons.text.StringSubstitutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,30 +18,30 @@ public class ApplicationException extends RuntimeException implements Serializab
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationException.class);
 
-    private final transient IErrorResponse errorResponse;
+    private final transient Error errorResponse;
     private final transient Map<String, Object> messageArguments;
 
-    public IErrorResponse getErrorResponse() {
+    public Error getErrorResponse() {
         return errorResponse;
     }
 
-    public ApplicationException(IErrorResponse errorResponse) {
+    public ApplicationException(Error errorResponse) {
         this.errorResponse = errorResponse;
         this.messageArguments = Map.of();
     }
 
-    public ApplicationException(IErrorResponse errorResponse, Map<String, Object> messageArguments) {
+    public ApplicationException(Error errorResponse, Map<String, Object> messageArguments) {
         this.errorResponse = errorResponse;
         this.messageArguments = messageArguments;
     }
 
-    public ApplicationException(IErrorResponse errorResponse, Throwable cause) {
+    public ApplicationException(Error errorResponse, Throwable cause) {
         super(cause);
         this.errorResponse = errorResponse;
         this.messageArguments = Map.of();
     }
 
-    public ApplicationException(IErrorResponse errorResponse, Map<String, Object> messageArguments, Throwable cause) {
+    public ApplicationException(Error errorResponse, Map<String, Object> messageArguments, Throwable cause) {
         super(cause);
         this.errorResponse = errorResponse;
         this.messageArguments = messageArguments;

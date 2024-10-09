@@ -1,4 +1,4 @@
-package com.misicode.purpost.userservice.domain.exceptions.error;
+package com.misicode.purpost.userservice.infrastructure.exceptions.utils;
 
 public class ConstraintsViolationError {
     private String property;

@@ -2,8 +2,8 @@ package com.misicode.purpost.userservice.application.services;
 
 import com.misicode.purpost.userservice.application.ports.in.UserServicePort;
 import com.misicode.purpost.userservice.application.ports.out.UserPersistencePort;
-import com.misicode.purpost.userservice.domain.exceptions.ApplicationException;
-import com.misicode.purpost.userservice.domain.exceptions.error.ErrorResponseEnum;
+import com.misicode.purpost.userservice.application.exceptions.ApplicationException;
+import com.misicode.purpost.userservice.application.exceptions.errors.ErrorCatalog;
 import com.misicode.purpost.userservice.domain.model.RoleEnum;
 import com.misicode.purpost.userservice.domain.model.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,7 +30,7 @@ public class UserService implements UserServicePort {
                 .findById(id)
                 .switchIfEmpty(Mono.error(
                         new ApplicationException(
-                                ErrorResponseEnum.USER_NOT_FOUND,
+                                ErrorCatalog.USER_NOT_FOUND,
                                 Map.of("id", "usuario con ID", "value", id)
                         )
                 ));
@@ -42,7 +42,7 @@ public class UserService implements UserServicePort {
                 .findByUsername(username)
                 .switchIfEmpty(Mono.error(
                         new ApplicationException(
-                                ErrorResponseEnum.USER_NOT_FOUND,
+                                ErrorCatalog.USER_NOT_FOUND,
                                 Map.of("id", "usuario", "value", username)
                         )
                 ));
@@ -54,7 +54,7 @@ public class UserService implements UserServicePort {
                 .findByUsernameOrEmail(account, account)
                 .switchIfEmpty(Mono.error(
                         new ApplicationException(
-                                ErrorResponseEnum.USER_NOT_FOUND,
+                                ErrorCatalog.USER_NOT_FOUND,
                                 Map.of("id", "nombre de usuario o correo", "value", account)
                         )
                 ));
@@ -68,14 +68,14 @@ public class UserService implements UserServicePort {
         ).flatMap(exists -> {
             if (exists.getT1()) {
                 return Mono.error(new ApplicationException(
-                        ErrorResponseEnum.USER_EXISTS,
+                        ErrorCatalog.USER_EXISTS,
                         Map.of("id", "correo", "value", user.getEmail())
                 ));
             }
 
             if (exists.getT2()) {
                 return Mono.error(new ApplicationException(
-                        ErrorResponseEnum.USER_EXISTS,
+                        ErrorCatalog.USER_EXISTS,
                         Map.of("id", "usuario", "value", user.getUsername())
                 ));
             }
@@ -83,6 +83,7 @@ public class UserService implements UserServicePort {
             return roleService.findByName(RoleEnum.ROLE_USER)
                     .flatMap(role -> {
                         user.setPassword(passwordEncoder.encode(user.getPassword()));
+                        user.setActive(true);
                         user.setIdRole(role.getIdRole());
 
                         return userPersistencePort.save(user);

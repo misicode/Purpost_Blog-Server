@@ -1,7 +1,5 @@
 package com.misicode.purpost.userservice.domain.model;
 
-import java.time.LocalDateTime;
-
 public class User {
     private String idUser;
     private String username;
@@ -9,18 +7,17 @@ public class User {
     private String password;
     private String names;
     private String surnames;
-    private Boolean isActive = true;
+    private Boolean isActive;
     private String idRole;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
-    public User(String idUser, String username, String email, String password, String names, String surnames, String idRole) {
+    public User(String idUser, String username, String email, String password, String names, String surnames, Boolean isActive, String idRole) {
         this.idUser = idUser;
         this.username = username;
-        this.password = password;
         this.email = email;
+        this.password = password;
         this.names = names;
         this.surnames = surnames;
+        this.isActive = isActive;
         this.idRole = idRole;
     }
 
@@ -66,6 +63,14 @@ public class User {
 
     public void setSurnames(String surnames) {
         this.surnames = surnames;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 
     public String getIdRole() {

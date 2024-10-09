@@ -18,6 +18,7 @@ public class UserRestMapper {
                 user.getPassword(),
                 user.getNames(),
                 user.getSurnames(),
+                null,
                 null
         );
     }
@@ -30,6 +31,7 @@ public class UserRestMapper {
                 null,
                 user.getNames(),
                 user.getSurnames(),
+                null,
                 null
         );
     }

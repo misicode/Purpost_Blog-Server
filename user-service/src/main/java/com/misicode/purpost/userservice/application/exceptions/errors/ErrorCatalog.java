@@ -1,8 +1,8 @@
-package com.misicode.purpost.userservice.domain.exceptions.error;
+package com.misicode.purpost.userservice.application.exceptions.errors;
 
 import org.springframework.http.HttpStatus;
 
-public enum ErrorResponseEnum implements IErrorResponse {
+public enum ErrorCatalog implements Error {
     USER_EXISTS("USER_EXISTS", HttpStatus.CONFLICT, "El {id} {value} ya se encuentra registrado"),
     USER_NOT_FOUND("USER_NOT_FOUND", HttpStatus.NOT_FOUND, "El {id} {value} no fue encontrado");
 
@@ -10,7 +10,7 @@ public enum ErrorResponseEnum implements IErrorResponse {
     final HttpStatus httpStatus;
     final String message;
 
-    ErrorResponseEnum(String key, HttpStatus httpStatus, String message) {
+    ErrorCatalog(String key, HttpStatus httpStatus, String message) {
         this.message = message;
         this.key = key;
         this.httpStatus = httpStatus;

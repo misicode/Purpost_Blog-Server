@@ -22,7 +22,7 @@ public class UserEntity {
 
     private String surnames;
 
-    private final Boolean isActive = true;
+    private Boolean isActive;
 
     private String idRole;
 
@@ -32,13 +32,14 @@ public class UserEntity {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public UserEntity(String idUser, String username, String email, String password, String names, String surnames, String idRole) {
+    public UserEntity(String idUser, String username, String email, String password, String names, String surnames, Boolean isActive, String idRole) {
         this.idUser = idUser;
         this.username = username;
         this.email = email;
         this.password = password;
         this.names = names;
         this.surnames = surnames;
+        this.isActive = isActive;
         this.idRole = idRole;
     }
 
@@ -84,6 +85,14 @@ public class UserEntity {
 
     public void setSurnames(String surnames) {
         this.surnames = surnames;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 
     public String getIdRole() {

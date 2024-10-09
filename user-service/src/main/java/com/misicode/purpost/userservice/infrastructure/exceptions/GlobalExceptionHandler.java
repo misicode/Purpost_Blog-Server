@@ -1,7 +1,8 @@
-package com.misicode.purpost.userservice.domain.exceptions;
+package com.misicode.purpost.userservice.infrastructure.exceptions;
 
-import com.misicode.purpost.userservice.domain.exceptions.constants.HttpConstants;
-import com.misicode.purpost.userservice.domain.exceptions.error.ConstraintsViolationError;
+import com.misicode.purpost.userservice.application.exceptions.ApplicationException;
+import com.misicode.purpost.userservice.infrastructure.exceptions.utils.HttpConstants;
+import com.misicode.purpost.userservice.infrastructure.exceptions.utils.ConstraintsViolationError;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -27,8 +29,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ApplicationException.class)
     public Mono<Map<String, Object>> handle(ApplicationException ex,
                                             ServerWebExchange exchange) {
-        exchange.getResponse().setStatusCode(ex.getErrorResponse().getHttpStatus());
-        return ofType(exchange, ex.getErrorResponse().getHttpStatus(), ex);
+        exchange.getResponse().setStatusCode(ex.getError().getHttpStatus());
+        return ofType(exchange, ex.getError().getHttpStatus(), ex);
     }
 
     @ExceptionHandler(WebExchangeBindException.class)
@@ -50,7 +52,7 @@ public class GlobalExceptionHandler {
                                                          HttpStatus status,
                                                          ApplicationException ex) {
         return ofType(exchange, status, ex.getLocalizedMessage(LocaleContextHolder.getLocale(), messageSource),
-                ex.getErrorResponse().getKey(), Collections.emptyList());
+                ex.getError().getKey(), Collections.emptyList());
     }
 
     private Mono<Map<String, Object>> ofType(ServerWebExchange exchange,
@@ -60,6 +62,7 @@ public class GlobalExceptionHandler {
                                              List<?> validationErrors) {
         Map<String, Object> attributes = new HashMap<>();
 
+        attributes.put(HttpConstants.TIMESTAMP, LocalDateTime.now());
         attributes.put(HttpConstants.STATUS, status.value());
         attributes.put(HttpConstants.ERROR, status);
         attributes.put(HttpConstants.ERROR_KEY, key);

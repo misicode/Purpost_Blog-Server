@@ -36,30 +36,30 @@ public class GatewayConfig {
                         .uri("http://" + authServiceHost + ":8090"))
 
                 // Image Service Routes
-                .route("image-service", r -> r
-                        .path("/api/v1/image/**")
-                        .uri("http://" + imageServiceHost + ":9090"))
                 .route("image-private-service", r -> r
                         .path("/api/v1/image/private/**")
                         .filters(f -> f.filter(jwtAuthFilter.apply(new JwtAuthenticationFilter.Config())))
                         .uri("http://" + imageServiceHost + ":9090"))
+                .route("image-service", r -> r
+                        .path("/api/v1/image/**")
+                        .uri("http://" + imageServiceHost + ":9090"))
 
                 // Post Service Routes
-                .route("post-service", r -> r
-                        .path("/api/v1/post/**")
-                        .uri("http://" + postServiceHost + ":10090"))
                 .route("post-private-service", r -> r
                         .path("/api/v1/post/private/**")
                         .filters(f -> f.filter(jwtAuthFilter.apply(new JwtAuthenticationFilter.Config())))
                         .uri("http://" + postServiceHost + ":10090"))
+                .route("post-service", r -> r
+                        .path("/api/v1/post/**")
+                        .uri("http://" + postServiceHost + ":10090"))
 
                 // User Service Routes
-                .route("user-service", r -> r
-                        .path("/api/v1/user/**")
-                        .uri("http://" + userServiceHost + ":11090"))
                 .route("user-private-service", r -> r
                         .path("/api/v1/user/private/**")
                         .filters(f -> f.filter(jwtAuthFilter.apply(new JwtAuthenticationFilter.Config())))
+                        .uri("http://" + userServiceHost + ":11090"))
+                .route("user-service", r -> r
+                        .path("/api/v1/user/**")
                         .uri("http://" + userServiceHost + ":11090"))
 
                 .build();

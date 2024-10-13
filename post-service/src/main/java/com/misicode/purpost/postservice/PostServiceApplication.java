@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @EnableMongoAuditing
-@EnableMongoRepositories(basePackages = "com.misicode.purpost.postservice.repositories")
+@EnableMongoRepositories(basePackages = "com.misicode.purpost.postservice.infrastructure.adapters.out.persistence.repositories")
 @EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication

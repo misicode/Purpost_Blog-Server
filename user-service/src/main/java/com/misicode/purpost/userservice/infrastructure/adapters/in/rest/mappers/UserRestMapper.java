@@ -19,6 +19,8 @@ public class UserRestMapper {
                 user.getNames(),
                 user.getSurnames(),
                 null,
+                null,
+                null,
                 null
         );
     }
@@ -31,6 +33,8 @@ public class UserRestMapper {
                 null,
                 user.getNames(),
                 user.getSurnames(),
+                null,
+                null,
                 null,
                 null
         );

@@ -32,7 +32,7 @@ public class UserEntity {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public UserEntity(String idUser, String username, String email, String password, String names, String surnames, Boolean isActive, String idRole) {
+    public UserEntity(String idUser, String username, String email, String password, String names, String surnames, Boolean isActive, String idRole, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.idUser = idUser;
         this.username = username;
         this.email = email;
@@ -41,6 +41,8 @@ public class UserEntity {
         this.surnames = surnames;
         this.isActive = isActive;
         this.idRole = idRole;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public String getIdUser() {
@@ -101,5 +103,21 @@ public class UserEntity {
 
     public void setIdRole(String idRole) {
         this.idRole = idRole;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

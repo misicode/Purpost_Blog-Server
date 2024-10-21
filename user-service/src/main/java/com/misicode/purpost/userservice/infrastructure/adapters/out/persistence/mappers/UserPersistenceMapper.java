@@ -17,7 +17,9 @@ public class UserPersistenceMapper {
                 user.getNames(),
                 user.getSurnames(),
                 user.getActive(),
-                user.getIdRole()
+                user.getIdRole(),
+                user.getCreatedAt(),
+                user.getUpdatedAt()
         );
     }
 
@@ -30,7 +32,9 @@ public class UserPersistenceMapper {
                 userEntity.getNames(),
                 userEntity.getSurnames(),
                 userEntity.getActive(),
-                userEntity.getIdRole()
+                userEntity.getIdRole(),
+                userEntity.getCreatedAt(),
+                userEntity.getUpdatedAt()
         );
     }
 }

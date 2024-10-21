@@ -2,15 +2,10 @@ package com.misicode.purpost.userservice.infrastructure.adapters.in.rest.dtos.re
 
 public class UserResponse {
     private String idUser;
-
     private String username;
-
     private String email;
-
     private String names;
-
     private String surnames;
-
     private String idRole;
 
     public UserResponse(String idUser, String username, String email, String names, String surnames, String idRole) {

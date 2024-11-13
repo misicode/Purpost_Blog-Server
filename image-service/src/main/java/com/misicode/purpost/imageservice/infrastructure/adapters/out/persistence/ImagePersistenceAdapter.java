@@ -5,8 +5,7 @@ import com.misicode.purpost.imageservice.domain.model.Image;
 import com.misicode.purpost.imageservice.infrastructure.adapters.out.persistence.mappers.ImagePersistenceMapper;
 import com.misicode.purpost.imageservice.infrastructure.adapters.out.persistence.repositories.ImageRepository;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
+import reactor.core.publisher.Mono;
 
 @Component
 public class ImagePersistenceAdapter implements ImagePersistencePort {
@@ -17,14 +16,16 @@ public class ImagePersistenceAdapter implements ImagePersistencePort {
     }
 
     @Override
-    public Optional<Image> findById(String id) {
-        return imageRepository.findById(id).map(ImagePersistenceMapper::toImage);
+    public Mono<Image> findById(String id) {
+        return imageRepository
+                .findById(id)
+                .map(ImagePersistenceMapper::toImage);
     }
 
     @Override
-    public Image save(Image image) {
-        return ImagePersistenceMapper.toImage(
-                imageRepository.save(ImagePersistenceMapper.toImageEntity(image))
-        );
+    public Mono<Image> save(Image image) {
+        return imageRepository
+                .save(ImagePersistenceMapper.toImageEntity(image))
+                .map(ImagePersistenceMapper::toImage);
     }
 }

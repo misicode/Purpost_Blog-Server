@@ -1,7 +1,8 @@
 package com.misicode.purpost.imageservice.application.ports.in;
 
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.codec.multipart.FilePart;
+import reactor.core.publisher.Mono;
 
 public interface CloudinaryServicePort {
-    String uploadFile(MultipartFile file, String folderName);
+    Mono<String> uploadFile(FilePart file, String folderName);
 }

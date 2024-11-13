@@ -7,6 +7,7 @@ import com.misicode.purpost.imageservice.application.exceptions.ApplicationExcep
 import com.misicode.purpost.imageservice.application.exceptions.errors.ErrorCatalog;
 import com.misicode.purpost.imageservice.domain.model.Image;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -24,28 +25,39 @@ public class ImageService implements ImageServicePort {
     }
 
     @Override
-    public Image findById(String id) {
+    public Mono<Image> findById(String id) {
         return imagePersistencePort
                 .findById(id)
-                .orElseThrow(
-                        () -> new ApplicationException(ErrorCatalog.IMAGE_NOT_FOUND, Map.of("id", id))
-                );
+                .switchIfEmpty(Mono.error(
+                        new ApplicationException(
+                                ErrorCatalog.IMAGE_NOT_FOUND,
+                                Map.of("id", id)
+                        )
+                ));
     }
 
     @Override
-    public Image save(Image image) {
+    public Mono<Image> save(Image image) {
         image.setName(UUID.randomUUID().toString().substring(0, 10) + "_" + LocalTime.now().format(DateTimeFormatter.ofPattern("HHmmss")));
-        image.setUrl(cloudinaryServicePort.uploadFile(image.getImage(), "Purpost/posts"));
 
-        return imagePersistencePort.save(image);
+        return cloudinaryServicePort
+                .uploadFile(image.getImage(), "Purpost/posts")
+                .flatMap(url -> {
+                    image.setUrl(url);
+
+                    return imagePersistencePort.save(image);
+                });
     }
 
     @Override
-    public Image update(Image image) {
-        Image newImage = findById(image.getIdImage());
+    public Mono<Image> update(Image image) {
+        return findById(image.getIdImage())
+                .flatMap(newImage -> cloudinaryServicePort
+                        .uploadFile(image.getImage(), "Purpost/posts")
+                        .flatMap(url -> {
+                            newImage.setUrl(url);
 
-        newImage.setUrl(cloudinaryServicePort.uploadFile(image.getImage(), "Purpost/posts"));
-
-        return imagePersistencePort.save(newImage);
+                            return imagePersistencePort.save(newImage);
+                        }));
     }
 }

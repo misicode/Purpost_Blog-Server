@@ -1,11 +1,10 @@
 package com.misicode.purpost.imageservice.application.ports.out;
 
 import com.misicode.purpost.imageservice.domain.model.Image;
-
-import java.util.Optional;
+import reactor.core.publisher.Mono;
 
 public interface ImagePersistencePort {
-    Optional<Image> findById(String id);
+    Mono<Image> findById(String id);
 
-    Image save(Image image);
+    Mono<Image> save(Image image);
 }

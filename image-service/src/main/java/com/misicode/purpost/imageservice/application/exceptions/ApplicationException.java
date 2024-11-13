@@ -18,51 +18,51 @@ public class ApplicationException extends RuntimeException implements Serializab
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationException.class);
 
-    private final transient Error errorResponse;
+    private final transient Error error;
     private final transient Map<String, Object> messageArguments;
 
-    public Error getErrorResponse() {
-        return errorResponse;
+    public Error getError() {
+        return error;
     }
 
-    public ApplicationException(Error errorResponse) {
-        this.errorResponse = errorResponse;
+    public ApplicationException(Error error) {
+        this.error = error;
         this.messageArguments = Map.of();
     }
 
-    public ApplicationException(Error errorResponse, Map<String, Object> messageArguments) {
-        this.errorResponse = errorResponse;
+    public ApplicationException(Error error, Map<String, Object> messageArguments) {
+        this.error = error;
         this.messageArguments = messageArguments;
     }
 
-    public ApplicationException(Error errorResponse, Throwable cause) {
+    public ApplicationException(Error error, Throwable cause) {
         super(cause);
-        this.errorResponse = errorResponse;
+        this.error = error;
         this.messageArguments = Map.of();
     }
 
-    public ApplicationException(Error errorResponse, Map<String, Object> messageArguments, Throwable cause) {
+    public ApplicationException(Error error, Map<String, Object> messageArguments, Throwable cause) {
         super(cause);
-        this.errorResponse = errorResponse;
+        this.error = error;
         this.messageArguments = messageArguments;
     }
 
     @Override
     public String getMessage() {
         return messageArguments.isEmpty()
-                ? errorResponse.getMessage()
-                : StringSubstitutor.replace(errorResponse.getMessage(), messageArguments, "{", "}");
+                ? error.getMessage()
+                : StringSubstitutor.replace(error.getMessage(), messageArguments, "{", "}");
     }
 
     public String getLocalizedMessage(Locale locale, MessageSource messageSource) {
         try {
-            String localizedMessage = messageSource.getMessage(errorResponse.getKey(), new Object[]{}, locale);
+            String localizedMessage = messageSource.getMessage(error.getKey(), new Object[]{}, locale);
 
             return messageArguments.isEmpty()
                     ? localizedMessage
                     : StringSubstitutor.replace(localizedMessage, messageArguments, "{", "}");
         } catch (NoSuchMessageException exception) {
-            LOGGER.warn("Considere agregar un mensaje localizado para la clave {}", errorResponse.getKey());
+            LOGGER.warn("Considere agregar un mensaje localizado para la clave {}", error.getKey());
         }
 
         return getMessage();

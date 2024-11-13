@@ -3,7 +3,7 @@ package com.misicode.purpost.imageservice.infrastructure.adapters.in.rest.dtos.r
 import com.misicode.purpost.imageservice.domain.validators.ValidFile;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.codec.multipart.FilePart;
 
 public class ImageUpdateRequest {
     @NotNull
@@ -12,9 +12,9 @@ public class ImageUpdateRequest {
 
     @NotNull
     @ValidFile
-    private MultipartFile image;
+    private FilePart image;
 
-    public ImageUpdateRequest(String idImage, MultipartFile image) {
+    public ImageUpdateRequest(String idImage, FilePart image) {
         this.idImage = idImage;
         this.image = image;
     }
@@ -23,7 +23,7 @@ public class ImageUpdateRequest {
         return idImage;
     }
 
-    public MultipartFile getImage() {
+    public FilePart getImage() {
         return image;
     }
 }

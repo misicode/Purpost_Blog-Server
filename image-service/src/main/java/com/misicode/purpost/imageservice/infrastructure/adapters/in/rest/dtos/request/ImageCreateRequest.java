@@ -2,18 +2,18 @@ package com.misicode.purpost.imageservice.infrastructure.adapters.in.rest.dtos.r
 
 import com.misicode.purpost.imageservice.domain.validators.ValidFile;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.codec.multipart.FilePart;
 
 public class ImageCreateRequest {
     @NotNull
     @ValidFile
-    private MultipartFile image;
+    private FilePart image;
 
-    public ImageCreateRequest(MultipartFile image) {
+    public ImageCreateRequest(FilePart image) {
         this.image = image;
     }
 
-    public MultipartFile getImage() {
+    public FilePart getImage() {
         return image;
     }
 }

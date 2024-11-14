@@ -1,6 +1,6 @@
-package com.misicode.purpost.postservice.infrastructure.adapters.out.client.dtos.response;
+package com.misicode.purpost.postservice.infrastructure.adapters.out.webclient.dtos.response;
 
-public class UserClientResponse {
+public class UserWebClientResponse {
     private String idUser;
     private String username;
     private String email;
@@ -8,7 +8,7 @@ public class UserClientResponse {
     private String surnames;
     private String idRole;
 
-    public UserClientResponse(String idUser, String username, String email, String names, String surnames, String idRole) {
+    public UserWebClientResponse(String idUser, String username, String email, String names, String surnames, String idRole) {
         this.idUser = idUser;
         this.username = username;
         this.email = email;

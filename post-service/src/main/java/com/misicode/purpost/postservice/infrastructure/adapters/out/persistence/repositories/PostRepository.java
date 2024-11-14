@@ -1,21 +1,13 @@
 package com.misicode.purpost.postservice.infrastructure.adapters.out.persistence.repositories;
 
 import com.misicode.purpost.postservice.infrastructure.adapters.out.persistence.entity.PostEntity;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
-import org.springframework.data.mongodb.repository.Update;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 @Repository
-public interface PostRepository extends MongoRepository<PostEntity, String> {
-    List<PostEntity> findByIsActiveTrueOrderByCreatedAtDesc();
+public interface PostRepository extends ReactiveMongoRepository<PostEntity, String> {
+    Flux<PostEntity> findByIsActiveTrueOrderByCreatedAtDesc();
 
-    List<PostEntity> findByIdUserAndIsActiveTrueOrderByCreatedAtDesc(String idUser);
-
-    @Query("{'_id' : ?0}")
-    @Update("{'$set' : {'isActive': false}}")
-    void softDelete(@Param("id") String id);
+    Flux<PostEntity> findByIdUserAndIsActiveTrueOrderByCreatedAtDesc(String idUser);
 }

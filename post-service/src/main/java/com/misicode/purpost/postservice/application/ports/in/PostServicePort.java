@@ -1,19 +1,19 @@
 package com.misicode.purpost.postservice.application.ports.in;
 
 import com.misicode.purpost.postservice.domain.model.Post;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface PostServicePort {
-    Post findById(String id);
+    Mono<Post> findById(String id);
 
-    List<Post> findByUsername(String username);
+    Flux<Post> findByUsername(String username);
 
-    List<Post> findAll();
+    Flux<Post> findAll();
 
-    Post create(Post post);
+    Mono<Post> create(Post post);
 
-    Post update(Post post);
+    Mono<Post> update(Post post);
 
-    void deleteById(String id);
+    Mono<Void> deleteById(String id);
 }

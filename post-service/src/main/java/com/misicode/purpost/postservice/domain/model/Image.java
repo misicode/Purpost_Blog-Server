@@ -1,18 +1,18 @@
 package com.misicode.purpost.postservice.domain.model;
 
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.codec.multipart.FilePart;
 
 public class Image {
     private String idImage;
     private String name;
     private String url;
-    private MultipartFile imageFile;
+    private FilePart image;
 
-    public Image(String idImage, String name, String url, MultipartFile imageFile) {
+    public Image(String idImage, String name, String url, FilePart image) {
         this.idImage = idImage;
         this.name = name;
         this.url = url;
-        this.imageFile = imageFile;
+        this.image = image;
     }
 
     public String getIdImage() {
@@ -39,11 +39,11 @@ public class Image {
         this.url = url;
     }
 
-    public MultipartFile getImageFile() {
-        return imageFile;
+    public FilePart getImage() {
+        return image;
     }
 
-    public void setImageFile(MultipartFile imageFile) {
-        this.imageFile = imageFile;
+    public void setImageFile(FilePart image) {
+        this.image = image;
     }
 }

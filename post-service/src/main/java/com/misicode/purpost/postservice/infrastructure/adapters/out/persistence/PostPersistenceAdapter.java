@@ -2,56 +2,62 @@ package com.misicode.purpost.postservice.infrastructure.adapters.out.persistence
 
 import com.misicode.purpost.postservice.application.ports.out.PostPersistencePort;
 import com.misicode.purpost.postservice.domain.model.Post;
+import com.misicode.purpost.postservice.infrastructure.adapters.out.persistence.entity.PostEntity;
 import com.misicode.purpost.postservice.infrastructure.adapters.out.persistence.mappers.PostPersistenceMapper;
 import com.misicode.purpost.postservice.infrastructure.adapters.out.persistence.repositories.PostRepository;
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Component
 public class PostPersistenceAdapter implements PostPersistencePort {
     private final PostRepository postRepository;
+    private final ReactiveMongoTemplate mongoTemplate;
 
-    public PostPersistenceAdapter(PostRepository postRepository) {
+    public PostPersistenceAdapter(PostRepository postRepository, ReactiveMongoTemplate mongoTemplate) {
         this.postRepository = postRepository;
+        this.mongoTemplate = mongoTemplate;
     }
 
     @Override
-    public Optional<Post> findById(String id) {
+    public Mono<Post> findById(String id) {
         return postRepository
                 .findById(id)
                 .map(PostPersistenceMapper::toPost);
     }
 
     @Override
-    public List<Post> findByIdUser(String idUser) {
+    public Flux<Post> findByIdUser(String idUser) {
         return postRepository
                 .findByIdUserAndIsActiveTrueOrderByCreatedAtDesc(idUser)
-                .stream()
-                .map(PostPersistenceMapper::toPost)
-                .collect(Collectors.toList());
+                .map(PostPersistenceMapper::toPost);
     }
 
     @Override
-    public List<Post> findAll() {
+    public Flux<Post> findAll() {
         return postRepository
                 .findByIsActiveTrueOrderByCreatedAtDesc()
-                .stream()
-                .map(PostPersistenceMapper::toPost)
-                .collect(Collectors.toList());
+                .map(PostPersistenceMapper::toPost);
     }
 
     @Override
-    public Post save(Post post) {
-        return PostPersistenceMapper.toPost(
-                postRepository.save(PostPersistenceMapper.toPostEntity(post))
-        );
+    public Mono<Post> save(Post post) {
+        return postRepository
+                .save(PostPersistenceMapper.toPostEntity(post))
+                .map(PostPersistenceMapper::toPost);
     }
 
     @Override
-    public void deleteById(String id) {
-        postRepository.softDelete(id);
+    public Mono<Void> deleteById(String id) {
+        Query query = new Query(Criteria.where("_id").is(id));
+        Update update = new Update().set("isActive", false);
+
+        return mongoTemplate
+                .updateFirst(query, update, PostEntity.class)
+                .then();
     }
 }

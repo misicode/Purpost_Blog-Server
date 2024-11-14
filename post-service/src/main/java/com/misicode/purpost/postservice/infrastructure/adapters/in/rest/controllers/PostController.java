@@ -8,6 +8,8 @@ import com.misicode.purpost.postservice.infrastructure.adapters.in.rest.mappers.
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -21,56 +23,44 @@ public class PostController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<PostResponse> getPostById(@PathVariable String id) {
-        return ResponseEntity.ok(
-                PostRestMapper.toPostResponse(
-                        postServicePort.findById(id)
-                )
-        );
+    public Mono<PostResponse> getPostById(@PathVariable String id) {
+        return postServicePort
+                .findById(id)
+                .map(PostRestMapper::toPostResponse);
     }
 
     @GetMapping("/username/{username}")
-    public ResponseEntity<List<PostResponse>> getPostsByUser(@PathVariable String username) {
-        return ResponseEntity.ok(
-                PostRestMapper.toListPostResponse(
-                        postServicePort.findByUsername(username)
-                )
-        );
+    public Flux<PostResponse> getPostsByUser(@PathVariable String username) {
+        return postServicePort
+                .findByUsername(username)
+                .map(PostRestMapper::toPostResponse);
     }
 
     @GetMapping()
-    public ResponseEntity<List<PostResponse>> getPosts() {
-        return ResponseEntity.ok(
-                PostRestMapper.toListPostResponse(
-                        postServicePort.findAll()
-                )
-        );
+    public Flux<PostResponse> getPosts() {
+        return postServicePort
+                .findAll()
+                .map(PostRestMapper::toPostResponse);
     }
 
     @PostMapping(value="/private", consumes = "multipart/form-data")
-    public ResponseEntity<PostResponse> createPost(@ModelAttribute @Valid PostCreateRequest post) {
-        return ResponseEntity.ok(
-                PostRestMapper.toPostResponse(
-                        postServicePort.create(PostRestMapper.toPost(post))
-                )
-        );
+    public Mono<PostResponse> createPost(@ModelAttribute @Valid PostCreateRequest postRequest) {
+        return postServicePort
+                .create(PostRestMapper.toPost(postRequest))
+                .map(PostRestMapper::toPostResponse);
     }
 
     @PutMapping(value="/private", consumes = "multipart/form-data")
-    public ResponseEntity<PostResponse> updatePost(@ModelAttribute @Valid PostUpdateRequest post) {
-        return ResponseEntity.ok(
-                PostRestMapper.toPostResponse(
-                        postServicePort.update(PostRestMapper.toPost(post))
-                )
-        );
+    public Mono<PostResponse> updatePost(@ModelAttribute @Valid PostUpdateRequest postRequest) {
+        return postServicePort
+                .update(PostRestMapper.toPost(postRequest))
+                .map(PostRestMapper::toPostResponse);
     }
 
     @DeleteMapping("/private/{id}")
-    public ResponseEntity<String> deletePost(@PathVariable String id) {
-        postServicePort.deleteById(id);
-
-        return ResponseEntity.ok(
-                "Publicación eliminada exitosamente!"
-        );
+    public Mono<String> deletePost(@PathVariable String id) {
+        return postServicePort
+                .deleteById(id)
+                .then(Mono.just("Publicación eliminada exitosamente"));
     }
 }

@@ -1,18 +1,17 @@
 package com.misicode.purpost.postservice.application.ports.out;
 
 import com.misicode.purpost.postservice.domain.model.Post;
-
-import java.util.List;
-import java.util.Optional;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface PostPersistencePort {
-    Optional<Post> findById(String id);
+    Mono<Post> findById(String id);
 
-    List<Post> findByIdUser(String idUser);
+    Flux<Post> findByIdUser(String idUser);
 
-    List<Post> findAll();
+    Flux<Post> findAll();
 
-    Post save(Post post);
+    Mono<Post> save(Post post);
 
-    void deleteById(String id);
+    Mono<Void> deleteById(String id);
 }

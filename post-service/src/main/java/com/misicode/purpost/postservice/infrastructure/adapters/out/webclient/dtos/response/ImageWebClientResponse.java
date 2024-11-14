@@ -1,11 +1,11 @@
-package com.misicode.purpost.postservice.infrastructure.adapters.out.client.dtos.response;
+package com.misicode.purpost.postservice.infrastructure.adapters.out.webclient.dtos.response;
 
-public class ImageClientResponse {
+public class ImageWebClientResponse {
     private String idImage;
     private String name;
     private String url;
 
-    public ImageClientResponse(String idImage, String name, String url) {
+    public ImageWebClientResponse(String idImage, String name, String url) {
         this.idImage = idImage;
         this.name = name;
         this.url = url;

@@ -1,143 +1,167 @@
 package com.misicode.purpost.postservice.application.services;
 
 import com.misicode.purpost.postservice.application.ports.in.PostServicePort;
-import com.misicode.purpost.postservice.application.ports.out.ImageClientPort;
+import com.misicode.purpost.postservice.application.ports.out.ImageWebClientPort;
 import com.misicode.purpost.postservice.application.ports.out.PostPersistencePort;
-import com.misicode.purpost.postservice.application.ports.out.UserClientPort;
+import com.misicode.purpost.postservice.application.ports.out.UserWebClientPort;
 import com.misicode.purpost.postservice.domain.model.Image;
 import com.misicode.purpost.postservice.domain.model.Post;
 import com.misicode.purpost.postservice.application.exceptions.ApplicationException;
 import com.misicode.purpost.postservice.application.exceptions.errors.ErrorCatalog;
 import com.misicode.purpost.postservice.domain.model.User;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class PostService implements PostServicePort {
     private final PostPersistencePort postPersistencePort;
-    private final UserClientPort userClientPort;
-    private final ImageClientPort imageClientPort;
+    private final UserWebClientPort userWebClientPort;
+    private final ImageWebClientPort imageWebClientPort;
 
-    public PostService(PostPersistencePort postPersistencePort, UserClientPort userClientPort, ImageClientPort imageClientPort) {
+    public PostService(PostPersistencePort postPersistencePort, UserWebClientPort userWebClientPort, ImageWebClientPort imageWebClientPort) {
         this.postPersistencePort = postPersistencePort;
-        this.userClientPort = userClientPort;
-        this.imageClientPort = imageClientPort;
+        this.userWebClientPort = userWebClientPort;
+        this.imageWebClientPort = imageWebClientPort;
     }
 
     @Override
-    public Post findById(String id) {
-        Post post = postPersistencePort
+    public Mono<Post> findById(String id) {
+        return postPersistencePort
                 .findById(id)
-                .orElseThrow(
-                        () -> new ApplicationException(ErrorCatalog.POST_NOT_FOUND, Map.of("id", id))
+                .switchIfEmpty(Mono.error(
+                        new ApplicationException(
+                                ErrorCatalog.POST_NOT_FOUND,
+                                Map.of("id", id)
+                        )
+                ))
+                .flatMap(post ->
+                        Mono.zip(
+                                userWebClientPort.findById(post.getUser().getIdUser()),
+                                imageWebClientPort.findById(post.getImage().getIdImage()),
+                                (user, image) -> {
+                                    post.setUser(user);
+                                    post.setImage(image);
+
+                                    return post;
+                                }
+                        )
                 );
-
-        User user = userClientPort.findById(post.getUser().getIdUser());
-        Image image = imageClientPort.findById(post.getImage().getIdImage());
-
-        post.setUser(user);
-        post.setImage(image);
-
-        return post;
     }
 
     @Override
-    public List<Post> findByUsername(String username) {
-        try {
-            User user = userClientPort.findByUsername(username);
+    public Flux<Post> findByUsername(String username) {
+        return userWebClientPort
+                .findByUsername(username)
+                .flatMapMany(user ->
+                        postPersistencePort
+                                .findByIdUser(user.getIdUser())
+                                .flatMap(post ->
+                                        imageWebClientPort
+                                                .findById(post.getImage().getIdImage())
+                                                .map(image -> {
+                                                    post.setUser(user);
+                                                    post.setImage(image);
 
-            List<Post> postList = postPersistencePort.findByIdUser(user.getIdUser());
-
-            return postList
-                    .stream()
-                    .map(post -> {
-                        Image image = imageClientPort.findById(post.getImage().getIdImage());
-
-                        post.setUser(user);
-                        post.setImage(image);
-
-                        return post;
-                    })
-                    .collect(Collectors.toList());
-        } catch(Exception e) {
-            throw new ApplicationException(
-                    ErrorCatalog.USER_NOT_FOUND, Map.of("username", username)
-            );
-        }
+                                                    return post;
+                                                })
+                                )
+                )
+                .switchIfEmpty(Flux.empty());
     }
 
     @Override
-    public List<Post> findAll() {
-        List<Post> postList = postPersistencePort.findAll();
+    public Flux<Post> findAll() {
+        return postPersistencePort
+                .findAll()
+                .flatMap(post ->
+                        Mono.zip(
+                                userWebClientPort.findById(post.getUser().getIdUser()),
+                                imageWebClientPort.findById(post.getImage().getIdImage()),
+                                (user, image) -> {
+                                    post.setUser(user);
+                                    post.setImage(image);
 
-        return postList
-                .stream()
-                .map(post -> {
-                    User user = userClientPort.findById(post.getUser().getIdUser());
-                    Image image = imageClientPort.findById(post.getImage().getIdImage());
-
-                    post.setUser(user);
-                    post.setImage(image);
-
-                    return post;
-                })
-                .collect(Collectors.toList());
+                                    return post;
+                                }
+                        )
+                );
     }
 
     @Override
-    public Post create(Post post) {
-        User user = userClientPort.findByUsername(post.getUser().getUsername());
-        Image image = imageClientPort.save(post.getImage().getImageFile());
+    public Mono<Post> create(Post post) {
+        return Mono.zip(
+                userWebClientPort.findByUsername(post.getUser().getUsername()),
+                imageWebClientPort.save(post.getImage().getImage())
+        ).flatMap(tuple -> {
+                User user = tuple.getT1();
+                Image image = tuple.getT2();
 
-        post.setActive(true);
-        post.setIdUser(user.getIdUser());
-        post.setIdImage(image.getIdImage());
+                post.setActive(true);
+                post.setIdUser(user.getIdUser());
+                post.setIdImage(image.getIdImage());
 
-        Post newPost = postPersistencePort.save(post);
+                return postPersistencePort
+                        .save(post)
+                        .map(newPost -> {
+                            newPost.setUser(user);
+                            newPost.setImage(image);
 
-        newPost.setUser(user);
-        newPost.setImage(image);
-
-        return newPost;
+                            return newPost;
+                        });
+        });
     }
 
     @Override
-    public Post update(Post post) {
-        Post updatedPost = postPersistencePort
+    public Mono<Post> update(Post post) {
+        return postPersistencePort
                 .findById(post.getIdPost())
-                .orElseThrow(
-                        () -> new ApplicationException(ErrorCatalog.POST_NOT_FOUND, Map.of("id", post.getIdPost()))
-                );
-        Image image = null;
+                .switchIfEmpty(Mono.error(
+                        new ApplicationException(
+                                ErrorCatalog.POST_NOT_FOUND,
+                                Map.of("id", post.getIdPost())
+                        )
+                ))
+                .flatMap(updatedPost -> {
+                    updatedPost.setTitle(post.getTitle());
+                    updatedPost.setBody(post.getBody());
 
-        updatedPost.setTitle(post.getTitle());
-        updatedPost.setBody(post.getBody());
+                    Mono<Image> imageMono = (post.getImage().getImage() != null)
+                            ? imageWebClientPort.update(updatedPost.getImage().getIdImage(), post.getImage().getImage())
+                            : imageWebClientPort.findById(updatedPost.getImage().getIdImage());
 
-        if(post.getImage().getImageFile() != null) {
-            image = imageClientPort.update(updatedPost.getImage().getIdImage(), post.getImage().getImageFile());
-            updatedPost.setIdImage(image.getIdImage());
-        } else {
-            image = imageClientPort.findById(updatedPost.getImage().getIdImage());
-        }
+                    return imageMono
+                            .flatMap(image -> {
+                                updatedPost.setIdImage(image.getIdImage());
 
-        Post newPost = postPersistencePort.save(updatedPost);
-        User user = userClientPort.findById(newPost.getUser().getIdUser());
+                                return postPersistencePort
+                                        .save(updatedPost)
+                                        .flatMap(newPost ->
+                                                userWebClientPort
+                                                        .findById(newPost.getUser().getIdUser())
+                                                        .map(user -> {
+                                                            newPost.setUser(user);
+                                                            newPost.setImage(image);
 
-        newPost.setUser(user);
-        newPost.setImage(image);
-
-        return newPost;
+                                                            return newPost;
+                                                        })
+                                        );
+                            });
+                });
     }
 
     @Override
-    public void deleteById(String id) {
-        if(postPersistencePort.findById(id).isPresent()) {
-            postPersistencePort.deleteById(id);
-        } else {
-            throw new ApplicationException(ErrorCatalog.POST_NOT_FOUND, Map.of("id", id));
-        }
+    public Mono<Void> deleteById(String id) {
+        return postPersistencePort
+                .findById(id)
+                .switchIfEmpty(Mono.error(
+                        new ApplicationException(
+                                ErrorCatalog.POST_NOT_FOUND,
+                                Map.of("id", id)
+                        )
+                ))
+                .flatMap(post -> postPersistencePort.deleteById(id));
     }
 }

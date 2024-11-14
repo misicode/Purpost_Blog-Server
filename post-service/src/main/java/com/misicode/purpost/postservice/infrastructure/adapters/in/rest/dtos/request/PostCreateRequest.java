@@ -2,6 +2,7 @@ package com.misicode.purpost.postservice.infrastructure.adapters.in.rest.dtos.re
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.beans.ConstructorProperties;
@@ -20,10 +21,10 @@ public class PostCreateRequest {
     private String body;
 
     @NotNull
-    private MultipartFile imageFile;
+    private FilePart imageFile;
 
     @ConstructorProperties({"username", "title", "body", "image"})
-    public PostCreateRequest(String username, String title, String body, MultipartFile imageFile) {
+    public PostCreateRequest(String username, String title, String body, FilePart imageFile) {
         this.username = username;
         this.title = title;
         this.body = body;
@@ -42,7 +43,7 @@ public class PostCreateRequest {
         return body;
     }
 
-    public MultipartFile getImageFile() {
+    public FilePart getImageFile() {
         return imageFile;
     }
 }

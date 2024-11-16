@@ -1,6 +1,6 @@
 package com.misicode.purpost.gatewayservice.filter;
 
-import com.misicode.purpost.gatewayservice.util.JwtUtil;
+import com.misicode.purpost.gatewayservice.utils.JwtUtil;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
@@ -38,14 +38,13 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
             }
 
             String token = authHeader.substring(7);
-            try {
-                jwtUtil.validateToken(token);
-            } catch (Exception e) {
-                exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-                return exchange.getResponse().setComplete();
-            }
 
-            return chain.filter(exchange);
+            return jwtUtil.validateToken(token)
+                    .flatMap(claims -> chain.filter(exchange))
+                    .onErrorResume(err -> {
+                        exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                        return exchange.getResponse().setComplete();
+                    });
         };
     }
 }

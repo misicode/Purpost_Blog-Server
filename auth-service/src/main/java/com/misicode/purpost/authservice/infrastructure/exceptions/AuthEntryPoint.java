@@ -1,39 +1,48 @@
 package com.misicode.purpost.authservice.infrastructure.exceptions;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.misicode.purpost.authservice.application.exceptions.ApplicationException;
+import com.misicode.purpost.authservice.application.exceptions.errors.ErrorCatalog;
 import com.misicode.purpost.authservice.infrastructure.exceptions.utils.HttpConstants;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.server.ServerAuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
 
-import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class AuthEntryPoint implements AuthenticationEntryPoint {
+public class AuthEntryPoint implements ServerAuthenticationEntryPoint {
     @Override
-    public void commence (HttpServletRequest request,
-                          HttpServletResponse response,
-                          AuthenticationException authException)
-            throws IOException {
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+    public Mono<Void> commence (ServerWebExchange exchange,
+                                AuthenticationException authException) {
+        exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
+        exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
 
-        final Map<String, Object> body = new HashMap<>();
-        body.put(HttpConstants.TIMESTAMP, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(ZonedDateTime.now()));
-        body.put(HttpConstants.STATUS, HttpServletResponse.SC_UNAUTHORIZED);
-        body.put(HttpConstants.ERROR, "UNAUTHORIZED");
-        body.put(HttpConstants.ERROR_KEY, "AUTH_EXCEPTION");
-        body.put(HttpConstants.MESSAGE, "Operación inválida");
-        body.put(HttpConstants.PATH, request.getServletPath());
+        Map<String, Object> body = Map.of(
+                HttpConstants.TIMESTAMP, ZonedDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
+                HttpConstants.STATUS, HttpStatus.UNAUTHORIZED,
+                HttpConstants.ERROR, "UNAUTHORIZED",
+                HttpConstants.ERROR_KEY, "AUTH_EXCEPTION",
+                HttpConstants.MESSAGE, "Operación inválida",
+                HttpConstants.PATH, exchange.getRequest().getPath().value()
+        );
 
-        final ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(response.getOutputStream(), body);
+        return exchange
+                .getResponse()
+                .writeWith(Mono.fromSupplier(() -> {
+                    try {
+                        byte[] bytes = new ObjectMapper().writeValueAsBytes(body);
+                        return exchange.getResponse().bufferFactory().wrap(bytes);
+                    } catch (JsonProcessingException e) {
+                        throw new ApplicationException(ErrorCatalog.ERROR_RESPONSE);
+                    }
+                }));
     }
 }

@@ -1,9 +1,10 @@
 package com.misicode.purpost.authservice.application.ports.in;
 
 import com.misicode.purpost.authservice.domain.model.Credentials;
+import reactor.core.publisher.Mono;
 
 public interface AuthServicePort {
-    String login(Credentials credentials);
+    Mono<String> login(Credentials credentials);
 
-    String checkToken(String token);
+    Mono<String> checkToken(String token);
 }

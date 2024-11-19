@@ -4,7 +4,8 @@ import org.springframework.http.HttpStatus;
 
 public enum ErrorCatalog implements Error {
     AUTH_FAILED("AUTH_FAILED", HttpStatus.UNAUTHORIZED, "Acceso no autorizado: {message}"),
-    INVALID_TOKEN("INVALID_TOKEN", HttpStatus.UNAUTHORIZED, "Token inválido");
+    INVALID_TOKEN("INVALID_TOKEN", HttpStatus.UNAUTHORIZED, "Token inválido"),
+    ERROR_RESPONSE("ERROR_RESPONSE", HttpStatus.INTERNAL_SERVER_ERROR, "Error al serializar la respuesta"),;
 
     final String key;
     final HttpStatus httpStatus;

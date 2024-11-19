@@ -19,7 +19,7 @@ public class UserDetailsImpl implements UserDetails {
 
     public static UserDetailsImpl build(UserData user) {
         Collection<? extends GrantedAuthority> authorities = Collections.singletonList(
-                (GrantedAuthority) () -> user.getRole().getName());
+                (GrantedAuthority) user::getIdRole);
 
         return new UserDetailsImpl(
                 user.getUsername(),

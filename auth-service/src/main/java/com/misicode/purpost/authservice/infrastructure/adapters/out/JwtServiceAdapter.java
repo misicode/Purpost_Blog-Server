@@ -8,6 +8,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.security.Key;
 import java.util.Date;
@@ -22,17 +23,18 @@ public class JwtServiceAdapter implements JwtServicePort {
     private String expirationTime;
 
     @Override
-    public String generateJwtToken(String username) {
-        return Jwts.builder()
+    public Mono<String> generateJwtToken(String username) {
+        return Mono.fromSupplier(() -> Jwts
+                .builder()
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + Long.parseLong(expirationTime)))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
-                .compact();
+                .compact());
     }
 
     @Override
-    public boolean isValidJwtToken(String token) {
+    public Boolean isValidJwtToken(String token) {
         try {
             getAllClaims(token);
             return true;
@@ -43,8 +45,8 @@ public class JwtServiceAdapter implements JwtServicePort {
     }
 
     @Override
-    public String extractUsername(String token){
-        return getClaim(token, Claims::getSubject);
+    public Mono<String> extractUsername(String token){
+        return Mono.fromSupplier(() -> getClaim(token, Claims::getSubject));
     }
 
     public Key getKey() {

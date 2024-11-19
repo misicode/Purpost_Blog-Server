@@ -6,8 +6,8 @@ import com.misicode.purpost.authservice.infrastructure.adapters.in.rest.dtos.res
 import com.misicode.purpost.authservice.infrastructure.adapters.in.rest.mappers.LoginRestMapper;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -19,20 +19,16 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
-        return ResponseEntity.ok(
-                LoginRestMapper.toLoginResponse(
-                        authServicePort.login(LoginRestMapper.toCredentials(request))
-                )
-        );
+    public Mono<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
+        return authServicePort
+                .login(LoginRestMapper.toCredentials(request))
+                .map(LoginRestMapper::toLoginResponse);
     }
 
     @GetMapping("/token")
-    public ResponseEntity<LoginResponse> checkToken(@RequestHeader(name = "Authorization") @NotNull String token) {
-        return ResponseEntity.ok(
-                LoginRestMapper.toLoginResponse(
-                        authServicePort.checkToken(token)
-                )
-        );
+    public Mono<LoginResponse> checkToken(@RequestHeader(name = "Authorization") @NotNull String token) {
+        return authServicePort
+                .checkToken(token)
+                .map(LoginRestMapper::toLoginResponse);
     }
 }

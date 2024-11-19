@@ -5,15 +5,15 @@ public class UserData {
 
     private String password;
 
-    private Role role;
+    private String idRole;
 
     public UserData() {
     }
 
-    public UserData(String username, String password, Role role) {
+    public UserData(String username, String password, String idRole) {
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.idRole = idRole;
     }
 
     public String getUsername() {
@@ -32,11 +32,11 @@ public class UserData {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
+    public String getIdRole() {
+        return idRole;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setIdRole(String idRole) {
+        this.idRole = idRole;
     }
 }

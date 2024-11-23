@@ -4,16 +4,8 @@ import com.misicode.purpost.imageservice.domain.validators.ValidFile;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.codec.multipart.FilePart;
 
-public class ImageCreateRequest {
+public record ImageCreateRequest(
     @NotNull
     @ValidFile
-    private FilePart image;
-
-    public ImageCreateRequest(FilePart image) {
-        this.image = image;
-    }
-
-    public FilePart getImage() {
-        return image;
-    }
-}
+    FilePart image
+) { }

@@ -5,46 +5,26 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class UserCreateRequest {
+public record UserCreateRequest(
     @NotBlank
     @NotNull
-    private String username;
+    String username,
 
     @NotBlank
     @NotNull
     @Email
-    private String email;
+    String email,
 
     @NotBlank
     @NotNull
     @Size(min = 6)
-    private String password;
+    String password,
 
     @NotBlank
     @NotNull
-    private String names;
+    String names,
 
     @NotBlank
     @NotNull
-    private String surnames;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getNames() {
-        return names;
-    }
-
-    public String getSurnames() {
-        return surnames;
-    }
-}
+    String surnames
+) { }

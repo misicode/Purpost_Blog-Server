@@ -3,28 +3,16 @@ package com.misicode.purpost.userservice.infrastructure.adapters.in.rest.dtos.re
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public class UserUpdateRequest {
+public record UserUpdateRequest(
     @NotNull
     @NotBlank
-    private String username;
-
-    @NotBlank
-    @NotNull
-    private String names;
+    String username,
 
     @NotBlank
     @NotNull
-    private String surnames;
+    String names,
 
-    public String getUsername() {
-        return username;
-    }
-
-    public String getNames() {
-        return names;
-    }
-
-    public String getSurnames() {
-        return surnames;
-    }
-}
+    @NotBlank
+    @NotNull
+    String surnames
+) { }

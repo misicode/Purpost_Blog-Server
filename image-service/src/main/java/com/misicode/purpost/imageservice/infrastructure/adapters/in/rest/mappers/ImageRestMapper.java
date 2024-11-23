@@ -13,7 +13,7 @@ public class ImageRestMapper {
     public static Image toImage(ImageCreateRequest image) {
         return new Image(
                 null,
-                image.getImage(),
+                image.image(),
                 null,
                 null
         );
@@ -21,8 +21,8 @@ public class ImageRestMapper {
 
     public static Image toImage(ImageUpdateRequest image) {
         return new Image(
-                image.getIdImage(),
-                image.getImage(),
+                image.idImage(),
+                image.image(),
                 null,
                 null
         );

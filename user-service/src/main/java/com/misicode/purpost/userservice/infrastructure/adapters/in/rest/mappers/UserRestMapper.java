@@ -13,11 +13,11 @@ public class UserRestMapper {
     public static User toUser(UserCreateRequest user) {
         return new User(
                 null,
-                user.getUsername(),
-                user.getEmail(),
-                user.getPassword(),
-                user.getNames(),
-                user.getSurnames(),
+                user.username(),
+                user.email(),
+                user.password(),
+                user.names(),
+                user.surnames(),
                 null,
                 null,
                 null,
@@ -28,11 +28,11 @@ public class UserRestMapper {
     public static User toUser(UserUpdateRequest user) {
         return new User(
                 null,
-                user.getUsername(),
+                user.username(),
                 null,
                 null,
-                user.getNames(),
-                user.getSurnames(),
+                user.names(),
+                user.surnames(),
                 null,
                 null,
                 null,

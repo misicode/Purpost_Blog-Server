@@ -11,8 +11,8 @@ public class LoginRestMapper {
 
     public static Credentials toCredentials(LoginRequest loginRequest) {
         return new Credentials(
-                loginRequest.getAccount(),
-                loginRequest.getPassword()
+                loginRequest.account(),
+                loginRequest.password()
         );
     }
 

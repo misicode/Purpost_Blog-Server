@@ -5,25 +5,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.codec.multipart.FilePart;
 
-public class ImageUpdateRequest {
+public record ImageUpdateRequest(
     @NotNull
     @NotBlank
-    private String idImage;
+    String idImage,
 
     @NotNull
     @ValidFile
-    private FilePart image;
-
-    public ImageUpdateRequest(String idImage, FilePart image) {
-        this.idImage = idImage;
-        this.image = image;
-    }
-
-    public String getIdImage() {
-        return idImage;
-    }
-
-    public FilePart getImage() {
-        return image;
-    }
-}
+    FilePart image
+) { }

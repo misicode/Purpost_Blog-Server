@@ -17,12 +17,12 @@ public class PostRestMapper {
     public static Post toPost(PostCreateRequest postRequest) {
         return new Post(
                 null,
-                postRequest.getTitle(),
-                postRequest.getBody(),
+                postRequest.title(),
+                postRequest.body(),
                 null,
                 new User(
                         null,
-                        postRequest.getUsername(),
+                        postRequest.username(),
                         null,
                         null
                 ),
@@ -30,7 +30,7 @@ public class PostRestMapper {
                         null,
                         null,
                         null,
-                        postRequest.getImageFile()
+                        postRequest.image()
                 ),
                 null,
                 null
@@ -39,16 +39,16 @@ public class PostRestMapper {
 
     public static Post toPost(PostUpdateRequest postRequest) {
         return new Post(
-                postRequest.getIdPost(),
-                postRequest.getTitle(),
-                postRequest.getBody(),
+                postRequest.idPost(),
+                postRequest.title(),
+                postRequest.body(),
                 null,
                 null,
                 new Image(
                         null,
                         null,
                         null,
-                        postRequest.getImageFile()
+                        postRequest.image()
                 ),
                 null,
                 null
@@ -56,16 +56,16 @@ public class PostRestMapper {
     }
 
     public static PostResponse toPostResponse(Post post) {
-        return new PostResponse.Builder()
-                .idPost(post.getIdPost())
-                .title(post.getTitle())
-                .body(post.getBody())
-                .isActive(post.getActive())
-                .user(UserRestMapper.toUserResponse(post.getUser()))
-                .image(ImageRestMapper.toImageResponse(post.getImage()))
-                .createdAt(post.getCreatedAt())
-                .updatedAt(post.getUpdatedAt())
-                .build();
+        return new PostResponse(
+                post.getIdPost(),
+                post.getTitle(),
+                post.getBody(),
+                post.getActive(),
+                UserRestMapper.toUserResponse(post.getUser()),
+                ImageRestMapper.toImageResponse(post.getImage()),
+                post.getCreatedAt(),
+                post.getUpdatedAt()
+        );
     }
 
     public static List<PostResponse> toListPostResponse(List<Post> postList) {

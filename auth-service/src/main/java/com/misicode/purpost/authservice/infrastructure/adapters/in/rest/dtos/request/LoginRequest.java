@@ -3,20 +3,12 @@ package com.misicode.purpost.authservice.infrastructure.adapters.in.rest.dtos.re
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public class LoginRequest {
+public record LoginRequest(
     @NotBlank
     @NotNull
-    private String account;
+    String account,
 
     @NotBlank
     @NotNull
-    private String password;
-
-    public String getAccount() {
-        return account;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-}
+    String password
+) { }

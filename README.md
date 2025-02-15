@@ -25,18 +25,18 @@ Aplicación de microservicios desarrollado con Spring Boot del proyecto Purpost 
 
 ### Construido con
 
-| Herramienta                                                    | Descripción                                   | Versión                 |
-|----------------------------------------------------------------|-----------------------------------------------|-------------------------|
-| [![Java][java-badge]][java-url]                                | Lenguaje de programación utilizado            | 17.0.1                  |
-| [![Spring Boot][springboot-badge]][springboot-url]             | Framework para el desarrollo de aplicaciones  | 3.2.4                   |
-| [![Spring Security][springsecurity-badge]][springsecurity-url] | Framework para la seguridad de acceso         | 6.2.3                   |
-| [![JWT][jwt-badge]][jwt-url]                                   | Estándar para la creación de tokens de acceso | 0.11.5                  |
-| [![MongoDB][mongodb-badge]][mongodb-url]                       | Base de datos NoSQL                           | 4.2.1                   |
-| [![Swagger][swagger-badge]][swagger-url]                       | Estándar para la especificación de APIs       | 3.0                     |
-| [![Sonarqube][sonarqube-badge]][sonarqube-url]                 | Plataforma para evaluar código fuente         | 10.5                    |
-| [![Docker][docker-badge]][docker-url]                          | Plataforma para desplegar contenedores        | 27.0.3                  |
-| [![Apache Maven][maven-badge]][maven-url]                      | Herramienta para la gestión de dependencias   | 3.9.2                   |
-| [![IntelliJ IDEA][intellijidea-badge]][intellijidea-url]       | Entorno de desarrollo del proyecto            | 2023.2 Ultimate Edition |
+| Herramienta                                                    | Descripción                                   | Versión                   |
+|----------------------------------------------------------------|-----------------------------------------------|---------------------------|
+| [![Java][java-badge]][java-url]                                | Lenguaje de programación utilizado            | 17.0.1                    |
+| [![Spring Boot][springboot-badge]][springboot-url]             | Framework para el desarrollo de aplicaciones  | 3.3.8                     |
+| [![Spring Security][springsecurity-badge]][springsecurity-url] | Framework para la seguridad de acceso         | 6.3.6                     |
+| [![JWT][jwt-badge]][jwt-url]                                   | Estándar para la creación de tokens de acceso | 0.11.5                    |
+| [![MongoDB][mongodb-badge]][mongodb-url]                       | Base de datos NoSQL                           | 5.0.1                     |
+| [![Swagger][swagger-badge]][swagger-url]                       | Estándar para la especificación de APIs       | 3.0                       |
+| [![Sonarqube][sonarqube-badge]][sonarqube-url]                 | Plataforma para evaluar código fuente         | 10.5                      |
+| [![Docker][docker-badge]][docker-url]                          | Plataforma para desplegar contenedores        | 27.0.3                    |
+| [![Apache Maven][maven-badge]][maven-url]                      | Herramienta para la gestión de dependencias   | 3.9.6                     |
+| [![IntelliJ IDEA][intellijidea-badge]][intellijidea-url]       | Entorno de desarrollo del proyecto            | 2024.1.7 Ultimate Edition |
 
 
 <!-- GETTING STARTED -->

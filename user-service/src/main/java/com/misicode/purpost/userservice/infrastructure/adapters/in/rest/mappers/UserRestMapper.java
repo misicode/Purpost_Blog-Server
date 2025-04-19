@@ -11,43 +11,32 @@ public class UserRestMapper {
     }
 
     public static User toUser(UserCreateRequest user) {
-        return new User(
-                null,
-                user.username(),
-                user.email(),
-                user.password(),
-                user.names(),
-                user.surnames(),
-                null,
-                null,
-                null,
-                null
-        );
+        return User.builder()
+                .username(user.username())
+                .email(user.email())
+                .password(user.password())
+                .names(user.names())
+                .surnames(user.surnames())
+                .build();
+
     }
 
     public static User toUser(UserUpdateRequest user) {
-        return new User(
-                null,
-                user.username(),
-                null,
-                null,
-                user.names(),
-                user.surnames(),
-                null,
-                null,
-                null,
-                null
-        );
+        return User.builder()
+                .username(user.username())
+                .names(user.names())
+                .surnames(user.surnames())
+                .build();
     }
 
     public static UserResponse toUserResponse(User user) {
-        return new UserResponse(
-                user.getIdUser(),
-                user.getUsername(),
-                user.getEmail(),
-                user.getNames(),
-                user.getSurnames(),
-                user.getIdRole()
-        );
+        return UserResponse.builder()
+                .idUser(user.getIdUser())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .names(user.getNames())
+                .surnames(user.getSurnames())
+                .idRole(user.getIdRole())
+                .build();
     }
 }

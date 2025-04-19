@@ -9,11 +9,11 @@ public class UserRestMapper {
     }
 
     public static UserResponse toUserResponse(User user) {
-        return new UserResponse(
-                user.getIdUser(),
-                user.getUsername(),
-                user.getNames(),
-                user.getSurnames()
-        );
+        return UserResponse.builder()
+                .idUser(user.getIdUser())
+                .username(user.getUsername())
+                .names(user.getNames())
+                .surnames(user.getSurnames())
+                .build();
     }
 }

@@ -1,7 +1,10 @@
 package com.misicode.purpost.postservice.infrastructure.adapters.in.rest.dtos.response;
 
+import lombok.Builder;
+
 import java.time.LocalDateTime;
 
+@Builder
 public record PostResponse(
     String idPost,
     String title,

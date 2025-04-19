@@ -28,7 +28,7 @@ Aplicación de microservicios desarrollado con Spring Boot del proyecto Purpost 
 | Herramienta                                                    | Descripción                                   | Versión                   |
 |----------------------------------------------------------------|-----------------------------------------------|---------------------------|
 | [![Java][java-badge]][java-url]                                | Lenguaje de programación utilizado            | 17.0.1                    |
-| [![Spring Boot][springboot-badge]][springboot-url]             | Framework para el desarrollo de aplicaciones  | 3.3.8                     |
+| [![Spring Boot][springboot-badge]][springboot-url]             | Framework para el desarrollo de aplicaciones  | 3.3.9                     |
 | [![Spring Security][springsecurity-badge]][springsecurity-url] | Framework para la seguridad de acceso         | 6.3.6                     |
 | [![JWT][jwt-badge]][jwt-url]                                   | Estándar para la creación de tokens de acceso | 0.11.5                    |
 | [![MongoDB][mongodb-badge]][mongodb-url]                       | Base de datos NoSQL                           | 5.0.1                     |

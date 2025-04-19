@@ -9,10 +9,10 @@ public class ImageRestMapper {
     }
 
     public static ImageResponse toImageResponse(Image image) {
-        return new ImageResponse(
-                image.getIdImage(),
-                image.getName(),
-                image.getUrl()
-        );
+        return ImageResponse.builder()
+                .idImage(image.getIdImage())
+                .name(image.getName())
+                .url(image.getUrl())
+                .build();
     }
 }

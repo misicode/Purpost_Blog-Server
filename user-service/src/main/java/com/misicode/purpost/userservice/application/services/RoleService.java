@@ -20,7 +20,11 @@ public class RoleService implements RoleServicePort {
         return rolePersistencePort
                 .findByName(name)
                 .switchIfEmpty(
-                        rolePersistencePort.save(new Role(null, name))
+                        rolePersistencePort.save(
+                                Role.builder()
+                                        .name(name)
+                                        .build()
+                        )
                 );
     }
 }

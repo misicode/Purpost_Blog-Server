@@ -1,7 +1,16 @@
 package com.misicode.purpost.userservice.domain.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 public class User {
     private String idUser;
     private String username;
@@ -13,93 +22,4 @@ public class User {
     private String idRole;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
-    public User(String idUser, String username, String email, String password, String names, String surnames, Boolean isActive, String idRole, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.idUser = idUser;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.names = names;
-        this.surnames = surnames;
-        this.isActive = isActive;
-        this.idRole = idRole;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
-    public String getIdUser() {
-        return idUser;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getNames() {
-        return names;
-    }
-
-    public void setNames(String names) {
-        this.names = names;
-    }
-
-    public String getSurnames() {
-        return surnames;
-    }
-
-    public void setSurnames(String surnames) {
-        this.surnames = surnames;
-    }
-
-    public Boolean getActive() {
-        return isActive;
-    }
-
-    public void setActive(Boolean active) {
-        isActive = active;
-    }
-
-    public String getIdRole() {
-        return idRole;
-    }
-
-    public void setIdRole(String idRole) {
-        this.idRole = idRole;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 }

@@ -9,10 +9,10 @@ public class UserDataRestMapper {
     }
 
     public static UserDataResponse toUserDataResponse(User user) {
-        return new UserDataResponse(
-                user.getUsername(),
-                user.getPassword(),
-                user.getIdRole()
-        );
+        return UserDataResponse.builder()
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .idRole(user.getIdRole())
+                .build();
     }
 }

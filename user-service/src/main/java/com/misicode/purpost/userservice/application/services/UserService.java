@@ -83,7 +83,7 @@ public class UserService implements UserServicePort {
             return roleService.findByName(RoleEnum.ROLE_USER)
                     .flatMap(role -> {
                         user.setPassword(passwordEncoder.encode(user.getPassword()));
-                        user.setActive(true);
+                        user.setIsActive(true);
                         user.setIdRole(role.getIdRole());
 
                         return userPersistencePort.save(user);

@@ -11,28 +11,23 @@ public class ImageRestMapper {
     }
 
     public static Image toImage(ImageCreateRequest image) {
-        return new Image(
-                null,
-                image.image(),
-                null,
-                null
-        );
+        return Image.builder()
+                .image(image.image())
+                .build();
     }
 
     public static Image toImage(ImageUpdateRequest image) {
-        return new Image(
-                image.idImage(),
-                image.image(),
-                null,
-                null
-        );
+        return Image.builder()
+                .idImage(image.idImage())
+                .image(image.image())
+                .build();
     }
 
     public static ImageResponse toImageResponse(Image image) {
-        return new ImageResponse(
-                image.getIdImage(),
-                image.getName(),
-                image.getUrl()
-        );
+        return ImageResponse.builder()
+                .idImage(image.getIdImage())
+                .name(image.getName())
+                .url(image.getUrl())
+                .build();
     }
 }

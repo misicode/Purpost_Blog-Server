@@ -99,9 +99,13 @@ public class PostService implements PostServicePort {
                 User user = tuple.getT1();
                 Image image = tuple.getT2();
 
-                post.setActive(true);
-                post.setIdUser(user.getIdUser());
-                post.setIdImage(image.getIdImage());
+                post.setIsActive(true);
+                post.setUser(User.builder()
+                        .idUser(user.getIdUser())
+                        .build());
+                post.setImage(Image.builder()
+                        .idImage(image.getIdImage())
+                        .build());
 
                 return postPersistencePort
                         .save(post)
@@ -134,7 +138,9 @@ public class PostService implements PostServicePort {
 
                     return imageMono
                             .flatMap(image -> {
-                                updatedPost.setIdImage(image.getIdImage());
+                                updatedPost.setImage(Image.builder()
+                                        .idImage(image.getIdImage())
+                                        .build());
 
                                 return postPersistencePort
                                         .save(updatedPost)

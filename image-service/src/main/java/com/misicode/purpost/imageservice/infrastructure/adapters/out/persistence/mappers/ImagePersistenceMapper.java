@@ -9,19 +9,18 @@ public class ImagePersistenceMapper {
     }
 
     public static ImageEntity toImageEntity(Image image) {
-        return new ImageEntity(
-                image.getIdImage(),
-                image.getName(),
-                image.getUrl()
-        );
+        return ImageEntity.builder()
+                .idImage(image.getIdImage())
+                .name(image.getName())
+                .url(image.getUrl())
+                .build();
     }
 
     public static Image toImage(ImageEntity image) {
-        return new Image(
-                image.getIdImage(),
-                null,
-                image.getName(),
-                image.getUrl()
-        );
+        return Image.builder()
+                .idImage(image.getIdImage())
+                .name(image.getName())
+                .url(image.getUrl())
+                .build();
     }
 }

@@ -9,32 +9,32 @@ public class UserPersistenceMapper {
     }
 
     public static UserEntity toUserEntity(User user) {
-        return new UserEntity(
-                user.getIdUser(),
-                user.getUsername(),
-                user.getEmail(),
-                user.getPassword(),
-                user.getNames(),
-                user.getSurnames(),
-                user.getActive(),
-                user.getIdRole(),
-                user.getCreatedAt(),
-                user.getUpdatedAt()
-        );
+        return UserEntity.builder()
+                .idUser(user.getIdUser())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .names(user.getNames())
+                .surnames(user.getSurnames())
+                .isActive(user.getIsActive())
+                .idRole(user.getIdRole())
+                .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
+                .build();
     }
 
     public static User toUser(UserEntity userEntity) {
-        return new User(
-                userEntity.getIdUser(),
-                userEntity.getUsername(),
-                userEntity.getEmail(),
-                userEntity.getPassword(),
-                userEntity.getNames(),
-                userEntity.getSurnames(),
-                userEntity.getActive(),
-                userEntity.getIdRole(),
-                userEntity.getCreatedAt(),
-                userEntity.getUpdatedAt()
-        );
+        return User.builder()
+                .idUser(userEntity.getIdUser())
+                .username(userEntity.getUsername())
+                .email(userEntity.getEmail())
+                .password(userEntity.getPassword())
+                .names(userEntity.getNames())
+                .surnames(userEntity.getSurnames())
+                .isActive(userEntity.getIsActive())
+                .idRole(userEntity.getIdRole())
+                .createdAt(userEntity.getCreatedAt())
+                .updatedAt(userEntity.getUpdatedAt())
+                .build();
     }
 }

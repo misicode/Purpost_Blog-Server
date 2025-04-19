@@ -11,38 +11,34 @@ public class PostPersistenceMapper {
     }
 
     public static PostEntity toPostEntity(Post post) {
-        return new PostEntity(
-                post.getIdPost(),
-                post.getTitle(),
-                post.getBody(),
-                post.getActive(),
-                post.getUser().getIdUser(),
-                post.getImage().getIdImage(),
-                post.getCreatedAt(),
-                post.getUpdatedAt()
-        );
+        return PostEntity.builder()
+                .idPost(post.getIdPost())
+                .title(post.getTitle())
+                .body(post.getBody())
+                .isActive(post.getIsActive())
+                .idUser(post.getUser().getIdUser())
+                .idImage(post.getImage().getIdImage())
+                .createdAt(post.getCreatedAt())
+                .updatedAt(post.getUpdatedAt())
+                .build();
     }
 
     public static Post toPost(PostEntity postEntity) {
-        return new Post(
-                postEntity.getIdPost(),
-                postEntity.getTitle(),
-                postEntity.getBody(),
-                postEntity.getActive(),
-                new User(
-                        postEntity.getIdUser(),
-                        null,
-                        null,
-                        null
-                ),
-                new Image(
-                        postEntity.getIdImage(),
-                        null,
-                        null,
-                        null
-                ),
-                postEntity.getCreatedAt(),
-                postEntity.getUpdatedAt()
-        );
+        return Post.builder()
+                .idPost(postEntity.getIdPost())
+                .title(postEntity.getTitle())
+                .body(postEntity.getBody())
+                .isActive(postEntity.getIsActive())
+                .user(User.builder()
+                        .idUser(postEntity.getIdUser())
+                        .build()
+                )
+                .image(Image.builder()
+                        .idImage(postEntity.getIdImage())
+                        .build()
+                )
+                .createdAt(postEntity.getCreatedAt())
+                .updatedAt(postEntity.getUpdatedAt())
+                .build();
     }
 }

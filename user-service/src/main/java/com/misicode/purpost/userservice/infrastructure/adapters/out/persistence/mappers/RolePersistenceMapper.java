@@ -9,16 +9,16 @@ public class RolePersistenceMapper {
     }
 
     public static RoleEntity toRoleEntity(Role role) {
-        return new RoleEntity(
-                role.getIdRole(),
-                role.getName()
-        );
+        return RoleEntity.builder()
+                .idRole(role.getIdRole())
+                .name(role.getName())
+                .build();
     }
 
     public static Role toRole(RoleEntity roleEntity) {
-        return new Role(
-                roleEntity.getIdRole(),
-                roleEntity.getName()
-        );
+        return Role.builder()
+                .idRole(roleEntity.getIdRole())
+                .name(roleEntity.getName())
+                .build();
     }
 }
